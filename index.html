@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smile Confidence</title>
+
+  <!-- Preconnect for fastest font load -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Non-blocking font load -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────────────── */
+    :root {
+      --color-bg:          #faf9f7;
+      --color-surface:     #ffffff;
+      --color-text:        #1a1612;
+      --color-text-muted:  #6b6460;
+      --color-accent:      #c4773a;
+      --color-accent-light:#f5ede3;
+      --color-star:        #e8a030;
+      --color-border:      rgba(26,22,18,.10);
+
+      --max-width:         1400px;
+      --nav-height:        68px;
+
+      --font-display:      'DM Serif Display', Georgia, serif;
+      --font-body:         'DM Sans', system-ui, sans-serif;
+
+      --ease-out-expo:     cubic-bezier(.19,1,.22,1);
+
+      --space-2xs:  .25rem;
+      --space-xs:   .5rem;
+      --space-sm:   .75rem;
+      --space-md:   1rem;
+      --space-lg:   1.5rem;
+      --space-xl:   2.5rem;
+      --space-2xl:  4rem;
+      --space-3xl:  6rem;
+    }
+
+    /* ─── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+
+    /* ─── Typography Scale ───────────────────────────────────────────── */
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: .6875rem;           /* 11px */
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+
+    .display {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7.5vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+    }
+
+    .h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+    }
+
+    .h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -.015em;
+    }
+
+    .h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.375rem, 2.5vw, 2rem);
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -.01em;
+    }
+
+    .h4 {
+      font-family: var(--font-body);
+      font-size: clamp(1.125rem, 1.75vw, 1.375rem);
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -.01em;
+    }
+
+    .subhead {
+      font-family: var(--font-body);
+      font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--color-text-muted);
+    }
+
+    .body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.65;
+    }
+
+    .body-large {
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      font-weight: 400;
+      line-height: 1.65;
+    }
+
+    .body-small {
+      font-family: var(--font-body);
+      font-size: .875rem;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .caption {
+      font-family: var(--font-body);
+      font-size: .75rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--color-text-muted);
+    }
+
+    .button-text {
+      font-family: var(--font-body);
+      font-size: .9375rem;
+      font-weight: 500;
+      letter-spacing: .01em;
+    }
+
+    .label {
+      font-family: var(--font-body);
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── Layout Helpers ─────────────────────────────────────────────── */
+    .wrapper {
+      width: 100%;
+      max-width: var(--max-width);
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
+    }
+
+    /* ─── NAV ────────────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      background: rgba(250,249,247,.72);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      backdrop-filter: blur(18px) saturate(180%);
+      border-bottom: 1px solid var(--color-border);
+      transition: transform .4s var(--ease-out-expo),
+                  opacity  .4s var(--ease-out-expo);
+    }
+
+    .nav.nav--hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    .nav__inner {
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Wordmark */
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .nav__logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .nav__logo-mark svg {
+      width: 16px;
+      height: 16px;
+      fill: #fff;
+    }
+
+    .nav__logo-text {
+      font-family: var(--font-display);
+      font-size: 1.1875rem;
+      letter-spacing: -.02em;
+      color: var(--color-text);
+    }
+
+    /* Desktop links */
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xl);
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: .875rem;
+      font-weight: 400;
+      color: var(--color-text-muted);
+      transition: color .2s;
+    }
+
+    .nav__links a:hover { color: var(--color-text); }
+
+    /* Nav CTA */
+    .nav__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: .5rem 1.25rem;
+      border-radius: 100px;
+      background: var(--color-text);
+      color: var(--color-bg);
+      font-size: .8125rem;
+      font-weight: 500;
+      letter-spacing: .01em;
+      transition: background .2s, transform .15s;
+    }
+
+    .nav__cta:hover {
+      background: var(--color-accent);
+      transform: translateY(-1px);
+    }
+
+    /* Hamburger */
+    .nav__burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav__burger-line {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform .35s var(--ease-out-expo),
+                  opacity  .25s ease,
+                  width    .3s  var(--ease-out-expo);
+    }
+
+    /* Animated X state */
+    .nav__burger[aria-expanded="true"] .nav__burger-line:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+    .nav__burger[aria-expanded="true"] .nav__burger-line:nth-child(2) {
+      opacity: 0;
+      width: 0;
+    }
+    .nav__burger[aria-expanded="true"] .nav__burger-line:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    /* Mobile drawer */
+    .nav__drawer {
+      display: none;
+      position: fixed;
+      inset: var(--nav-height) 0 0 0;
+      background: rgba(250,249,247,.92);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      backdrop-filter: blur(24px) saturate(180%);
+      padding: var(--space-xl) clamp(1.25rem, 5vw, 3rem);
+      flex-direction: column;
+      gap: var(--space-lg);
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity .3s var(--ease-out-expo),
+                  transform .35s var(--ease-out-expo);
+      z-index: 99;
+      list-style: none;
+    }
+
+    .nav__drawer.is-open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .nav__drawer a {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-text);
+      transition: color .2s;
+    }
+
+    .nav__drawer a:hover { color: var(--color-accent); }
+
+    /* ─── HERO ───────────────────────────────────────────────────────── */
+    .hero {
+      padding-top: calc(var(--nav-height) + var(--space-3xl));
+      padding-bottom: var(--space-3xl);
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle radial accent behind hero text */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 55%;
+      height: 70%;
+      background: radial-gradient(ellipse at 70% 30%,
+        rgba(196,119,58,.13) 0%,
+        transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+      position: relative;
+    }
+
+    .hero__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      max-width: 780px;
+    }
+
+    /* Stagger fade-in */
+    .hero__eyebrow,
+    .hero__headline,
+    .hero__subhead,
+    .hero__actions,
+    .hero__reviews {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp .8s var(--ease-out-expo) forwards;
+    }
+
+    .hero__eyebrow  { animation-delay: .05s; }
+    .hero__headline { animation-delay: .15s; }
+    .hero__subhead  { animation-delay: .25s; }
+    .hero__actions  { animation-delay: .35s; }
+    .hero__reviews  { animation-delay: .45s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Eyebrow pill */
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      align-self: flex-start;
+      padding: .375rem .875rem;
+      border-radius: 100px;
+      background: var(--color-accent-light);
+      border: 1px solid rgba(196,119,58,.2);
+    }
+
+    .hero__eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      flex-shrink: 0;
+    }
+
+    /* Headline — italic accent on last word */
+    .hero__headline em {
+      font-style: italic;
+      color: var(--color-accent);
+    }
+
+    /* CTA group */
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: .875rem 2rem;
+      border-radius: 100px;
+      background: var(--color-text);
+      color: var(--color-bg);
+      transition: background .25s, transform .2s, box-shadow .25s;
+      box-shadow: 0 4px 24px rgba(26,22,18,.18);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(196,119,58,.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    /* Arrow icon inside button */
+    .btn-primary__arrow {
+      width: 16px;
+      height: 16px;
+      transition: transform .25s var(--ease-out-expo);
+    }
+
+    .btn-primary:hover .btn-primary__arrow {
+      transform: translateX(3px);
+    }
+
+    /* Trust note */
+    .hero__trust {
+      font-size: .8125rem;
+      color: var(--color-text-muted);
+      font-weight: 400;
+    }
+
+    /* Reviews row */
+    .hero__reviews {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding-top: var(--space-xs);
+    }
+
+    .hero__review-divider {
+      width: 1px;
+      height: 36px;
+      background: var(--color-border);
+    }
+
+    .hero__stars {
+      display: flex;
+      gap: 3px;
+    }
+
+    .hero__star {
+      width: 18px;
+      height: 18px;
+      fill: var(--color-star);
+    }
+
+    .hero__review-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .hero__review-label {
+      font-size: .8125rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .hero__review-sub {
+      font-size: .75rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ─── Decorative floating card ───────────────────────────────────── */
+    .hero__card {
+      display: none;
+      position: absolute;
+      right: clamp(1rem, 4vw, 3rem);
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,.75);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: var(--space-lg) var(--space-xl);
+      box-shadow: 0 24px 64px rgba(26,22,18,.08);
+      width: min(320px, 28vw);
+      gap: var(--space-md);
+      flex-direction: column;
+      opacity: 0;
+      animation: fadeUp .9s .55s var(--ease-out-expo) forwards;
+    }
+
+    .hero__card-stat {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xs);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero__card-stat:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .hero__card-number {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      line-height: 1;
+      color: var(--color-text);
+      letter-spacing: -.02em;
+    }
+
+    .hero__card-desc {
+      font-size: .8125rem;
+      color: var(--color-text-muted);
+      font-weight: 400;
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────────────── */
+
+    /* Show desktop nav links, hide burger below 768 */
+    @media (max-width: 767px) {
+      .nav__links,
+      .nav__cta { display: none; }
+      .nav__burger { display: flex; }
+      .nav__drawer { display: flex; }
+    }
+
+    @media (min-width: 768px) {
+      .nav__drawer { display: none !important; }
+    }
+
+    /* Show floating card on large screens */
+    @media (min-width: 1024px) {
+      .hero__inner {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+      }
+
+      .hero__content {
+        max-width: none;
+      }
+
+      .hero__card {
+        display: flex;
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: auto;
+        justify-self: center;
+      }
+    }
+
+    /* Body scroll lock when menu open */
+    body.menu-open { overflow: hidden; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────────────────────────── -->
+  <header class="nav" id="nav" role="banner">
+    <div class="wrapper">
+      <nav class="nav__inner" aria-label="Main navigation">
+
+        <!-- Wordmark -->
+        <a class="nav__logo" href="/" aria-label="Home">
+          <span class="nav__logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 12.5a5.5 5.5 0 110-11 5.5 5.5 0 010 11zM5 9.5s.75 2 3 2 3-2 3-2" stroke="#fff" stroke-width="1.25" fill="none" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="nav__logo-text">SmileSystem</span>
+        </a>
+
+        <!-- Desktop links -->
+        <ul class="nav__links" role="list">
+          <li><a href="#how-it-works" class="body-small">How it Works</a></li>
+          <li><a href="#stories" class="body-small">Stories</a></li>
+          <li><a href="#faq" class="body-small">FAQ</a></li>
+        </ul>
+
+        <!-- Desktop CTA -->
+        <a href="#get-started" class="nav__cta button-text">Get Started</a>
+
+        <!-- Mobile burger -->
+        <button
+          class="nav__burger"
+          id="burger"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          aria-label="Open navigation menu"
+        >
+          <span class="nav__burger-line" aria-hidden="true"></span>
+          <span class="nav__burger-line" aria-hidden="true"></span>
+          <span class="nav__burger-line" aria-hidden="true"></span>
+        </button>
+
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <ul class="nav__drawer" id="mobile-menu" role="list" aria-label="Mobile navigation">
+    <li><a href="#how-it-works" class="h3">How it Works</a></li>
+    <li><a href="#stories" class="h3">Stories</a></li>
+    <li><a href="#faq" class="h3">FAQ</a></li>
+    <li><a href="#get-started" class="h3" style="color:var(--color-accent)">Get Started →</a></li>
+  </ul>
+
+  <!-- ─── MAIN ──────────────────────────────────────────────────────────── -->
+  <main>
+
+    <!-- ─── HERO ────────────────────────────────────────────────────────── -->
+    <section class="hero" aria-labelledby="hero-headline">
+      <div class="wrapper">
+        <div class="hero__inner">
+
+          <!-- Content column -->
+          <div class="hero__content">
+
+            <!-- Eyebrow -->
+            <p class="hero__eyebrow eyebrow">
+              <span class="hero__eyebrow-dot" aria-hidden="true"></span>
+              Confidence Restoration System
+            </p>
+
+            <!-- Headline -->
+            <h1 class="hero__headline display" id="hero-headline">
+              Stop Hiding<br>Your Smile.<br>Start Living <em>Again.</em>
+            </h1>
+
+            <!-- Subhead -->
+            <p class="hero__subhead subhead">
+              Learn about the system that gave over&nbsp;400 everyday people their confidence back.
+            </p>
+
+            <!-- CTA -->
+            <div class="hero__actions">
+              <a href="#get-started" class="btn-primary" id="hero-cta">
+                <span class="button-text">I'm Ready to Smile Again</span>
+                <svg class="btn-primary__arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <span class="hero__trust body-small">No obligation &bull; Free consultation</span>
+            </div>
+
+            <!-- Reviews -->
+            <div class="hero__reviews" aria-label="Customer reviews">
+              <!-- Stars -->
+              <div class="hero__stars" aria-label="5 stars">
+                <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
+                <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
+                <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
+                <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
+                <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
+              </div>
+
+              <span class="hero__review-divider" aria-hidden="true"></span>
+
+              <div class="hero__review-text">
+                <span class="hero__review-label label">5 stars out of 117 reviews</span>
+                <span class="hero__review-sub caption">Real people. Real results.</span>
+              </div>
+            </div>
+
+          </div><!-- /hero__content -->
+
+          <!-- Stats card (visible ≥1024px) -->
+          <aside class="hero__card" aria-label="Key statistics">
+            <div class="hero__card-stat">
+              <span class="hero__card-number">400+</span>
+              <span class="hero__card-desc body-small">people who reclaimed their smile</span>
+            </div>
+            <div class="hero__card-stat">
+              <span class="hero__card-number">5.0</span>
+              <span class="hero__card-desc body-small">average star rating from 117 reviews</span>
+            </div>
+            <div class="hero__card-stat">
+              <span class="hero__card-number">92%</span>
+              <span class="hero__card-desc body-small">report renewed confidence in 30 days</span>
+            </div>
+          </aside>
+
+        </div><!-- /hero__inner -->
+      </div><!-- /wrapper -->
+    </section>
+
+  </main>
+
+  <script>
+    (() => {
+      'use strict';
+
+      /* ─── Hide-on-scroll nav ─────────────────────────────────────── */
+      const nav    = document.getElementById('nav');
+      let lastY    = window.scrollY;
+      let ticking  = false;
+
+      const updateNav = () => {
+        const currentY = window.scrollY;
+        const scrolled = currentY > 80;          // only hide after 80px
+        const goingDown = currentY > lastY;
+
+        if (scrolled && goingDown) {
+          nav.classList.add('nav--hidden');
+        } else {
+          nav.classList.remove('nav--hidden');
+        }
+
+        lastY = currentY;
+        ticking = false;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(updateNav);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      /* ─── Mobile burger ──────────────────────────────────────────── */
+      const burger = document.getElementById('burger');
+      const drawer = document.getElementById('mobile-menu');
+
+      const openMenu  = () => {
+        burger.setAttribute('aria-expanded', 'true');
+        burger.setAttribute('aria-label', 'Close navigation menu');
+        drawer.classList.add('is-open');
+        document.body.classList.add('menu-open');
+      };
+
+      const closeMenu = () => {
+        burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-label', 'Open navigation menu');
+        drawer.classList.remove('is-open');
+        document.body.classList.remove('menu-open');
+      };
+
+      burger.addEventListener('click', () => {
+        const isOpen = burger.getAttribute('aria-expanded') === 'true';
+        isOpen ? closeMenu() : openMenu();
+      });
+
+      // Close on drawer link tap
+      drawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeMenu();
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
