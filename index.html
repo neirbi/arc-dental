@@ -391,6 +391,8 @@
       grid-template-columns: 1fr;
       gap: var(--space-2xl);
       position: relative;
+      justify-items: center;
+      text-align: center;
     }
 
     .hero__content {
@@ -398,6 +400,7 @@
       flex-direction: column;
       gap: var(--space-lg);
       max-width: 780px;
+      align-items: center;
     }
 
     /* Stagger fade-in */
@@ -452,6 +455,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
       gap: var(--space-md);
     }
 
@@ -499,6 +503,7 @@
     .hero__reviews {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: var(--space-md);
       padding-top: var(--space-xs);
     }
@@ -602,12 +607,8 @@
     /* Show floating card on large screens */
     @media (min-width: 1024px) {
       .hero__inner {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         align-items: center;
-      }
-
-      .hero__content {
-        max-width: none;
       }
 
       .hero__card {
@@ -688,12 +689,6 @@
           <!-- Content column -->
           <div class="hero__content">
 
-            <!-- Eyebrow -->
-            <p class="hero__eyebrow eyebrow">
-              <span class="hero__eyebrow-dot" aria-hidden="true"></span>
-              Confidence Restoration System
-            </p>
-
             <!-- Headline -->
             <h1 class="hero__headline display" id="hero-headline">
               Stop Hiding<br>Your Smile.<br>Start Living <em>Again.</em>
@@ -712,7 +707,6 @@
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
-              <span class="hero__trust body-small">No obligation &bull; Free consultation</span>
             </div>
 
             <!-- Reviews -->
@@ -726,11 +720,8 @@
                 <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
               </div>
 
-              <span class="hero__review-divider" aria-hidden="true"></span>
-
               <div class="hero__review-text">
                 <span class="hero__review-label label">5 stars out of 117 reviews</span>
-                <span class="hero__review-sub caption">Real people. Real results.</span>
               </div>
             </div>
 
