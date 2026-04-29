@@ -380,10 +380,15 @@
       font-size: .875rem;
       font-weight: 400;
       color: var(--color-nav-link);
-      transition: color .2s;
+      padding: .375rem .75rem;
+      border-radius: 100px;
+      transition: color .2s, background .2s;
     }
 
-    .nav__links a:hover { color: var(--color-nav-link-hover); }
+    .nav__links a:hover {
+      color: var(--color-nav-link-hover);
+      background: rgba(128,128,128,.12);
+    }
 
     /* Nav CTA */
     .nav__cta {
