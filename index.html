@@ -581,14 +581,15 @@
       font-size: clamp(3.5rem, 7vw, 6.25rem);
       line-height: 0.95;
       letter-spacing: -0.06em;
-      max-width: 12ch;
+      max-width: 22ch;
       color: var(--color-text);
     }
 
-    /* Headline — italic accent on last word */
-    .hero__headline em {
-      font-style: italic;
-      color: var(--color-primary);
+    .hero-title__gradient {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     /* CTA group */
@@ -812,7 +813,7 @@
 
             <!-- Headline -->
             <h1 class="hero__headline hero-title" id="hero-headline">
-              Stop Hiding<br>Your Smile.<br>Start Living <em>Again.</em>
+              Stop Hiding Your Smile. <span class="hero-title__gradient">Start Living Again.</span>
             </h1>
 
             <!-- Subhead -->
