@@ -723,6 +723,25 @@
       color: var(--color-text-muted);
     }
 
+    /* Register --split so CSS can tween it */
+    @property --split {
+      syntax: '<percentage>';
+      inherits: true;
+      initial-value: 50%;
+    }
+
+    /* One-shot hint fires when .is-hinting is added via IntersectionObserver */
+    .ba-slider.is-hinting {
+      animation: sliderHint 1.6s cubic-bezier(.4,0,.2,1) forwards;
+    }
+
+    @keyframes sliderHint {
+      0%   { --split: 50%; }
+      35%  { --split: 22%; }
+      65%  { --split: 78%; }
+      100% { --split: 50%; }
+    }
+
     /* ─── SOLUTIONS ─────────────────────────────────────────────────── */
     .solutions {
       padding: var(--space-3xl) 0;
@@ -1223,6 +1242,17 @@
           if (e.key === 'ArrowLeft')  slider.style.setProperty('--split', clamp(cur - step, 0, 100).toFixed(2) + '%');
           if (e.key === 'ArrowRight') slider.style.setProperty('--split', clamp(cur + step, 0, 100).toFixed(2) + '%');
         });
+
+        // One-shot viewport hint
+        const observer = new IntersectionObserver(([entry], obs) => {
+          if (!entry.isIntersecting) return;
+          slider.classList.add('is-hinting');
+          slider.addEventListener('animationend', () => {
+            slider.classList.remove('is-hinting');
+          }, { once: true });
+          obs.disconnect();
+        }, { threshold: 0.5 });
+        observer.observe(slider);
       });
 
     })();
