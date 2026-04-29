@@ -723,6 +723,117 @@
       color: var(--color-text-muted);
     }
 
+    /* ─── SOLUTIONS ─────────────────────────────────────────────────── */
+    .solutions {
+      padding: var(--space-3xl) 0;
+      background: var(--color-surface);
+    }
+
+    .solutions__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(var(--space-xl), 6vw, var(--space-2xl));
+      align-items: center;
+    }
+
+    .solutions__copy {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    /* ─── Before / After Slider ──────────────────────────────────────── */
+    .ba-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      aspect-ratio: 4 / 3;
+      cursor: col-resize;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y pinch-zoom;
+      box-shadow: 0 8px 48px rgba(0,0,0,.12);
+    }
+
+    .ba-slider__before,
+    .ba-slider__after {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      pointer-events: none;
+    }
+
+    .ba-slider__after {
+      clip-path: inset(0 0 0 var(--split, 50%));
+    }
+
+    .ba-slider__label {
+      position: absolute;
+      bottom: .875rem;
+      padding: .25rem .625rem;
+      border-radius: 100px;
+      background: rgba(0,0,0,.52);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: .6875rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .ba-slider__label--before { left:  .875rem; }
+    .ba-slider__label--after  { right: .875rem; }
+
+    .ba-slider__handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: var(--split, 50%);
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+      width: 44px;
+    }
+
+    .ba-slider__line {
+      flex: 1;
+      width: 2px;
+      background: #fff;
+      box-shadow: 0 0 6px rgba(0,0,0,.3);
+    }
+
+    .ba-slider__circle {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 16px rgba(0,0,0,.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .ba-slider__circle svg {
+      width: 14px;
+      height: 14px;
+      color: #333;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 767px) {
+      .solutions__inner { grid-template-columns: 1fr; }
+    }
+
     /* ─── VIDEO REVEAL ───────────────────────────────────────────────── */
     .video-reveal {
       view-timeline: --video-section block;
@@ -922,6 +1033,61 @@
       </div><!-- /wrapper -->
     </section>
 
+    <!-- ─── SOLUTIONS ───────────────────────────────────────────────── -->
+    <section class="solutions" id="solutions" aria-labelledby="solutions-headline">
+      <div class="wrapper">
+        <div class="solutions__inner">
+
+          <div class="solutions__copy">
+            <span class="eyebrow">What We Do</span>
+            <h2 class="h2" id="solutions-headline">Solutions Built Around Your Smile</h2>
+            <p class="body-large">
+              We can rebuild your smile, whether you're missing one tooth or need a full-arch
+              restoration. We focus on precision and comfort. From All-on-4®, All-on-6, and
+              All-on-X to zirconia implant bridges and cosmetic makeovers, we customize your
+              treatment plan. We use modern technology and a focused restorative approach
+              tailored for you.
+            </p>
+          </div>
+
+          <!-- Before / After Slider -->
+          <div class="ba-slider" style="--split: 50%;" role="img" aria-label="Before and after dental treatment comparison">
+            <img class="ba-slider__before"
+                 src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/before-after/arc-dental-before-photo.png"
+                 alt="Before dental treatment"
+                 draggable="false" />
+            <img class="ba-slider__after"
+                 src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/before-after/arc-dental-after-photo.png"
+                 alt="After dental treatment"
+                 draggable="false" />
+
+            <span class="ba-slider__label ba-slider__label--before" aria-hidden="true">Before</span>
+            <span class="ba-slider__label ba-slider__label--after"  aria-hidden="true">After</span>
+
+            <div class="ba-slider__handle"
+                 role="slider"
+                 aria-label="Compare before and after"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-valuenow="50"
+                 tabindex="0">
+              <div class="ba-slider__line"></div>
+              <div class="ba-slider__circle" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 18l6-6-6-6"/>
+                </svg>
+              </div>
+              <div class="ba-slider__line"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- ─── VIDEO REVEAL ────────────────────────────────────────────── -->
     <section class="video-reveal" aria-label="Patient story">
       <div class="video-reveal__sticky">
@@ -1028,6 +1194,35 @@
       // Close on Escape
       document.addEventListener('keydown', e => {
         if (e.key === 'Escape') closeMenu();
+      });
+
+      /* ─── Before / After Slider ──────────────────────────────────── */
+      document.querySelectorAll('.ba-slider').forEach(slider => {
+        let active = false;
+        const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
+
+        const setPos = clientX => {
+          const { left, width } = slider.getBoundingClientRect();
+          const pct = clamp((clientX - left) / width * 100, 0, 100);
+          slider.style.setProperty('--split', pct.toFixed(2) + '%');
+          slider.querySelector('.ba-slider__handle')
+                .setAttribute('aria-valuenow', Math.round(pct));
+        };
+
+        slider.addEventListener('mousedown',  e => { active = true; setPos(e.clientX); });
+        window.addEventListener('mousemove',  e => { if (active) setPos(e.clientX); });
+        window.addEventListener('mouseup',    ()  => { active = false; });
+
+        slider.addEventListener('touchstart', e => { active = true; setPos(e.touches[0].clientX); }, { passive: true });
+        window.addEventListener('touchmove',  e => { if (active) setPos(e.touches[0].clientX); },   { passive: true });
+        window.addEventListener('touchend',   ()  => { active = false; });
+
+        slider.querySelector('.ba-slider__handle').addEventListener('keydown', e => {
+          const cur  = parseFloat(slider.style.getPropertyValue('--split') || '50');
+          const step = e.shiftKey ? 10 : 2;
+          if (e.key === 'ArrowLeft')  slider.style.setProperty('--split', clamp(cur - step, 0, 100).toFixed(2) + '%');
+          if (e.key === 'ArrowRight') slider.style.setProperty('--split', clamp(cur + step, 0, 100).toFixed(2) + '%');
+        });
       });
 
     })();
