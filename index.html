@@ -15,16 +15,38 @@
   />
 
   <style>
-    /* ─── Design Tokens ─────────────────────────────────────────────── */
+    /* ─── Design Tokens (from Token-Hex-Use.csv) ───────────────────── */
     :root {
-      --color-bg:          #faf9f7;
-      --color-surface:     #ffffff;
-      --color-text:        #1a1612;
-      --color-text-muted:  #6b6460;
-      --color-accent:      #c4773a;
-      --color-accent-light:#f5ede3;
-      --color-star:        #e8a030;
-      --color-border:      rgba(26,22,18,.10);
+      /* Brand */
+      --color-primary:       #0A5CFF; /* Main CTA blue, links, key actions */
+      --color-secondary:     #5BB6FF; /* Gradient partner, highlights, soft emphasis */
+      --color-primary-dark:  #0847C7; /* Hover/pressed state for primary blue */
+      --color-primary-soft:  #EAF2FF; /* Light blue surface, chips, info cards */
+      --color-accent-ice:    #F4F9FF; /* Blue-tinted background sections */
+
+      /* Text */
+      --color-text:          #1D1D1F; /* Primary text — Apple-style near-black */
+      --color-text-muted:    #6E6E73; /* Secondary text, supporting copy */
+      --color-text-faint:    #8E8E93; /* Captions, metadata, helper text */
+
+      /* Surfaces */
+      --color-bg:            #F5F5F7; /* Main page background — Apple-style off-white */
+      --color-surface:       #FFFFFF; /* Cards, nav, content panels */
+      --color-surface-alt:   #FBFBFD; /* Alternate section background */
+
+      /* Strokes */
+      --color-border:        #DDE3EA; /* Borders, dividers, inputs */
+      --color-divider:       #E5E5EA; /* Soft separators */
+
+      /* Semantic */
+      --color-success:       #22A06B;
+      --color-warning:       #C98A16;
+      --color-error:         #D92D20;
+
+      /* Aliases used throughout */
+      --color-accent:        var(--color-primary);
+      --color-accent-light:  var(--color-primary-soft);
+      --color-star:          #F5A623; /* star gold — not in CSV, kept as-is */
 
       --max-width:         1400px;
       --nav-height:        68px;
@@ -67,7 +89,7 @@
       font-weight: 500;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: var(--color-accent);
+      color: var(--color-primary);
     }
 
     .display {
@@ -178,7 +200,7 @@
       right: 0;
       z-index: 100;
       height: var(--nav-height);
-      background: rgba(250,249,247,.72);
+      background: rgba(245,245,247,.80);
       -webkit-backdrop-filter: blur(18px) saturate(180%);
       backdrop-filter: blur(18px) saturate(180%);
       border-bottom: 1px solid var(--color-border);
@@ -209,7 +231,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: var(--color-accent);
+      background: var(--color-primary);
       display: grid;
       place-items: center;
       flex-shrink: 0;
@@ -261,7 +283,7 @@
     }
 
     .nav__cta:hover {
-      background: var(--color-accent);
+      background: var(--color-primary);
       transform: translateY(-1px);
     }
 
@@ -309,7 +331,7 @@
       display: none;
       position: fixed;
       inset: var(--nav-height) 0 0 0;
-      background: rgba(250,249,247,.92);
+      background: rgba(245,245,247,.95);
       -webkit-backdrop-filter: blur(24px) saturate(180%);
       backdrop-filter: blur(24px) saturate(180%);
       padding: var(--space-xl) clamp(1.25rem, 5vw, 3rem);
@@ -337,7 +359,7 @@
       transition: color .2s;
     }
 
-    .nav__drawer a:hover { color: var(--color-accent); }
+    .nav__drawer a:hover { color: var(--color-primary); }
 
     /* ─── HERO ───────────────────────────────────────────────────────── */
     .hero {
@@ -359,7 +381,7 @@
       width: 55%;
       height: 70%;
       background: radial-gradient(ellipse at 70% 30%,
-        rgba(196,119,58,.13) 0%,
+        rgba(10,92,255,.09) 0%,
         transparent 65%);
       pointer-events: none;
     }
@@ -407,22 +429,22 @@
       align-self: flex-start;
       padding: .375rem .875rem;
       border-radius: 100px;
-      background: var(--color-accent-light);
-      border: 1px solid rgba(196,119,58,.2);
+      background: var(--color-primary-soft);
+      border: 1px solid rgba(10,92,255,.18);
     }
 
     .hero__eyebrow-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--color-accent);
+      background: var(--color-primary);
       flex-shrink: 0;
     }
 
     /* Headline — italic accent on last word */
     .hero__headline em {
       font-style: italic;
-      color: var(--color-accent);
+      color: var(--color-primary);
     }
 
     /* CTA group */
@@ -439,16 +461,16 @@
       gap: var(--space-sm);
       padding: .875rem 2rem;
       border-radius: 100px;
-      background: var(--color-text);
-      color: var(--color-bg);
+      background: var(--color-primary);
+      color: #fff;
       transition: background .25s, transform .2s, box-shadow .25s;
-      box-shadow: 0 4px 24px rgba(26,22,18,.18);
+      box-shadow: 0 4px 24px rgba(10,92,255,.28);
     }
 
     .btn-primary:hover {
-      background: var(--color-accent);
+      background: var(--color-primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(196,119,58,.3);
+      box-shadow: 0 8px 32px rgba(10,92,255,.36);
     }
 
     .btn-primary:active {
@@ -522,13 +544,13 @@
       right: clamp(1rem, 4vw, 3rem);
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255,255,255,.75);
+      background: rgba(255,255,255,.85);
       -webkit-backdrop-filter: blur(16px);
       backdrop-filter: blur(16px);
       border: 1px solid var(--color-border);
       border-radius: 20px;
       padding: var(--space-lg) var(--space-xl);
-      box-shadow: 0 24px 64px rgba(26,22,18,.08);
+      box-shadow: 0 24px 64px rgba(10,92,255,.08);
       width: min(320px, 28vw);
       gap: var(--space-md);
       flex-direction: column;
@@ -541,7 +563,7 @@
       flex-direction: column;
       gap: var(--space-2xs);
       padding-bottom: var(--space-md);
-      border-bottom: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-divider);
     }
 
     .hero__card-stat:last-child {
@@ -553,7 +575,7 @@
       font-family: var(--font-display);
       font-size: 2.25rem;
       line-height: 1;
-      color: var(--color-text);
+      color: var(--color-primary);
       letter-spacing: -.02em;
     }
 
@@ -652,7 +674,7 @@
     <li><a href="#how-it-works" class="h3">How it Works</a></li>
     <li><a href="#stories" class="h3">Stories</a></li>
     <li><a href="#faq" class="h3">FAQ</a></li>
-    <li><a href="#get-started" class="h3" style="color:var(--color-accent)">Get Started →</a></li>
+    <li><a href="#get-started" class="h3" style="color:var(--color-primary)">Get Started →</a></li>
   </ul>
 
   <!-- ─── MAIN ──────────────────────────────────────────────────────────── -->
