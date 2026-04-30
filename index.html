@@ -1191,9 +1191,16 @@
       transform: scale(1.25);
     }
 
+    /* Inactive iframes don't intercept swipe/tap — slide receives them instead */
+    .stories__slide:not(.is-active) iframe {
+      pointer-events: none;
+    }
+
     @media (max-width: 767px) {
       .stories__track {
         gap: .5rem;
+        padding-inline: max(1rem, calc(50vw - min(190px, 35vw)));
+        scroll-padding-inline: max(1rem, calc(50vw - min(190px, 35vw)));
       }
       .stories__slide {
         width: min(380px, 70vw);
@@ -1462,7 +1469,7 @@
       <div class="stories__viewport">
         <div class="stories__track" role="region" aria-label="Patient testimonials carousel" tabindex="0">
 
-          <article class="stories__slide stories__slide--text" aria-roledescription="slide" aria-label="Slide 1 of 3: Intro">
+          <article class="stories__slide stories__slide--text is-active" aria-roledescription="slide" aria-label="Slide 1 of 3: Intro">
             <div>
               <span class="eyebrow">Patient Testimonials</span>
               <h3 id="stories-headline">Wondering what a new smile feels like?</h3>
@@ -1702,6 +1709,14 @@
               inline: 'center',
               block: 'nearest'
             });
+          });
+        });
+
+        // Tap an inactive slide to bring it to center (active iframe still
+        // captures clicks normally so video playback isn't intercepted)
+        storiesSlides.forEach((slide, i) => {
+          slide.addEventListener('click', () => {
+            if (i !== storiesActive) goToSlide(i);
           });
         });
 
