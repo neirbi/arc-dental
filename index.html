@@ -1198,6 +1198,16 @@
       transform: scale(1.25);
     }
 
+    @media (max-width: 767px) {
+      .stories__track {
+        gap: .5rem;
+      }
+      .stories__slide {
+        width: min(380px, 70vw);
+        transform: scale(0.78);
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .stories__slide,
       .stories__track {
