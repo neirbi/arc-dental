@@ -1219,6 +1219,238 @@
       }
     }
 
+    /* ─── REVIEWS GRID ───────────────────────────────────────────────── */
+    .reviews {
+      padding: var(--space-3xl) 0;
+      background: var(--color-bg);
+      overflow: hidden;
+    }
+
+    .reviews__inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .reviews__head {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+      padding: 0 1.5rem;
+    }
+
+    .reviews__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .reviews__row {
+      position: relative;
+    }
+
+    .reviews__row-track {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: .5rem 1.5rem;
+      scroll-padding-inline: 1.5rem;
+      cursor: grab;
+    }
+    .reviews__row-track::-webkit-scrollbar { display: none; }
+
+    .reviews__row-track.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+      scroll-behavior: auto;
+      user-select: none;
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .reviews__row-track { cursor: auto; }
+    }
+
+    .review-card {
+      flex: 0 0 auto;
+      width: 360px;
+      height: 340px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      scroll-snap-align: start;
+      box-shadow: 0 2px 12px -4px rgba(0,0,0,.08);
+    }
+
+    .review-card__head {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .review-card__avatar {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #fff;
+      letter-spacing: .02em;
+      user-select: none;
+    }
+
+    .review-card__identity {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .review-card__name {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--color-text);
+      line-height: 1.2;
+    }
+
+    .review-card__location {
+      font-size: .85rem;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+
+    .review-card__body {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+    }
+
+    .review-card__text {
+      font-size: .95rem;
+      line-height: 1.5;
+      color: var(--color-text);
+      margin: 0;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+    }
+
+    .review-card__more {
+      align-self: flex-start;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      color: var(--color-primary);
+      font-weight: 500;
+      font-size: .9rem;
+      cursor: pointer;
+      display: none;
+    }
+    .review-card__more.is-visible { display: inline-block; }
+    .review-card__more:hover { text-decoration: underline; }
+    .review-card__more:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .review-card__date {
+      font-size: .8rem;
+      color: var(--color-text-faint);
+      margin-top: auto;
+    }
+
+    @media (max-width: 767px) {
+      .review-card {
+        width: min(360px, 85vw);
+      }
+      .reviews__row-track {
+        padding: .5rem 1rem;
+        scroll-padding-inline: 1rem;
+      }
+    }
+
+    /* Review dialog */
+    .review-dialog {
+      border: 0;
+      padding: 0;
+      max-width: min(560px, 92vw);
+      width: 100%;
+      max-height: 86vh;
+      background: var(--color-surface);
+      color: var(--color-text);
+      border-radius: 20px;
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,.35);
+      overflow: hidden;
+    }
+    .review-dialog::backdrop {
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(4px);
+    }
+    .review-dialog[open] {
+      animation: reviewDialogIn .25s ease-out;
+    }
+    @keyframes reviewDialogIn {
+      from { opacity: 0; transform: translateY(8px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0)   scale(1); }
+    }
+
+    .review-dialog__inner {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 86vh;
+      overflow-y: auto;
+    }
+
+    .review-dialog__close {
+      position: absolute;
+      top: .75rem;
+      right: .75rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 0;
+      background: transparent;
+      color: var(--color-text);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: color .2s, background .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .review-dialog__close:hover {
+      background: rgba(128,128,128,.12);
+    }
+    .review-dialog__close svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .review-dialog__text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--color-text);
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
     /* ─── Responsive ─────────────────────────────────────────────────── */
 
     /* Show desktop nav links, hide burger below 768 */
@@ -1521,6 +1753,37 @@
       </div>
     </section>
 
+    <!-- ─── REVIEWS GRID ──────────────────────────────────────────── -->
+    <section class="reviews" id="reviews" aria-labelledby="reviews-headline">
+      <div class="reviews__inner">
+        <div class="reviews__head">
+          <span class="eyebrow">Reviews</span>
+          <h2 class="h2" id="reviews-headline">What our patients say</h2>
+        </div>
+        <div class="reviews__grid"></div>
+      </div>
+
+      <dialog class="review-dialog" id="review-dialog" aria-labelledby="review-dialog-name">
+        <button class="review-dialog__close" type="button" aria-label="Close review">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="review-dialog__inner">
+          <div class="review-card__head">
+            <div class="review-card__avatar" id="review-dialog-avatar"></div>
+            <div class="review-card__identity">
+              <span class="review-card__name" id="review-dialog-name"></span>
+              <span class="review-card__location" id="review-dialog-location"></span>
+            </div>
+          </div>
+          <p class="review-dialog__text" id="review-dialog-text"></p>
+          <span class="review-card__date" id="review-dialog-date"></span>
+        </div>
+      </dialog>
+    </section>
+
   </main>
 
   <script>
@@ -1787,6 +2050,189 @@
         });
 
         updateStories();
+      }
+
+      /* ─── Reviews Grid ───────────────────────────────────────────── */
+      const reviewsGrid = document.querySelector('.reviews__grid');
+      if (reviewsGrid) {
+        const reviews = [
+          // Row 1
+          [
+            { name: "Sarah J.",    location: "Austin, TX",       date: "Apr 12, 2026", text: "Best dental experience I've ever had. Dr. Hussein walked me through every option and I never felt rushed." },
+            { name: "Michael R.",  location: "Buffalo, NY",      date: "Mar 28, 2026", text: "I came in dreading a cleaning and walked out smiling. The hygienist was thorough and surprisingly gentle." },
+            { name: "Priya S.",    location: "Houston, TX",      date: "Mar 22, 2026", text: "I'd been putting off dental work for years because of bad experiences elsewhere. Dr. Hussein and his team completely changed my mind. From the moment I sat in the chair, every step was explained, every concern was addressed, and the work itself was honestly painless. My only regret is not coming here sooner. Highly, highly recommended for anyone who's nervous about the dentist." },
+            { name: "Daniel K.",   location: "Dallas, TX",       date: "Mar 15, 2026", text: "Quick, professional, and friendly. Got me in and out for a chip repair in under an hour." },
+            { name: "Emma L.",     location: "Austin, TX",       date: "Mar 09, 2026", text: "The office is gorgeous and the staff is even better. I appreciated how transparent they were about pricing." },
+            { name: "Jordan P.",   location: "San Antonio, TX",  date: "Feb 28, 2026", text: "Genuinely care about their patients. My wife and I both switched our whole family over." },
+          ],
+          // Row 2
+          [
+            { name: "Aisha M.",    location: "Plano, TX",        date: "Feb 24, 2026", text: "First time getting Invisalign and the consultation was really informative. Two months in and the results are amazing." },
+            { name: "Carlos V.",   location: "El Paso, TX",      date: "Feb 18, 2026", text: "Showed up with a cracked molar in pain and they fit me in same-day. The relief I felt walking out is hard to overstate. Tarek talked me through the crown options without any pressure, which I appreciated since I'd been burned by upsells at other places." },
+            { name: "Hannah W.",   location: "Round Rock, TX",   date: "Feb 11, 2026", text: "Friendly front desk, modern equipment, and zero wait time. Five stars." },
+            { name: "Tom B.",      location: "Austin, TX",       date: "Feb 02, 2026", text: "The whitening treatment exceeded my expectations. People keep asking if I had something done." },
+            { name: "Rachel D.",   location: "Cedar Park, TX",   date: "Jan 27, 2026", text: "I've been a patient for two years now. Consistently great care across cleanings, a filling, and a recent crown." },
+            { name: "Omar H.",     location: "Buffalo, NY",      date: "Jan 19, 2026", text: "Switched here after our last dentist retired. So glad we did. The kids actually look forward to their cleanings." },
+          ],
+          // Row 3
+          [
+            { name: "Lina F.",     location: "Houston, TX",      date: "Jan 12, 2026", text: "Beautiful office, gentle hands, fair pricing. What more could you want?" },
+            { name: "Kevin O.",    location: "Austin, TX",       date: "Jan 04, 2026", text: "I had three implants done over the course of last year. The whole process was carefully planned and the results look completely natural. The staff remembered details about my life between visits, which made the experience feel personal rather than transactional. I cannot recommend the practice enough — it's worth the drive across town." },
+            { name: "Megan T.",    location: "Pflugerville, TX", date: "Dec 22, 2025", text: "They got my insurance figured out faster than I could have. Loved that." },
+            { name: "Brian C.",    location: "Austin, TX",       date: "Dec 15, 2025", text: "Was nervous about a deep cleaning but it ended up being almost relaxing. Music in the headphones was a nice touch." },
+            { name: "Yasmin A.",   location: "Georgetown, TX",   date: "Dec 08, 2025", text: "Tarek is an artist. My new veneers look exactly like I'd hoped." },
+            { name: "Patrick S.",  location: "Austin, TX",       date: "Nov 30, 2025", text: "Fair, honest, no pushy upsells. Refreshing for a dental office." },
+          ],
+          // Row 4
+          [
+            { name: "Nina G.",     location: "Leander, TX",      date: "Nov 22, 2025", text: "Brought my 7-year-old in for her first visit and she actually had fun. Whatever they're doing for pediatric patients, it's working." },
+            { name: "Andre L.",    location: "Austin, TX",       date: "Nov 14, 2025", text: "Solid practice. Modern, clean, on time. That's all I ask for." },
+            { name: "Sofia E.",    location: "Buda, TX",         date: "Nov 06, 2025", text: "Dr. Hussein took the time to explain every step of my root canal in plain English. By the end I genuinely understood what was happening, which made it much less scary. The follow-up call the next day to check on me was a really thoughtful detail." },
+            { name: "James M.",    location: "Austin, TX",       date: "Oct 30, 2025", text: "In and out for a cleaning in 40 minutes. Friendly the whole way through." },
+            { name: "Vera N.",     location: "Kyle, TX",         date: "Oct 21, 2025", text: "Best smile makeover decision I've made. Confidence through the roof." },
+            { name: "Ravi K.",     location: "Manor, TX",        date: "Oct 15, 2025", text: "Reasonable prices, transparent quotes, no surprises on the invoice. That alone is worth five stars." },
+          ],
+        ];
+
+        const initialFor = name => {
+          const parts = name.trim().split(/\s+/);
+          const first = parts[0]?.[0] || '';
+          const last  = parts[1]?.[0] || '';
+          return (first + last).toUpperCase();
+        };
+
+        const hueFor = name => {
+          let h = 0;
+          for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) >>> 0;
+          return h % 360;
+        };
+
+        const escapeHtml = s => s.replace(/[&<>"']/g, c => (
+          { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+        ));
+
+        const cardHTML = r => {
+          const hue = hueFor(r.name);
+          return `
+            <article class="review-card">
+              <div class="review-card__head">
+                <div class="review-card__avatar" style="background: hsl(${hue}, 60%, 48%);" aria-hidden="true">${escapeHtml(initialFor(r.name))}</div>
+                <div class="review-card__identity">
+                  <span class="review-card__name">${escapeHtml(r.name)}</span>
+                  <span class="review-card__location">${escapeHtml(r.location)}</span>
+                </div>
+              </div>
+              <div class="review-card__body">
+                <p class="review-card__text">${escapeHtml(r.text)}</p>
+                <button class="review-card__more" type="button">Read more</button>
+              </div>
+              <span class="review-card__date">${escapeHtml(r.date)}</span>
+            </article>
+          `;
+        };
+
+        // Render rows
+        reviewsGrid.innerHTML = reviews.map((row, ri) => `
+          <div class="reviews__row">
+            <div class="reviews__row-track" role="region" aria-label="Patient reviews row ${ri + 1}" tabindex="0">
+              ${row.map(cardHTML).join('')}
+            </div>
+          </div>
+        `).join('');
+
+        // Map cards back to data for the dialog
+        const cardEls = [...reviewsGrid.querySelectorAll('.review-card')];
+        const flatReviews = reviews.flat();
+
+        // Reveal "Read more" only when text actually overflows
+        const updateOverflowFlags = () => {
+          cardEls.forEach(card => {
+            const txt  = card.querySelector('.review-card__text');
+            const more = card.querySelector('.review-card__more');
+            const overflows = txt.scrollHeight - txt.clientHeight > 1;
+            more.classList.toggle('is-visible', overflows);
+          });
+        };
+        updateOverflowFlags();
+        window.addEventListener('resize', updateOverflowFlags);
+
+        // Dialog handling
+        const dialog       = document.getElementById('review-dialog');
+        const dlgAvatar    = document.getElementById('review-dialog-avatar');
+        const dlgName      = document.getElementById('review-dialog-name');
+        const dlgLocation  = document.getElementById('review-dialog-location');
+        const dlgText      = document.getElementById('review-dialog-text');
+        const dlgDate      = document.getElementById('review-dialog-date');
+        const dlgClose     = dialog.querySelector('.review-dialog__close');
+
+        const openDialog = r => {
+          const hue = hueFor(r.name);
+          dlgAvatar.style.background = `hsl(${hue}, 60%, 48%)`;
+          dlgAvatar.textContent      = initialFor(r.name);
+          dlgName.textContent        = r.name;
+          dlgLocation.textContent    = r.location;
+          dlgText.textContent        = r.text;
+          dlgDate.textContent        = r.date;
+          dialog.showModal();
+        };
+
+        cardEls.forEach((card, i) => {
+          card.querySelector('.review-card__more').addEventListener('click', e => {
+            e.stopPropagation();
+            openDialog(flatReviews[i]);
+          });
+        });
+
+        dlgClose.addEventListener('click', () => dialog.close());
+        // Click on backdrop closes
+        dialog.addEventListener('click', e => {
+          if (e.target === dialog) dialog.close();
+        });
+
+        /* Mouse drag-to-scroll on each row (touch uses native scroll) */
+        reviewsGrid.querySelectorAll('.reviews__row-track').forEach(track => {
+          let active = false, startX = 0, startLeft = 0, moved = false;
+
+          track.addEventListener('pointerdown', e => {
+            if (e.pointerType !== 'mouse' || e.button !== 0) return;
+            active    = true;
+            moved     = false;
+            startX    = e.clientX;
+            startLeft = track.scrollLeft;
+            track.classList.add('is-dragging');
+            track.setPointerCapture(e.pointerId);
+          });
+
+          track.addEventListener('pointermove', e => {
+            if (!active) return;
+            const dx = e.clientX - startX;
+            if (Math.abs(dx) > 3) moved = true;
+            track.scrollLeft = startLeft - dx;
+          });
+
+          const end = e => {
+            if (!active) return;
+            active = false;
+            track.classList.remove('is-dragging');
+            if (track.hasPointerCapture(e.pointerId)) {
+              track.releasePointerCapture(e.pointerId);
+            }
+          };
+          track.addEventListener('pointerup', end);
+          track.addEventListener('pointercancel', end);
+
+          // Suppress synthetic click after a real drag (so Read more buttons
+          // and card click handlers don't fire from the drag release)
+          track.addEventListener('click', e => {
+            if (moved) {
+              e.stopPropagation();
+              e.preventDefault();
+              moved = false;
+            }
+          }, true);
+
+          track.addEventListener('dragstart', e => e.preventDefault());
+        });
       }
 
     })();
