@@ -1128,54 +1128,30 @@
     }
 
     .stories__arrow {
-      --size: 44px;
-      width: var(--size);
-      height: var(--size);
-      flex: 0 0 auto;
-      border-radius: 50%;
-      border: 1px solid var(--color-border);
-      background: transparent;
-      color: var(--color-text);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      border: 0;
+      background: transparent;
+      color: var(--color-nav-link);
       padding: 0;
-      position: relative;
-      isolation: isolate;
-      transition: color .35s cubic-bezier(.4,0,.2,1),
-                  border-color .35s cubic-bezier(.4,0,.2,1),
-                  transform .15s ease;
+      cursor: pointer;
+      transition: color .2s, background .2s;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .stories__arrow::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: var(--color-text);
-      transform: scale(0);
-      transform-origin: center;
-      transition: transform .4s cubic-bezier(.65,0,.35,1);
-      z-index: -1;
+    .stories__arrow:hover {
+      color: var(--color-nav-link-hover);
+      background: rgba(128,128,128,.12);
     }
 
     .stories__arrow svg {
-      width: 16px;
-      height: 16px;
-      transition: transform .35s cubic-bezier(.4,0,.2,1);
-    }
-
-    @media (hover: hover) {
-      .stories__arrow:hover {
-        color: var(--color-bg);
-        border-color: var(--color-text);
-      }
-      .stories__arrow:hover::before {
-        transform: scale(1);
-      }
-      .stories__arrow--prev:hover svg { transform: translateX(-3px); }
-      .stories__arrow--next:hover svg { transform: translateX(3px); }
+      width: 18px;
+      height: 18px;
     }
 
     .stories__arrow:focus-visible {
@@ -1183,23 +1159,13 @@
       outline-offset: 3px;
     }
 
-    .stories__arrow:active {
-      transform: scale(0.94);
-    }
-
     .stories__arrow[disabled] {
       opacity: .3;
       cursor: not-allowed;
     }
     .stories__arrow[disabled]:hover {
-      color: var(--color-text);
-      border-color: var(--color-border);
-    }
-    .stories__arrow[disabled]:hover::before {
-      transform: scale(0);
-    }
-    .stories__arrow[disabled]:hover svg {
-      transform: none;
+      color: var(--color-nav-link);
+      background: transparent;
     }
 
     .stories__dots {
