@@ -863,7 +863,7 @@
     /* ─── VIDEO REVEAL ───────────────────────────────────────────────── */
     .video-reveal {
       view-timeline: --video-section block;
-      min-height: 280vh;
+      min-height: 200vh;
       position: relative;
       background: var(--color-bg);
     }
@@ -912,6 +912,10 @@
     }
 
     @media (min-width: 768px) {
+      .video-reveal {
+        min-height: 280vh;
+      }
+
       .video-reveal__sticky {
         flex-direction: row;
         gap: 4rem;
