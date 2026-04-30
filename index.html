@@ -1080,22 +1080,15 @@
     .stories__slide--text {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       padding: clamp(1.5rem, 4vw, 2.5rem);
-      text-align: center;
+      text-align: left;
       background: transparent;
       box-shadow: none;
     }
 
     .stories__slide--text.is-active {
       box-shadow: none;
-    }
-
-    @media (min-width: 768px) {
-      .stories__slide--text {
-        justify-content: flex-start;
-        text-align: left;
-      }
     }
 
     .stories__slide--text .eyebrow {
@@ -1205,6 +1198,9 @@
       .stories__slide {
         width: min(380px, 70vw);
         transform: scale(0.78);
+      }
+      .stories__arrow {
+        display: none;
       }
     }
 
