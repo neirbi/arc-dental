@@ -1278,14 +1278,14 @@
     .review-card {
       flex: 0 0 auto;
       width: 360px;
-      height: 340px;
+      height: 260px;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1.25rem 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: .75rem;
+      gap: .6rem;
       scroll-snap-align: start;
       box-shadow: 0 2px 12px -4px rgba(0,0,0,.08);
     }
@@ -1358,8 +1358,13 @@
       margin: 0;
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 5;
+      -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
+      white-space: pre-wrap;
+    }
+    .review-card__text.is-truncated {
+      -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+              mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
     }
 
     .review-card__more {
@@ -1367,14 +1372,16 @@
       background: transparent;
       border: 0;
       padding: 0;
-      color: var(--color-primary);
+      color: var(--color-text-muted);
       font-weight: 500;
-      font-size: .9rem;
+      font-size: .85rem;
       cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
       display: none;
     }
     .review-card__more.is-visible { display: inline-block; }
-    .review-card__more:hover { text-decoration: underline; }
+    .review-card__more:hover { color: var(--color-text); }
     .review-card__more:focus-visible {
       outline: 2px solid var(--color-primary);
       outline-offset: 2px;
@@ -2144,6 +2151,7 @@
             const more = card.querySelector('.review-card__more');
             const overflows = txt.scrollHeight - txt.clientHeight > 1;
             more.classList.toggle('is-visible', overflows);
+            txt.classList.toggle('is-truncated', overflows);
           });
         };
         updateOverflowFlags();
