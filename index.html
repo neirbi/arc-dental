@@ -1118,11 +1118,94 @@
       display: block;
     }
 
+    .stories__controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1rem, 3vw, 2rem);
+      margin-top: var(--space-lg);
+      padding: 0 1.5rem;
+    }
+
+    .stories__arrow {
+      --size: 44px;
+      width: var(--size);
+      height: var(--size);
+      flex: 0 0 auto;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: transparent;
+      color: var(--color-text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      position: relative;
+      isolation: isolate;
+      transition: color .35s cubic-bezier(.4,0,.2,1),
+                  border-color .35s cubic-bezier(.4,0,.2,1),
+                  transform .15s ease;
+    }
+
+    .stories__arrow::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: var(--color-text);
+      transform: scale(0);
+      transform-origin: center;
+      transition: transform .4s cubic-bezier(.65,0,.35,1);
+      z-index: -1;
+    }
+
+    .stories__arrow svg {
+      width: 16px;
+      height: 16px;
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+    }
+
+    @media (hover: hover) {
+      .stories__arrow:hover {
+        color: var(--color-bg);
+        border-color: var(--color-text);
+      }
+      .stories__arrow:hover::before {
+        transform: scale(1);
+      }
+      .stories__arrow--prev:hover svg { transform: translateX(-3px); }
+      .stories__arrow--next:hover svg { transform: translateX(3px); }
+    }
+
+    .stories__arrow:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 3px;
+    }
+
+    .stories__arrow:active {
+      transform: scale(0.94);
+    }
+
+    .stories__arrow[disabled] {
+      opacity: .3;
+      cursor: not-allowed;
+    }
+    .stories__arrow[disabled]:hover {
+      color: var(--color-text);
+      border-color: var(--color-border);
+    }
+    .stories__arrow[disabled]:hover::before {
+      transform: scale(0);
+    }
+    .stories__arrow[disabled]:hover svg {
+      transform: none;
+    }
+
     .stories__dots {
       display: flex;
       gap: .5rem;
       justify-content: center;
-      margin-top: var(--space-lg);
     }
 
     .stories__dot {
@@ -1430,10 +1513,24 @@
 
         </div>
 
-        <div class="stories__dots" role="tablist" aria-label="Patient stories pagination">
-          <button class="stories__dot is-active" type="button" role="tab" aria-label="Go to slide 1" data-index="0"></button>
-          <button class="stories__dot" type="button" role="tab" aria-label="Go to slide 2" data-index="1"></button>
-          <button class="stories__dot" type="button" role="tab" aria-label="Go to slide 3" data-index="2"></button>
+        <div class="stories__controls">
+          <button class="stories__arrow stories__arrow--prev" type="button" aria-label="Previous slide" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="15 6 9 12 15 18"></polyline>
+            </svg>
+          </button>
+
+          <div class="stories__dots" role="tablist" aria-label="Patient stories pagination">
+            <button class="stories__dot is-active" type="button" role="tab" aria-label="Go to slide 1" data-index="0"></button>
+            <button class="stories__dot" type="button" role="tab" aria-label="Go to slide 2" data-index="1"></button>
+            <button class="stories__dot" type="button" role="tab" aria-label="Go to slide 3" data-index="2"></button>
+          </div>
+
+          <button class="stories__arrow stories__arrow--next" type="button" aria-label="Next slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="9 6 15 12 9 18"></polyline>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
@@ -1576,7 +1673,10 @@
       if (storiesTrack) {
         const storiesSlides = [...storiesTrack.querySelectorAll('.stories__slide')];
         const storiesDots   = [...document.querySelectorAll('.stories__dot')];
+        const storiesPrev   = document.querySelector('.stories__arrow--prev');
+        const storiesNext   = document.querySelector('.stories__arrow--next');
 
+        let storiesActive = 0;
         let storiesRaf = false;
         const updateStories = () => {
           storiesRaf = false;
@@ -1590,9 +1690,24 @@
             const d = Math.abs(c - trackCenter);
             if (d < minDist) { minDist = d; closest = i; }
           });
+          storiesActive = closest;
           storiesSlides.forEach((s, i) => s.classList.toggle('is-active', i === closest));
           storiesDots.forEach((d, i) => d.classList.toggle('is-active', i === closest));
+          if (storiesPrev) storiesPrev.disabled = closest === 0;
+          if (storiesNext) storiesNext.disabled = closest === storiesSlides.length - 1;
         };
+
+        const goToSlide = i => {
+          const target = storiesSlides[Math.max(0, Math.min(storiesSlides.length - 1, i))];
+          target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        };
+
+        if (storiesPrev) {
+          storiesPrev.addEventListener('click', () => goToSlide(storiesActive - 1));
+        }
+        if (storiesNext) {
+          storiesNext.addEventListener('click', () => goToSlide(storiesActive + 1));
+        }
 
         storiesTrack.addEventListener('scroll', () => {
           if (!storiesRaf) {
