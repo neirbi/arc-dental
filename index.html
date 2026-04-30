@@ -1296,6 +1296,19 @@
       gap: .75rem;
     }
 
+    .review-card__rating {
+      display: inline-flex;
+      gap: 2px;
+      flex: 0 0 auto;
+      margin-left: auto;
+      color: var(--color-star);
+    }
+    .review-card__rating svg {
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+
     .review-card__avatar {
       width: 48px;
       height: 48px;
@@ -1777,6 +1790,7 @@
               <span class="review-card__name" id="review-dialog-name"></span>
               <span class="review-card__location" id="review-dialog-location"></span>
             </div>
+            <div class="review-card__rating" id="review-dialog-rating" aria-label="5 out of 5 stars"></div>
           </div>
           <p class="review-dialog__text" id="review-dialog-text"></p>
           <span class="review-card__date" id="review-dialog-date"></span>
@@ -2056,41 +2070,16 @@
       const reviewsGrid = document.querySelector('.reviews__grid');
       if (reviewsGrid) {
         const reviews = [
-          // Row 1
           [
-            { name: "Sarah J.",    location: "Austin, TX",       date: "Apr 12, 2026", text: "Best dental experience I've ever had. Dr. Hussein walked me through every option and I never felt rushed." },
-            { name: "Michael R.",  location: "Buffalo, NY",      date: "Mar 28, 2026", text: "I came in dreading a cleaning and walked out smiling. The hygienist was thorough and surprisingly gentle." },
-            { name: "Priya S.",    location: "Houston, TX",      date: "Mar 22, 2026", text: "I'd been putting off dental work for years because of bad experiences elsewhere. Dr. Hussein and his team completely changed my mind. From the moment I sat in the chair, every step was explained, every concern was addressed, and the work itself was honestly painless. My only regret is not coming here sooner. Highly, highly recommended for anyone who's nervous about the dentist." },
-            { name: "Daniel K.",   location: "Dallas, TX",       date: "Mar 15, 2026", text: "Quick, professional, and friendly. Got me in and out for a chip repair in under an hour." },
-            { name: "Emma L.",     location: "Austin, TX",       date: "Mar 09, 2026", text: "The office is gorgeous and the staff is even better. I appreciated how transparent they were about pricing." },
-            { name: "Jordan P.",   location: "San Antonio, TX",  date: "Feb 28, 2026", text: "Genuinely care about their patients. My wife and I both switched our whole family over." },
+            { name: "Paul L.",    location: "San Francisco, CA", date: "Dec 16, 2025", rating: 5, text: "Passion, modern techniques and equipment, clean office and friendly staff.\nI'm very happy with my dental implant – it's so important for your health, especially for seniors.\nCome see for yourself and compare with a regular dentist.\nFree consultation and special promotion: $2,495 per implant." },
+            { name: "Shalim O.",  location: "Rialto, CA",        date: "Oct 7, 2025",  rating: 5, text: "I had dental implants done by Dr. Tarek and the whole experience was excellent. He's very skilled, gentle, and took the time to explain every step. The results look natural and feel great. The office is clean, the staff is friendly, and you can tell he really cares about his patients." },
+            { name: "Ashley T.",  location: "Downey, CA",        date: "Oct 7, 2025",  rating: 5, text: "ARC Dental Implant Center is the best place to have dental work done. Dr. Hussein and Elizabeth walked me through the whole process when I was nervous about my procedure and made me feel at ease. My experience here was outstanding. This is the only place I will have dental work done." },
+            { name: "Ishaq H.",   location: "Grand Terrace, CA", date: "May 29, 2025", rating: 5, text: "This is a wonderful practice and Dr. Hussein listened to all my concerns. He takes his time and doesn't rush to get you in and out. Very professional with great work. Absolutely amazing service and I will recommend him to all my family and friends." },
           ],
-          // Row 2
           [
-            { name: "Aisha M.",    location: "Plano, TX",        date: "Feb 24, 2026", text: "First time getting Invisalign and the consultation was really informative. Two months in and the results are amazing." },
-            { name: "Carlos V.",   location: "El Paso, TX",      date: "Feb 18, 2026", text: "Showed up with a cracked molar in pain and they fit me in same-day. The relief I felt walking out is hard to overstate. Tarek talked me through the crown options without any pressure, which I appreciated since I'd been burned by upsells at other places." },
-            { name: "Hannah W.",   location: "Round Rock, TX",   date: "Feb 11, 2026", text: "Friendly front desk, modern equipment, and zero wait time. Five stars." },
-            { name: "Tom B.",      location: "Austin, TX",       date: "Feb 02, 2026", text: "The whitening treatment exceeded my expectations. People keep asking if I had something done." },
-            { name: "Rachel D.",   location: "Cedar Park, TX",   date: "Jan 27, 2026", text: "I've been a patient for two years now. Consistently great care across cleanings, a filling, and a recent crown." },
-            { name: "Omar H.",     location: "Buffalo, NY",      date: "Jan 19, 2026", text: "Switched here after our last dentist retired. So glad we did. The kids actually look forward to their cleanings." },
-          ],
-          // Row 3
-          [
-            { name: "Lina F.",     location: "Houston, TX",      date: "Jan 12, 2026", text: "Beautiful office, gentle hands, fair pricing. What more could you want?" },
-            { name: "Kevin O.",    location: "Austin, TX",       date: "Jan 04, 2026", text: "I had three implants done over the course of last year. The whole process was carefully planned and the results look completely natural. The staff remembered details about my life between visits, which made the experience feel personal rather than transactional. I cannot recommend the practice enough — it's worth the drive across town." },
-            { name: "Megan T.",    location: "Pflugerville, TX", date: "Dec 22, 2025", text: "They got my insurance figured out faster than I could have. Loved that." },
-            { name: "Brian C.",    location: "Austin, TX",       date: "Dec 15, 2025", text: "Was nervous about a deep cleaning but it ended up being almost relaxing. Music in the headphones was a nice touch." },
-            { name: "Yasmin A.",   location: "Georgetown, TX",   date: "Dec 08, 2025", text: "Tarek is an artist. My new veneers look exactly like I'd hoped." },
-            { name: "Patrick S.",  location: "Austin, TX",       date: "Nov 30, 2025", text: "Fair, honest, no pushy upsells. Refreshing for a dental office." },
-          ],
-          // Row 4
-          [
-            { name: "Nina G.",     location: "Leander, TX",      date: "Nov 22, 2025", text: "Brought my 7-year-old in for her first visit and she actually had fun. Whatever they're doing for pediatric patients, it's working." },
-            { name: "Andre L.",    location: "Austin, TX",       date: "Nov 14, 2025", text: "Solid practice. Modern, clean, on time. That's all I ask for." },
-            { name: "Sofia E.",    location: "Buda, TX",         date: "Nov 06, 2025", text: "Dr. Hussein took the time to explain every step of my root canal in plain English. By the end I genuinely understood what was happening, which made it much less scary. The follow-up call the next day to check on me was a really thoughtful detail." },
-            { name: "James M.",    location: "Austin, TX",       date: "Oct 30, 2025", text: "In and out for a cleaning in 40 minutes. Friendly the whole way through." },
-            { name: "Vera N.",     location: "Kyle, TX",         date: "Oct 21, 2025", text: "Best smile makeover decision I've made. Confidence through the roof." },
-            { name: "Ravi K.",     location: "Manor, TX",        date: "Oct 15, 2025", text: "Reasonable prices, transparent quotes, no surprises on the invoice. That alone is worth five stars." },
+            { name: "Angel T.",   location: "Long Beach, CA",    date: "Nov 9, 2025",  rating: 5, text: "Great experience from beginning to end. Dr. Tarek and Lizz were so great, and the office was clean and up to date with the latest technology. Surgery day can't come soon enough. I'll be sending all my friends to ARC Dental Implant Center." },
+            { name: "Tawnya O.",  location: "Downey, CA",        date: "Oct 7, 2025",  rating: 5, text: "Amazing staff and friendly service. I will definitely be returning for my dental needs." },
+            { name: "Roya Z.",    location: "Irvine, CA",        date: "Sep 19, 2025", rating: 5, text: "Dr. Tarek Hussein is an exceptionally knowledgeable doctor with impeccable work. I highly recommend him for his expertise and outstanding care." },
           ],
         ];
 
@@ -2111,6 +2100,9 @@
           { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
         ));
 
+        const STAR_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>';
+        const starsHTML = n => STAR_SVG.repeat(n);
+
         const cardHTML = r => {
           const hue = hueFor(r.name);
           return `
@@ -2121,6 +2113,7 @@
                   <span class="review-card__name">${escapeHtml(r.name)}</span>
                   <span class="review-card__location">${escapeHtml(r.location)}</span>
                 </div>
+                <div class="review-card__rating" aria-label="${r.rating} out of 5 stars">${starsHTML(r.rating)}</div>
               </div>
               <div class="review-card__body">
                 <p class="review-card__text">${escapeHtml(r.text)}</p>
@@ -2161,6 +2154,7 @@
         const dlgAvatar    = document.getElementById('review-dialog-avatar');
         const dlgName      = document.getElementById('review-dialog-name');
         const dlgLocation  = document.getElementById('review-dialog-location');
+        const dlgRating    = document.getElementById('review-dialog-rating');
         const dlgText      = document.getElementById('review-dialog-text');
         const dlgDate      = document.getElementById('review-dialog-date');
         const dlgClose     = dialog.querySelector('.review-dialog__close');
@@ -2171,6 +2165,8 @@
           dlgAvatar.textContent      = initialFor(r.name);
           dlgName.textContent        = r.name;
           dlgLocation.textContent    = r.location;
+          dlgRating.innerHTML        = starsHTML(r.rating);
+          dlgRating.setAttribute('aria-label', `${r.rating} out of 5 stars`);
           dlgText.textContent        = r.text;
           dlgDate.textContent        = r.date;
           dialog.showModal();
