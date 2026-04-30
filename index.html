@@ -931,6 +931,48 @@
       }
     }
 
+    /* ─── MEET THE DOCTOR ──────────────────────────────────────────── */
+    .meet-doctor {
+      padding: var(--space-3xl) 0;
+      background: var(--color-surface);
+    }
+
+    .meet-doctor__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(var(--space-xl), 6vw, var(--space-2xl));
+      align-items: end;
+    }
+
+    .meet-doctor__image {
+      width: 100%;
+      display: block;
+      max-height: 600px;
+      object-fit: contain;
+      object-position: bottom center;
+    }
+
+    .meet-doctor__copy {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      padding-bottom: var(--space-2xl);
+    }
+
+    @media (max-width: 767px) {
+      .meet-doctor__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .meet-doctor__image-wrap {
+        order: -1;
+      }
+
+      .meet-doctor__copy {
+        padding-bottom: 0;
+      }
+    }
+
     /* ─── Responsive ─────────────────────────────────────────────────── */
 
     /* Show desktop nav links, hide burger below 768 */
@@ -1145,6 +1187,30 @@
             allowfullscreen
             loading="lazy"
           ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── MEET THE DOCTOR ───────────────────────────────────────── -->
+    <section class="meet-doctor" aria-labelledby="doctor-headline">
+      <div class="wrapper">
+        <div class="meet-doctor__inner">
+
+          <div class="meet-doctor__image-wrap">
+            <img
+              src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/dr-tarek-photos/arc-dental-dr-tarek-photo.avif"
+              alt="Dr. Tarek Hussein, DDS"
+              class="meet-doctor__image"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="meet-doctor__copy">
+            <span class="eyebrow">Meet the Doctor</span>
+            <h2 class="h2" id="doctor-headline">Dr. Tarek Hussein, DDS</h2>
+            <p class="body-large">Dr. Hussein graduated from the University of Buffalo School of Dental Medicine in 2018. Since then, he has helped hundreds of people get the smile they always wanted. He uses the latest dental technology and treats every patient as an individual. He will walk you through all your options and answer every question you have. His goal is simple. He wants you to leave better than you came, even if you choose someone else.</p>
+          </div>
+
         </div>
       </div>
     </section>
