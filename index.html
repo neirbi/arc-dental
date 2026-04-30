@@ -3,20 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smile Confidence</title>
+  <title>ARC Dental Implant Center | Restore Your Smile With Confidence</title>
+  <meta name="description" content="ARC Dental Implant Center has helped over 400 people reclaim their smile. Learn about our confidence restoration system — 5-star rated, free consultation." />
+
+  <!-- Favicon & web clip -->
+  <link rel="icon" type="image/png" href="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/branding/arc-dental-logo-blue-favicon.png" />
+  <link rel="apple-touch-icon" href="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/branding/arc-dental-logo-white-on-blue-webclip.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="ARC Dental Implant Center | Restore Your Smile With Confidence" />
+  <meta property="og:description" content="ARC Dental Implant Center has helped over 400 people reclaim their smile. Learn about our confidence restoration system — 5-star rated, free consultation." />
+  <meta property="og:image"       content="https://placehold.co/1200x630?text=ARC+Dental+Implant+Center" />
+  <meta property="og:url"         content="https://arcdental.com" />
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="ARC Dental Implant Center | Restore Your Smile With Confidence" />
+  <meta name="twitter:description" content="ARC Dental Implant Center has helped over 400 people reclaim their smile. 5-star rated, free consultation." />
+  <meta name="twitter:image"       content="https://placehold.co/1200x630?text=ARC+Dental+Implant+Center" />
+
+  <!-- Browser chrome colour per mode -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F5F5F7" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#0E1014" />
+
+  <!-- Anti-FOUC: restore saved theme before first paint -->
+  <script>
+    (() => {
+      const t = localStorage.getItem('arc-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 
   <!-- Preconnect for fastest font load -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Non-blocking font load -->
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   />
 
   <style>
     /* ─── Design Tokens (from Token-Hex-Use.csv) ───────────────────── */
     :root {
+      color-scheme: light dark;
+
       /* Brand */
       --color-primary:       #0A5CFF; /* Main CTA blue, links, key actions */
       --color-secondary:     #5BB6FF; /* Gradient partner, highlights, soft emphasis */
@@ -48,11 +80,22 @@
       --color-accent-light:  var(--color-primary-soft);
       --color-star:          #F5A623; /* star gold — not in CSV, kept as-is */
 
+      /* Nav semantic tokens (light defaults) */
+      --color-nav-bg:          rgba(245,245,247,.92);
+      --color-nav-border:      #DDE3EA;
+      --color-nav-link:        #6E6E73;
+      --color-nav-link-hover:  #1D1D1F;
+      --color-nav-cta-bg:      #111317;
+      --color-nav-cta-fg:      #F5F5F7;
+      --color-nav-burger:      #1D1D1F;
+      --color-nav-drawer-bg:   rgba(245,245,247,.82);
+      --color-nav-drawer-link: #1D1D1F;
+
       --max-width:         1400px;
       --nav-height:        68px;
 
-      --font-display:      'DM Serif Display', Georgia, serif;
-      --font-body:         'DM Sans', system-ui, sans-serif;
+      --font-display:      'Inter', system-ui, sans-serif;
+      --font-body:         'Inter', system-ui, sans-serif;
 
       --ease-out-expo:     cubic-bezier(.19,1,.22,1);
 
@@ -66,6 +109,54 @@
       --space-3xl:  6rem;
     }
 
+    /* ─── Dark mode tokens ──────────────────────────────────────────── */
+    /* Applied via OS preference (unless user forced light) AND user-forced dark */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --color-bg:           #0E1014;
+        --color-surface:      #1C1F26;
+        --color-surface-alt:  #16191F;
+        --color-text:         #F0F0F2;
+        --color-text-muted:   #9B9BA6;
+        --color-text-faint:   #6E6E7A;
+        --color-border:       rgba(255,255,255,.10);
+        --color-divider:      rgba(255,255,255,.07);
+        --color-primary-soft: rgba(10,92,255,.18);
+
+        --color-nav-bg:          rgba(14,16,20,.92);
+        --color-nav-border:      rgba(255,255,255,.08);
+        --color-nav-link:        rgba(255,255,255,.6);
+        --color-nav-link-hover:  #ffffff;
+        --color-nav-cta-bg:      #ffffff;
+        --color-nav-cta-fg:      #111317;
+        --color-nav-burger:      #ffffff;
+        --color-nav-drawer-bg:   rgba(14,16,20,.82);
+        --color-nav-drawer-link: rgba(255,255,255,.85);
+      }
+    }
+
+    [data-theme="dark"] {
+      --color-bg:           #0E1014;
+      --color-surface:      #1C1F26;
+      --color-surface-alt:  #16191F;
+      --color-text:         #F0F0F2;
+      --color-text-muted:   #9B9BA6;
+      --color-text-faint:   #6E6E7A;
+      --color-border:       rgba(255,255,255,.10);
+      --color-divider:      rgba(255,255,255,.07);
+      --color-primary-soft: rgba(10,92,255,.18);
+
+      --color-nav-bg:          rgba(14,16,20,.92);
+      --color-nav-border:      rgba(255,255,255,.08);
+      --color-nav-link:        rgba(255,255,255,.6);
+      --color-nav-link-hover:  #ffffff;
+      --color-nav-cta-bg:      #ffffff;
+      --color-nav-cta-fg:      #111317;
+      --color-nav-burger:      #ffffff;
+      --color-nav-drawer-bg:   rgba(14,16,20,.82);
+      --color-nav-drawer-link: rgba(255,255,255,.85);
+    }
+
     /* ─── Reset ─────────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -77,6 +168,7 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      transition: background .3s ease, color .3s ease;
     }
     img, svg { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
@@ -85,102 +177,104 @@
     /* ─── Typography Scale ───────────────────────────────────────────── */
     .eyebrow {
       font-family: var(--font-body);
-      font-size: .6875rem;           /* 11px */
-      font-weight: 500;
-      letter-spacing: .14em;
+      font-size: .75rem;             /* 12px */
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--color-primary);
     }
 
     .display {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 7.5vw, 5.5rem);
-      font-weight: 400;
-      line-height: 1.05;
+      font-size: clamp(2.25rem, 5vw, 3.5rem); /* 36px → 56px */
+      font-weight: 700;
+      line-height: 1.1;
       letter-spacing: -.02em;
     }
 
     .h1 {
       font-family: var(--font-display);
-      font-size: clamp(2.25rem, 5vw, 3.75rem);
-      font-weight: 400;
-      line-height: 1.1;
+      font-size: clamp(2rem, 3.5vw, 2.75rem); /* 32px → 44px */
+      font-weight: 700;
+      line-height: 1.2;
       letter-spacing: -.02em;
     }
 
     .h2 {
       font-family: var(--font-display);
-      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-      font-weight: 400;
-      line-height: 1.15;
+      font-size: clamp(1.625rem, 2.5vw, 2rem); /* 26px → 32px */
+      font-weight: 700;
+      line-height: 1.25;
       letter-spacing: -.015em;
     }
 
     .h3 {
       font-family: var(--font-display);
-      font-size: clamp(1.375rem, 2.5vw, 2rem);
-      font-weight: 400;
-      line-height: 1.2;
+      font-size: clamp(1.375rem, 1.8vw, 1.5rem); /* 22px → 24px */
+      font-weight: 600;
+      line-height: 1.3;
       letter-spacing: -.01em;
     }
 
     .h4 {
       font-family: var(--font-body);
-      font-size: clamp(1.125rem, 1.75vw, 1.375rem);
-      font-weight: 500;
-      line-height: 1.3;
-      letter-spacing: -.01em;
+      font-size: 1.25rem; /* 20px */
+      font-weight: 600;
+      line-height: 1.4;
     }
 
     .subhead {
       font-family: var(--font-body);
-      font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
-      font-weight: 300;
-      line-height: 1.65;
-      color: var(--color-text-muted);
-    }
-
-    .body {
-      font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.65;
-    }
-
-    .body-large {
-      font-family: var(--font-body);
-      font-size: 1.125rem;
-      font-weight: 400;
-      line-height: 1.65;
-    }
-
-    .body-small {
-      font-family: var(--font-body);
-      font-size: .875rem;
-      font-weight: 400;
-      line-height: 1.6;
-    }
-
-    .caption {
-      font-family: var(--font-body);
-      font-size: .75rem;
+      font-size: clamp(1.125rem, 1.5vw, 1.375rem); /* 18px → 22px */
       font-weight: 400;
       line-height: 1.5;
       color: var(--color-text-muted);
     }
 
+    .body {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.2vw, 1.125rem); /* 16px → 18px */
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .body-large {
+      font-family: var(--font-body);
+      font-size: clamp(1.125rem, 1.3vw, 1.25rem); /* 18px → 20px */
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .body-small {
+      font-family: var(--font-body);
+      font-size: clamp(.9375rem, 1.1vw, 1rem); /* 15px → 16px */
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .caption {
+      font-family: var(--font-body);
+      font-size: clamp(.8125rem, .9vw, .875rem); /* 13px → 14px */
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--color-text-muted);
+    }
+
     .button-text {
       font-family: var(--font-body);
-      font-size: .9375rem;
-      font-weight: 500;
+      font-size: 1rem; /* 16px */
+      font-weight: 600;
+      line-height: 1.2;
       letter-spacing: .01em;
     }
 
     .label {
       font-family: var(--font-body);
-      font-size: .75rem;
+      font-size: .875rem; /* 14px */
       font-weight: 500;
-      letter-spacing: .08em;
+      line-height: 1.4;
+      letter-spacing: .06em;
       text-transform: uppercase;
     }
 
@@ -200,12 +294,14 @@
       right: 0;
       z-index: 100;
       height: var(--nav-height);
-      background: rgba(245,245,247,.80);
+      background: var(--color-nav-bg);
       -webkit-backdrop-filter: blur(18px) saturate(180%);
       backdrop-filter: blur(18px) saturate(180%);
-      border-bottom: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-nav-border);
       transition: transform .4s var(--ease-out-expo),
-                  opacity  .4s var(--ease-out-expo);
+                  opacity  .4s var(--ease-out-expo),
+                  background .3s ease,
+                  border-color .3s ease;
     }
 
     .nav.nav--hidden {
@@ -227,28 +323,68 @@
       gap: var(--space-xs);
     }
 
-    .nav__logo-mark {
-      width: 32px;
-      height: 32px;
+    .nav__logo-img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+
+    /* Logo variants — show the right one per theme */
+    .nav__logo-img--on-light { display: block; }
+    .nav__logo-img--on-dark  { display: none; }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .nav__logo-img--on-light { display: none; }
+      :root:not([data-theme="dark"])  .nav__logo-img--on-dark  { display: none; }
+      :root:not([data-theme="light"]) .nav__logo-img--on-dark  { display: block; }
+    }
+    [data-theme="dark"]  .nav__logo-img--on-light { display: none; }
+    [data-theme="dark"]  .nav__logo-img--on-dark  { display: block; }
+    [data-theme="light"] .nav__logo-img--on-light { display: block; }
+    [data-theme="light"] .nav__logo-img--on-dark  { display: none; }
+
+    /* Right-side nav group */
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Theme toggle */
+    .nav__theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      background: var(--color-primary);
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
+      color: var(--color-nav-link);
+      transition: color .2s, background .2s;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .nav__logo-mark svg {
-      width: 16px;
-      height: 16px;
-      fill: #fff;
+    .nav__theme-toggle:hover {
+      color: var(--color-nav-link-hover);
+      background: rgba(128,128,128,.12);
     }
 
-    .nav__logo-text {
-      font-family: var(--font-display);
-      font-size: 1.1875rem;
-      letter-spacing: -.02em;
-      color: var(--color-text);
+    .nav__theme-toggle svg {
+      width: 18px;
+      height: 18px;
     }
+
+    /* Sun/moon visibility — sun when dark, moon when light */
+    .nav__theme-icon--sun  { display: none; }
+    .nav__theme-icon--moon { display: block; }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .nav__theme-icon--sun  { display: block; }
+      :root:not([data-theme="light"]) .nav__theme-icon--moon { display: none; }
+    }
+    [data-theme="dark"]  .nav__theme-icon--sun  { display: block; }
+    [data-theme="dark"]  .nav__theme-icon--moon { display: none; }
+    [data-theme="light"] .nav__theme-icon--sun  { display: none; }
+    [data-theme="light"] .nav__theme-icon--moon { display: block; }
 
     /* Desktop links */
     .nav__links {
@@ -261,11 +397,16 @@
     .nav__links a {
       font-size: .875rem;
       font-weight: 400;
-      color: var(--color-text-muted);
-      transition: color .2s;
+      color: var(--color-nav-link);
+      padding: .375rem .75rem;
+      border-radius: 100px;
+      transition: color .2s, background .2s;
     }
 
-    .nav__links a:hover { color: var(--color-text); }
+    .nav__links a:hover {
+      color: var(--color-nav-link-hover);
+      background: rgba(128,128,128,.12);
+    }
 
     /* Nav CTA */
     .nav__cta {
@@ -274,16 +415,17 @@
       gap: var(--space-xs);
       padding: .5rem 1.25rem;
       border-radius: 100px;
-      background: var(--color-text);
-      color: var(--color-bg);
+      background: var(--color-nav-cta-bg);
+      color: var(--color-nav-cta-fg);
       font-size: .8125rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: .01em;
-      transition: background .2s, transform .15s;
+      transition: background .2s, color .2s, transform .15s;
     }
 
     .nav__cta:hover {
-      background: var(--color-primary);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: #fff;
       transform: translateY(-1px);
     }
 
@@ -306,7 +448,7 @@
       display: block;
       width: 22px;
       height: 1.5px;
-      background: var(--color-text);
+      background: var(--color-nav-burger);
       border-radius: 2px;
       transform-origin: center;
       transition: transform .35s var(--ease-out-expo),
@@ -331,7 +473,7 @@
       display: none;
       position: fixed;
       inset: var(--nav-height) 0 0 0;
-      background: rgba(245,245,247,.95);
+      background: var(--color-nav-drawer-bg);
       -webkit-backdrop-filter: blur(24px) saturate(180%);
       backdrop-filter: blur(24px) saturate(180%);
       padding: var(--space-xl) clamp(1.25rem, 5vw, 3rem);
@@ -353,13 +495,27 @@
     }
 
     .nav__drawer a {
-      font-family: var(--font-display);
+      font-family: var(--font-body);
       font-size: 1.5rem;
-      color: var(--color-text);
+      color: var(--color-nav-drawer-link);
       transition: color .2s;
     }
 
     .nav__drawer a:hover { color: var(--color-primary); }
+
+    .nav__drawer-cta {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
     /* ─── HERO ───────────────────────────────────────────────────────── */
     .hero {
@@ -391,6 +547,8 @@
       grid-template-columns: 1fr;
       gap: var(--space-2xl);
       position: relative;
+      justify-items: center;
+      text-align: center;
     }
 
     .hero__content {
@@ -398,6 +556,7 @@
       flex-direction: column;
       gap: var(--space-lg);
       max-width: 780px;
+      align-items: center;
     }
 
     /* Stagger fade-in */
@@ -441,6 +600,16 @@
       flex-shrink: 0;
     }
 
+    .hero-title {
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-size: clamp(3.5rem, 7vw, 6.25rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      max-width: 12ch;
+      color: var(--color-text);
+    }
+
     /* Headline — italic accent on last word */
     .hero__headline em {
       font-style: italic;
@@ -452,6 +621,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
       gap: var(--space-md);
     }
 
@@ -477,6 +647,28 @@
       transform: translateY(0);
     }
 
+    .btn-gradient {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: .875rem 2rem;
+      border-radius: 100px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: #fff;
+      transition: opacity .25s, transform .2s, box-shadow .25s;
+      box-shadow: 0 4px 24px rgba(10,92,255,.28);
+    }
+
+    .btn-gradient:hover {
+      opacity: .9;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(10,92,255,.36);
+    }
+
+    .btn-gradient:active {
+      transform: translateY(0);
+    }
+
     /* Arrow icon inside button */
     .btn-primary__arrow {
       width: 16px;
@@ -499,6 +691,7 @@
     .hero__reviews {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: var(--space-md);
       padding-top: var(--space-xs);
     }
@@ -537,52 +730,811 @@
       color: var(--color-text-muted);
     }
 
-    /* ─── Decorative floating card ───────────────────────────────────── */
-    .hero__card {
-      display: none;
-      position: absolute;
-      right: clamp(1rem, 4vw, 3rem);
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,.85);
-      -webkit-backdrop-filter: blur(16px);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--color-border);
-      border-radius: 20px;
-      padding: var(--space-lg) var(--space-xl);
-      box-shadow: 0 24px 64px rgba(10,92,255,.08);
-      width: min(320px, 28vw);
-      gap: var(--space-md);
-      flex-direction: column;
-      opacity: 0;
-      animation: fadeUp .9s .55s var(--ease-out-expo) forwards;
+    /* Register --split so CSS can tween it */
+    @property --split {
+      syntax: '<percentage>';
+      inherits: true;
+      initial-value: 50%;
     }
 
-    .hero__card-stat {
+    /* One-shot hint fires when .is-hinting is added via IntersectionObserver */
+    .ba-slider.is-hinting {
+      animation: sliderHint 1.6s cubic-bezier(.4,0,.2,1) forwards;
+    }
+
+    @keyframes sliderHint {
+      0%   { --split: 50%; }
+      35%  { --split: 22%; }
+      65%  { --split: 78%; }
+      100% { --split: 50%; }
+    }
+
+    /* ─── SOLUTIONS ─────────────────────────────────────────────────── */
+    .solutions {
+      padding: var(--space-3xl) 0;
+      background: var(--color-surface);
+    }
+
+    .solutions__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(var(--space-xl), 6vw, var(--space-2xl));
+      align-items: center;
+    }
+
+    .solutions__copy {
       display: flex;
       flex-direction: column;
-      gap: var(--space-2xs);
-      padding-bottom: var(--space-md);
-      border-bottom: 1px solid var(--color-divider);
+      gap: var(--space-lg);
     }
 
-    .hero__card-stat:last-child {
-      padding-bottom: 0;
-      border-bottom: none;
+    /* ─── Before / After Slider ──────────────────────────────────────── */
+    .ba-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      aspect-ratio: 4 / 3;
+      cursor: col-resize;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y pinch-zoom;
+      box-shadow: 0 8px 48px rgba(0,0,0,.12);
     }
 
-    .hero__card-number {
-      font-family: var(--font-display);
-      font-size: 2.25rem;
-      line-height: 1;
-      color: var(--color-primary);
-      letter-spacing: -.02em;
+    .ba-slider__before,
+    .ba-slider__after {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      pointer-events: none;
     }
 
-    .hero__card-desc {
-      font-size: .8125rem;
+    .ba-slider__after {
+      clip-path: inset(0 0 0 var(--split, 50%));
+    }
+
+    .ba-slider__label {
+      position: absolute;
+      bottom: .875rem;
+      padding: .25rem .625rem;
+      border-radius: 100px;
+      background: rgba(0,0,0,.52);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: .6875rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .ba-slider__label--before { left:  .875rem; }
+    .ba-slider__label--after  { right: .875rem; }
+
+    .ba-slider__handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: var(--split, 50%);
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+      width: 44px;
+    }
+
+    .ba-slider__line {
+      flex: 1;
+      width: 2px;
+      background: #fff;
+      box-shadow: 0 0 6px rgba(0,0,0,.3);
+    }
+
+    .ba-slider__circle {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 16px rgba(0,0,0,.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .ba-slider__circle svg {
+      width: 14px;
+      height: 14px;
+      color: #333;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 767px) {
+      .solutions__inner { grid-template-columns: 1fr; }
+    }
+
+    /* ─── VIDEO REVEAL ───────────────────────────────────────────────── */
+    .video-reveal {
+      view-timeline: --video-section block;
+      min-height: 200vh;
+      position: relative;
+      background: var(--color-bg);
+    }
+
+    .video-reveal__sticky {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 0 1.5rem;
+      overflow: hidden;
+    }
+
+    .video-reveal__heading {
+      text-align: center;
+      color: var(--color-text);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .video-reveal__body {
+      text-align: center;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 500;
+      color: var(--color-text-muted, var(--color-text));
+      margin-top: .5rem;
+    }
+
+    .video-reveal__body .emoji-desktop,
+    .video-reveal__body .emoji-mobile {
+      vertical-align: middle;
+    }
+
+    .video-reveal__body .emoji-mobile {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      .video-reveal__body .emoji-desktop {
+        display: none;
+      }
+      .video-reveal__body .emoji-mobile {
+        display: block;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .video-reveal {
+        min-height: 280vh;
+      }
+
+      .video-reveal__sticky {
+        flex-direction: row;
+        gap: 4rem;
+        padding: 0 6rem;
+      }
+
+      .video-reveal__copy {
+        flex: 1;
+        max-width: 320px;
+      }
+
+      .video-reveal__heading {
+        text-align: left;
+      }
+
+      .video-reveal__body {
+        text-align: left;
+      }
+    }
+
+    .video-reveal__frame {
+      width: min(420px, 90vw);
+      aspect-ratio: 9 / 16;
+      border-radius: 24px;
+      overflow: hidden;
+      transform-origin: center top;
+      will-change: transform;
+      box-shadow: 0 30px 60px -16px rgba(0,0,0,.45);
+      animation: videoGrow linear both;
+      animation-timeline: --video-section;
+      animation-range: entry 0% cover 40%;
+    }
+
+    .video-reveal__frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    @keyframes videoGrow {
+      from { transform: scale(0.25); border-radius: 32px; }
+      to   { transform: scale(1);    border-radius: 16px; }
+    }
+
+    /* Safari < 18.2 and other non-supporting browsers — render at full size */
+    @supports not (animation-timeline: view()) {
+      .video-reveal__frame {
+        transform: none;
+        animation: none;
+        border-radius: 16px;
+      }
+    }
+
+    /* ─── MEET THE DOCTOR ──────────────────────────────────────────── */
+    .meet-doctor {
+      padding: var(--space-3xl) 0;
+      background: var(--color-surface);
+    }
+
+    .meet-doctor__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(var(--space-xl), 6vw, var(--space-2xl));
+      align-items: end;
+    }
+
+    .meet-doctor__image {
+      width: 100%;
+      display: block;
+      max-height: 600px;
+      object-fit: contain;
+      object-position: bottom center;
+      -webkit-mask-image: linear-gradient(to bottom, black, black 75%, transparent);
+      mask-image: linear-gradient(to bottom, black, black 75%, transparent);
+    }
+
+    .meet-doctor__copy {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      padding-bottom: var(--space-2xl);
+    }
+
+    @media (max-width: 767px) {
+      .meet-doctor__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .meet-doctor__image-wrap {
+        order: -1;
+      }
+
+      .meet-doctor__copy {
+        padding-bottom: 0;
+      }
+    }
+
+    /* ─── PATIENT STORIES CAROUSEL ───────────────────────────────────── */
+    .stories {
+      padding: var(--space-3xl) 0;
+      background: var(--color-bg);
+      overflow: hidden;
+    }
+
+    .stories__viewport {
+      position: relative;
+    }
+
+    .stories__track {
+      display: flex;
+      gap: clamp(1rem, 3vw, 2rem);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-block: clamp(2rem, 6vw, 4rem);
+      padding-inline: max(1rem, calc(50vw - 210px));
+      scroll-padding-inline: max(1rem, calc(50vw - 210px));
+      cursor: grab;
+    }
+
+    .stories__track.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+      scroll-behavior: auto;
+      user-select: none;
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .stories__track { cursor: auto; }
+    }
+
+    .stories__track::-webkit-scrollbar { display: none; }
+
+    .stories__slide {
+      flex: 0 0 auto;
+      width: min(420px, 80vw);
+      aspect-ratio: 9 / 16;
+      scroll-snap-align: center;
+      border-radius: 24px;
+      overflow: hidden;
+      transform: scale(0.62);
+      transform-origin: center center;
+      transition: transform .45s cubic-bezier(.4,0,.2,1), box-shadow .45s ease;
+      box-shadow: 0 14px 32px -16px rgba(0,0,0,.35);
+      background: var(--color-surface);
+      will-change: transform;
+    }
+
+    .stories__slide.is-active {
+      transform: scale(1);
+      box-shadow: 0 30px 60px -16px rgba(0,0,0,.45);
+    }
+
+    .stories__slide--text {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      text-align: left;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .stories__slide--text.is-active {
+      box-shadow: none;
+    }
+
+    .stories__slide--text .eyebrow {
+      display: block;
+      margin-bottom: .75rem;
+    }
+
+    .stories__slide--text h3 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: .75rem;
+    }
+
+    .stories__slide--text p {
+      font-size: clamp(.95rem, 1.6vw, 1.05rem);
+      color: var(--color-text-muted, var(--color-text));
+      line-height: 1.5;
+    }
+
+    .stories__slide iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .stories__controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1rem, 3vw, 2rem);
+      margin-top: var(--space-lg);
+      padding: 0 1.5rem;
+    }
+
+    .stories__arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      border: 0;
+      background: transparent;
+      color: var(--color-nav-link);
+      padding: 0;
+      cursor: pointer;
+      transition: color .2s, background .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .stories__arrow:hover {
+      color: var(--color-nav-link-hover);
+      background: rgba(128,128,128,.12);
+    }
+
+    .stories__arrow svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .stories__arrow:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 3px;
+    }
+
+    .stories__arrow[disabled] {
+      opacity: .3;
+      cursor: not-allowed;
+    }
+    .stories__arrow[disabled]:hover {
+      color: var(--color-nav-link);
+      background: transparent;
+    }
+
+    .stories__dots {
+      display: flex;
+      gap: .5rem;
+      justify-content: center;
+    }
+
+    .stories__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 0;
+      padding: 0;
+      background: var(--color-text-muted, currentColor);
+      opacity: .3;
+      cursor: pointer;
+      transition: opacity .25s ease, transform .25s ease;
+    }
+
+    .stories__dot.is-active {
+      opacity: 1;
+      transform: scale(1.25);
+    }
+
+    /* Inactive iframes don't intercept swipe/tap — slide receives them instead */
+    .stories__slide:not(.is-active) iframe {
+      pointer-events: none;
+    }
+
+    @media (max-width: 767px) {
+      .stories__track {
+        gap: .5rem;
+        padding-inline: max(1rem, calc(50vw - min(190px, 35vw)));
+        scroll-padding-inline: max(1rem, calc(50vw - min(190px, 35vw)));
+      }
+      .stories__slide {
+        width: min(380px, 70vw);
+        transform: scale(0.78);
+      }
+      .stories__arrow {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .stories__slide,
+      .stories__track {
+        transition: none;
+        scroll-behavior: auto;
+      }
+    }
+
+    /* ─── REVIEWS SECTION (ported from back-to-action) ───────────────── */
+    .reviews {
+      padding: var(--space-3xl) 1.5rem;
+      background: var(--color-bg);
+    }
+
+    .reviews__inner {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .reviews__header {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .reviews__heading {
+      font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--color-text);
+    }
+
+    .reviews__viewport {
+      position: relative;
+    }
+
+    .reviews__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .reviews__row {
+      display: flex;
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      gap: 1rem;
+      cursor: grab;
+    }
+    .reviews__row::-webkit-scrollbar { display: none; }
+    .reviews__row.is-dragging { cursor: grabbing; user-select: none; }
+
+    /* ── Review Card ─────────────────────────────────────────── */
+    .review-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+      flex: 0 0 calc(33.333% - 0.667rem);
+      scroll-snap-align: start;
+      min-width: 0;
+    }
+
+    .review-card__header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .review-card__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--color-surface-alt, var(--color-bg));
+    }
+
+    .review-card__avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .review-card__avatar-initials {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
       color: var(--color-text-muted);
-      font-weight: 400;
+    }
+
+    .review-card__meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .review-card__name {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--color-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .review-card__location {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .review-card__stars {
+      display: flex;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+    .review-card__stars svg {
+      width: 13px;
+      height: 13px;
+      fill: #fbbc04;
+    }
+
+    .review-card__body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    .review-card__text {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      white-space: pre-wrap;
+    }
+
+    .review-card__more {
+      align-self: flex-start;
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-faint);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.15s;
+    }
+    .review-card__more:hover { color: var(--color-text-muted); }
+    .review-card__more:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .review-card__date {
+      font-size: 0.75rem;
+      color: var(--color-text-faint);
+      margin-top: auto;
+    }
+
+    /* ── Review Dialog (div-based overlay, not native <dialog>) ─ */
+    .review-dialog-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s cubic-bezier(.4,0,.2,1);
+    }
+    .review-dialog-overlay.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .review-dialog__backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .review-dialog__panel {
+      position: relative;
+      z-index: 1;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 520px;
+      width: 100%;
+      max-height: 82vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,.35);
+    }
+    .review-dialog-overlay.is-open .review-dialog__panel {
+      transform: translateY(0) scale(1);
+    }
+
+    .review-dialog__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(128,128,128,0.12);
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      transition: background 0.15s, color 0.15s;
+    }
+    .review-dialog__close:hover {
+      background: rgba(128,128,128,0.2);
+      color: var(--color-text);
+    }
+    .review-dialog__close svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .review-dialog__header {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      padding-right: 2.5rem;
+    }
+
+    .review-dialog__avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--color-surface-alt, var(--color-bg));
+    }
+    .review-dialog__avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .review-dialog__avatar-initials {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+    }
+
+    .review-dialog__name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .review-dialog__location {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .review-dialog__stars {
+      display: flex;
+      gap: 3px;
+    }
+    .review-dialog__stars svg {
+      width: 16px;
+      height: 16px;
+      fill: #fbbc04;
+    }
+
+    .review-dialog__body {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      white-space: pre-wrap;
+    }
+
+    .review-dialog__date {
+      font-size: 0.75rem;
+      color: var(--color-text-faint);
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    @media (max-width: 768px) {
+      .review-card { flex: 0 0 calc(100% - 2rem); }
+      .reviews { padding: 3rem 1.5rem; }
+      .reviews__header { margin-bottom: 1.5rem; }
     }
 
     /* ─── Responsive ─────────────────────────────────────────────────── */
@@ -599,27 +1551,6 @@
       .nav__drawer { display: none !important; }
     }
 
-    /* Show floating card on large screens */
-    @media (min-width: 1024px) {
-      .hero__inner {
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-      }
-
-      .hero__content {
-        max-width: none;
-      }
-
-      .hero__card {
-        display: flex;
-        position: relative;
-        right: auto;
-        top: auto;
-        transform: none;
-        width: auto;
-        justify-self: center;
-      }
-    }
 
     /* Body scroll lock when menu open */
     body.menu-open { overflow: hidden; }
@@ -632,14 +1563,22 @@
     <div class="wrapper">
       <nav class="nav__inner" aria-label="Main navigation">
 
-        <!-- Wordmark -->
-        <a class="nav__logo" href="/" aria-label="Home">
-          <span class="nav__logo-mark" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 12.5a5.5 5.5 0 110-11 5.5 5.5 0 010 11zM5 9.5s.75 2 3 2 3-2 3-2" stroke="#fff" stroke-width="1.25" fill="none" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <span class="nav__logo-text">SmileSystem</span>
+        <!-- Logo (swaps per theme) -->
+        <a class="nav__logo" href="/" aria-label="ARC Dental Implant Center home">
+          <!-- Blue logo for light backgrounds -->
+          <img
+            class="nav__logo-img nav__logo-img--on-light"
+            src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/branding/arc-dental-logo-blue-160px.avif"
+            alt="ARC Dental Implant Center"
+            width="160" height="40"
+          />
+          <!-- White logo for dark backgrounds -->
+          <img
+            class="nav__logo-img nav__logo-img--on-dark"
+            src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/branding/arc-dental-logo-white-160px.avif"
+            alt="ARC Dental Implant Center"
+            width="160" height="40"
+          />
         </a>
 
         <!-- Desktop links -->
@@ -649,21 +1588,36 @@
           <li><a href="#faq" class="body-small">FAQ</a></li>
         </ul>
 
-        <!-- Desktop CTA -->
-        <a href="#get-started" class="nav__cta button-text">Get Started</a>
+        <!-- Right side: theme toggle + CTA + burger -->
+        <div class="nav__right">
 
-        <!-- Mobile burger -->
-        <button
-          class="nav__burger"
-          id="burger"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
-          aria-label="Open navigation menu"
-        >
-          <span class="nav__burger-line" aria-hidden="true"></span>
-          <span class="nav__burger-line" aria-hidden="true"></span>
-          <span class="nav__burger-line" aria-hidden="true"></span>
-        </button>
+          <button class="nav__theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode">
+            <!-- Sun: shown in dark mode (click → light) -->
+            <svg class="nav__theme-icon nav__theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+            </svg>
+            <!-- Moon: shown in light mode (click → dark) -->
+            <svg class="nav__theme-icon nav__theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+
+          <a href="#get-started" class="nav__cta button-text">Get Started</a>
+
+          <button
+            class="nav__burger"
+            id="burger"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            aria-label="Open navigation menu"
+          >
+            <span class="nav__burger-line" aria-hidden="true"></span>
+            <span class="nav__burger-line" aria-hidden="true"></span>
+            <span class="nav__burger-line" aria-hidden="true"></span>
+          </button>
+
+        </div>
 
       </nav>
     </div>
@@ -674,7 +1628,7 @@
     <li><a href="#how-it-works" class="h3">How it Works</a></li>
     <li><a href="#stories" class="h3">Stories</a></li>
     <li><a href="#faq" class="h3">FAQ</a></li>
-    <li><a href="#get-started" class="h3" style="color:var(--color-primary)">Get Started →</a></li>
+    <li><a href="#get-started" class="h3 nav__drawer-cta">Get Started →</a></li>
   </ul>
 
   <!-- ─── MAIN ──────────────────────────────────────────────────────────── -->
@@ -688,14 +1642,8 @@
           <!-- Content column -->
           <div class="hero__content">
 
-            <!-- Eyebrow -->
-            <p class="hero__eyebrow eyebrow">
-              <span class="hero__eyebrow-dot" aria-hidden="true"></span>
-              Confidence Restoration System
-            </p>
-
             <!-- Headline -->
-            <h1 class="hero__headline display" id="hero-headline">
+            <h1 class="hero__headline hero-title" id="hero-headline">
               Stop Hiding<br>Your Smile.<br>Start Living <em>Again.</em>
             </h1>
 
@@ -706,13 +1654,12 @@
 
             <!-- CTA -->
             <div class="hero__actions">
-              <a href="#get-started" class="btn-primary" id="hero-cta">
+              <a href="#get-started" class="btn-gradient" id="hero-cta">
                 <span class="button-text">I'm Ready to Smile Again</span>
                 <svg class="btn-primary__arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
-              <span class="hero__trust body-small">No obligation &bull; Free consultation</span>
             </div>
 
             <!-- Reviews -->
@@ -726,41 +1673,563 @@
                 <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
               </div>
 
-              <span class="hero__review-divider" aria-hidden="true"></span>
-
               <div class="hero__review-text">
-                <span class="hero__review-label label">5 stars out of 117 reviews</span>
-                <span class="hero__review-sub caption">Real people. Real results.</span>
+                <span class="hero__review-label">5 stars out of 117 reviews</span>
               </div>
             </div>
 
           </div><!-- /hero__content -->
 
-          <!-- Stats card (visible ≥1024px) -->
-          <aside class="hero__card" aria-label="Key statistics">
-            <div class="hero__card-stat">
-              <span class="hero__card-number">400+</span>
-              <span class="hero__card-desc body-small">people who reclaimed their smile</span>
-            </div>
-            <div class="hero__card-stat">
-              <span class="hero__card-number">5.0</span>
-              <span class="hero__card-desc body-small">average star rating from 117 reviews</span>
-            </div>
-            <div class="hero__card-stat">
-              <span class="hero__card-number">92%</span>
-              <span class="hero__card-desc body-small">report renewed confidence in 30 days</span>
-            </div>
-          </aside>
-
         </div><!-- /hero__inner -->
       </div><!-- /wrapper -->
     </section>
 
+    <!-- ─── SOLUTIONS ───────────────────────────────────────────────── -->
+    <section class="solutions" id="solutions" aria-labelledby="solutions-headline">
+      <div class="wrapper">
+        <div class="solutions__inner">
+
+          <div class="solutions__copy">
+            <span class="eyebrow">What We Do</span>
+            <h2 class="h2" id="solutions-headline">Solutions Built Around Your Smile</h2>
+            <p class="body-large">
+              We can rebuild your smile, whether you're missing one tooth or need a full-arch
+              restoration. We focus on precision and comfort. From All-on-4®, All-on-6, and
+              All-on-X to zirconia implant bridges and cosmetic makeovers, we customize your
+              treatment plan. We use modern technology and a focused restorative approach
+              tailored for you.
+            </p>
+          </div>
+
+          <!-- Before / After Slider -->
+          <div class="ba-slider" style="--split: 50%;" role="img" aria-label="Before and after dental treatment comparison">
+            <img class="ba-slider__before"
+                 src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/before-after/arc-dental-before-photo.png"
+                 alt="Before dental treatment"
+                 draggable="false" />
+            <img class="ba-slider__after"
+                 src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/before-after/arc-dental-after-photo.png"
+                 alt="After dental treatment"
+                 draggable="false" />
+
+            <span class="ba-slider__label ba-slider__label--before" aria-hidden="true">Before</span>
+            <span class="ba-slider__label ba-slider__label--after"  aria-hidden="true">After</span>
+
+            <div class="ba-slider__handle"
+                 role="slider"
+                 aria-label="Compare before and after"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-valuenow="50"
+                 tabindex="0">
+              <div class="ba-slider__line"></div>
+              <div class="ba-slider__circle" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 18l6-6-6-6"/>
+                </svg>
+              </div>
+              <div class="ba-slider__line"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── VIDEO REVEAL ────────────────────────────────────────────── -->
+    <section class="video-reveal" aria-label="Patient story">
+      <div class="video-reveal__sticky">
+        <div class="video-reveal__copy">
+          <h2 class="video-reveal__heading">Behind Your <span class="text-gradient">New Smile</span></h2>
+          <p class="video-reveal__body">See How It's Done <span class="emoji-desktop">👉🏼</span><span class="emoji-mobile">👇🏼</span></p>
+        </div>
+        <div class="video-reveal__frame">
+          <iframe
+            src="https://www.youtube.com/embed/E8gm3iMconU?rel=0&modestbranding=1&controls=1"
+            title="ARC Dental — patient story"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── MEET THE DOCTOR ───────────────────────────────────────── -->
+    <section class="meet-doctor" aria-labelledby="doctor-headline">
+      <div class="wrapper">
+        <div class="meet-doctor__inner">
+
+          <div class="meet-doctor__image-wrap">
+            <img
+              src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/dr-tarek-photos/arc-dental-dr-tarek-photo.avif"
+              alt="Dr. Tarek Hussein, DDS"
+              class="meet-doctor__image"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="meet-doctor__copy">
+            <span class="eyebrow">Meet the Doctor</span>
+            <h2 class="h2" id="doctor-headline">Dr. Tarek Hussein, DDS</h2>
+            <p class="body-large">Dr. Hussein graduated from the University of Buffalo School of Dental Medicine in 2018. Since then, he has helped hundreds of people get the smile they always wanted. He uses the latest dental technology and treats every patient as an individual. He will walk you through all your options and answer every question you have. His goal is simple. He wants you to leave better than you came, even if you choose someone else.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PATIENT STORIES CAROUSEL ──────────────────────────────── -->
+    <section class="stories" id="stories" aria-labelledby="stories-headline">
+      <div class="stories__viewport">
+        <div class="stories__track" role="region" aria-label="Patient testimonials carousel" tabindex="0">
+
+          <article class="stories__slide stories__slide--text is-active" aria-roledescription="slide" aria-label="Slide 1 of 3: Intro">
+            <div>
+              <span class="eyebrow">Patient Testimonials</span>
+              <h3 id="stories-headline">Wondering what a new smile feels like?</h3>
+              <p>Hear directly from real patients about their experience, their comfort, and their results.</p>
+            </div>
+          </article>
+
+          <article class="stories__slide stories__slide--video" aria-roledescription="slide" aria-label="Slide 2 of 3: Patient story video">
+            <iframe
+              src="https://www.youtube.com/embed/fmmAkA4EjH0?rel=0&modestbranding=1&controls=1"
+              title="ARC Dental — patient story 1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </article>
+
+          <article class="stories__slide stories__slide--video" aria-roledescription="slide" aria-label="Slide 3 of 3: Patient story video">
+            <iframe
+              src="https://www.youtube.com/embed/mVwOiYfyrJQ?rel=0&modestbranding=1&controls=1"
+              title="ARC Dental — patient story 2"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </article>
+
+        </div>
+
+        <div class="stories__controls">
+          <button class="stories__arrow stories__arrow--prev" type="button" aria-label="Previous slide" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="15 6 9 12 15 18"></polyline>
+            </svg>
+          </button>
+
+          <div class="stories__dots" role="tablist" aria-label="Patient testimonials pagination">
+            <button class="stories__dot is-active" type="button" role="tab" aria-label="Go to slide 1" data-index="0"></button>
+            <button class="stories__dot" type="button" role="tab" aria-label="Go to slide 2" data-index="1"></button>
+            <button class="stories__dot" type="button" role="tab" aria-label="Go to slide 3" data-index="2"></button>
+          </div>
+
+          <button class="stories__arrow stories__arrow--next" type="button" aria-label="Next slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="9 6 15 12 9 18"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── REVIEWS ───────────────────────────────────────────────── -->
+    <section class="reviews" id="reviews" aria-labelledby="reviews-heading">
+      <div class="reviews__inner">
+
+        <div class="reviews__header">
+          <span class="eyebrow">Reviews</span>
+          <h2 class="reviews__heading" id="reviews-heading">What our patients say</h2>
+        </div>
+
+        <div class="reviews__viewport">
+          <div class="reviews__grid">
+
+            <!-- Row 1 -->
+            <div class="reviews__row">
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">PL</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Paul L.</div>
+                    <div class="review-card__location">San Francisco, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">Passion, modern techniques and equipment, clean office and friendly staff.
+I'm very happy with my dental implant – it's so important for your health, especially for seniors.
+Come see for yourself and compare with a regular dentist.
+Free consultation and special promotion: $2,495 per implant.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Dec 16, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar">
+                    <img src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/review-profile-pictures/Shalim%20O..jpg" alt="Shalim O., dental implant patient at ARC Dental" loading="lazy" width="40" height="40">
+                  </div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Shalim O.</div>
+                    <div class="review-card__location">Rialto, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">I had dental implants done by Dr. Tarek and the whole experience was excellent. He's very skilled, gentle, and took the time to explain every step. The results look natural and feel great. The office is clean, the staff is friendly, and you can tell he really cares about his patients.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Oct 7, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">AT</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Ashley T.</div>
+                    <div class="review-card__location">Downey, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">ARC Dental Implant Center is the best place to have dental work done. Dr. Hussein and Elizabeth walked me through the whole process when I was nervous about my procedure and made me feel at ease. My experience here was outstanding. This is the only place I will have dental work done.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Oct 7, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar">
+                    <img src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/review-profile-pictures/Ishaq%20H..jpg" alt="Ishaq H., dental implant patient at ARC Dental" loading="lazy" width="40" height="40">
+                  </div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Ishaq H.</div>
+                    <div class="review-card__location">Grand Terrace, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">This is a wonderful practice and Dr. Hussein listened to all my concerns. He takes his time and doesn't rush to get you in and out. Very professional with great work. Absolutely amazing service and I will recommend him to all my family and friends.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">May 29, 2025</div>
+              </div>
+            </div><!-- /.reviews__row -->
+
+            <!-- Row 2 -->
+            <div class="reviews__row">
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">AT</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Angel T.</div>
+                    <div class="review-card__location">Long Beach, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">Great experience from beginning to end. Dr. Tarek and Lizz were so great, and the office was clean and up to date with the latest technology. Surgery day can't come soon enough. I'll be sending all my friends to ARC Dental Implant Center.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Nov 9, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">TO</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Tawnya O.</div>
+                    <div class="review-card__location">Downey, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">Amazing staff and friendly service. I will definitely be returning for my dental needs.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Oct 7, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">RZ</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Roya Z.</div>
+                    <div class="review-card__location">Irvine, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">Dr. Tarek Hussein is an exceptionally knowledgeable doctor with impeccable work. I highly recommend him for his expertise and outstanding care.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Sep 19, 2025</div>
+              </div>
+            </div><!-- /.reviews__row -->
+
+            <!-- Row 3 -->
+            <div class="reviews__row">
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">AS</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Ali S.</div>
+                    <div class="review-card__location">Huntington Beach, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">These guys are the best in here. Dr Tarek and his girls (Liz and Angie) in the office are always friendly and attentive. Dr Tarek makes you feel comfortable and explains every step and how it's going to work out. At the end I'm extremely happy with my smile once again. Also I hear they are doing regular dental cleanings and cavity services now so I'm coming here for all my dental appointments and needs.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Feb 29, 2026</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">YA</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Yasmeen A.</div>
+                    <div class="review-card__location">Huntington Beach, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">Arc dental center is the place to be! Dr tarek is such an amazing doctor, he talked me through the process of doing my implants. Made me feel very comfortable and less nervous about my surgery. The office is very clean and smells so fresh!</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Nov 30, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">KT</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Kedsi T.</div>
+                    <div class="review-card__location">Irvine, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">I had a dental implant placed here and I couldn't be happier with the entire experience! From the first consultation to the final follow-up, the dentist and staff were professional, kind, and thorough. They explained every step clearly and made sure I was comfortable throughout the process. The results look natural, my bite feels perfect, and I can eat normally again without any discomfort. I highly recommend them to anyone needing dental implants.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Jan 31, 2026</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">MK</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Michele K.</div>
+                    <div class="review-card__location">Tustin, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">We went to Dr. Tarek for my Husband implants which were very affordable and done right, not like these other places that put the permanent teeth on immediately. The process takes time for your gums to heal and the inflammation to go down so the teeth fit correctly and you're not left with a lisp. Dr. Tarek and staff are very knowledgeable and friendly. Will be going ARC Dental for all our dental work now.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Feb 29, 2026</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">AA</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Ahlam A.</div>
+                    <div class="review-card__location">Tustin, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">ARC Dental Implant Center has been incredible from start to finish. A friend recommended them, and from the moment I walked in, Angelica made me feel so welcomed and comfortable. I had a tooth extraction and implants done with Dr. Tarek, and his patience, gentleness, and attention to detail truly stood out. I used to feel self-conscious about my smile, but he explained everything clearly, made the process easy, and the results look completely natural. The office is clean, modern, and the entire team is caring and professional. I'm so grateful for my experience here and highly recommend ARC Dental!</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Nov 30, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">RG</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Rosie G.</div>
+                    <div class="review-card__location">Tustin, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">Everybody is so nice! My implants came out excellent, I couldn't be happier. The staff is so nice and Dr. Tarek is very kind, it really made a difference. Thank you Arc Dental Implant Center for such great care! I will recommend all of my friends and family!</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Jan 31, 2026</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">MR</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Manjit R.</div>
+                    <div class="review-card__location">Huntington Beach, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">I had an amazing experience at ARC Dental Implant Center! From the moment I walked in, I was greeted by Angelica at the front office, who was incredibly warm and welcoming. She made the whole check-in process smooth and stress-free. The entire team was professional, attentive, and truly cared about making me feel comfortable. The facility is modern and clean, and I felt in great hands throughout my visit. Highly recommend ARC Dental for anyone needing top-notch care in a friendly and inviting atmosphere!</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Oct 31, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">MF</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Mary F.</div>
+                    <div class="review-card__location">Laguna Beach, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">Lizz and Dr Tarek were an amazing team! They have answered so many questions of mine and took such great care of me. I have never seen such a dental office that cares as much as they do. From beginning to end I was really impressed! Thank you so much Arc Dental Implant center, I can't explain enough how much the care means to me and I can't wait for my surgery.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Nov 30, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">YA</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Yousef A.</div>
+                    <div class="review-card__location">Huntington Beach, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">I couldn't be happier with my implant! The whole process was smooth from start to finish. The team was professional, caring, and explained every step clearly. The results look and feel completely natural, and the recovery was faster than I expected. I feel so much more confident now. Highly recommend to anyone considering an implant worth every penny! Thank you Dr Tarek! Only place I would go for my dental implants!</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Nov 30, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">AB</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Aye B.</div>
+                    <div class="review-card__location">Laguna Beach, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">Outstanding care and a smooth recovery. I want to extend my deepest gratitude to the incredible team at ARC Dental for the exceptional care I received throughout my recent surgery. From the moment I walked in, I felt welcomed, informed, and truly cared for. Dr. Tarek and the entire staff were not only highly skilled, but also compassionate and reassuring every step of the way. They took the time to explain the procedure clearly, answered all my questions, and ensured I was comfortable and confident going into surgery. The surgery itself went smoothly, and my recovery has been better than I expected, all thanks to the meticulous work and post-op guidance I received. It's rare to find a team that combines professionalism with such genuine kindness, but ARC Dental does just that. Thank you again to everyone at ARC Dental for making what could have been a stressful experience feel safe, seamless, and even uplifting. I highly recommend them to anyone seeking top-quality dental care.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Oct 31, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">SM</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Sergio M.</div>
+                    <div class="review-card__location">Newport Beach, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">Ive been seeing Dr Hussein for some years now and has been the the only dentist I can trust. He is meticulous, explains everything he is doing and why and dedicated to his craft. His staff is amazing and I feel like I am talking to a friend more than I am a dentist. His tooth work is amazing and understands and cares about all the aspects of your appearance that a better smile can improve beyond the nicer teeth. I would not go anywhere else, Really cant thank the ARC dental group enough.</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Nov 30, 2025</div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-card__header">
+                  <div class="review-card__avatar"><div class="review-card__avatar-initials" aria-hidden="true">CF</div></div>
+                  <div class="review-card__meta">
+                    <div class="review-card__name">Checo F.</div>
+                    <div class="review-card__location">Huntington Beach, CA</div>
+                  </div>
+                  <div class="review-card__stars" aria-label="5 out of 5 stars"></div>
+                </div>
+                <div class="review-card__body">
+                  <p class="review-card__text">Irene, Edna, Carolina, Dr. Hablani have been nothing short of amazing. They're all very attentive. Answer all questions and welcome all questions no matter how dumb I may think the questions are. They're like the support sisters I never had! Haha! Thank you ladies &amp; thank you Comfort Dental Spa for such a great experience and look forward to finish my invisalign treatment with you folks!</p>
+                  <button class="review-card__more" hidden>See more</button>
+                </div>
+                <div class="review-card__date">Nov 30, 2025</div>
+              </div>
+            </div><!-- /.reviews__row -->
+
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <!-- Review dialog (div-based overlay) -->
+  <div class="review-dialog-overlay" id="review-dialog" role="dialog" aria-modal="true" aria-label="Full review" hidden>
+    <div class="review-dialog__backdrop" id="review-dialog-backdrop"></div>
+    <div class="review-dialog__panel">
+      <button class="review-dialog__close" id="review-dialog-close" type="button" aria-label="Close">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+          <path d="M1 1l12 12M13 1L1 13"/>
+        </svg>
+      </button>
+      <div class="review-dialog__header">
+        <div class="review-dialog__avatar" id="rd-avatar"></div>
+        <div>
+          <div class="review-dialog__name" id="rd-name"></div>
+          <div class="review-dialog__location" id="rd-location"></div>
+        </div>
+      </div>
+      <div class="review-dialog__stars" id="rd-stars" aria-label="5 out of 5 stars"></div>
+      <p class="review-dialog__body" id="rd-body"></p>
+      <div class="review-dialog__date" id="rd-date"></div>
+    </div>
+  </div>
 
   <script>
     (() => {
       'use strict';
+
+      /* ─── Theme toggle ───────────────────────────────────────────── */
+      const html   = document.documentElement;
+      const toggle = document.getElementById('theme-toggle');
+      const mq     = window.matchMedia('(prefers-color-scheme: dark)');
+
+      const isDark = () => {
+        const attr = html.getAttribute('data-theme');
+        return attr ? attr === 'dark' : mq.matches;
+      };
+
+      const syncLabel = () => {
+        toggle.setAttribute(
+          'aria-label',
+          isDark() ? 'Switch to light mode' : 'Switch to dark mode'
+        );
+      };
+
+      toggle.addEventListener('click', () => {
+        const next = isDark() ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('arc-theme', next);
+        syncLabel();
+      });
+
+      mq.addEventListener('change', syncLabel);
+      syncLabel();
 
       /* ─── Hide-on-scroll nav ─────────────────────────────────────── */
       const nav    = document.getElementById('nav');
@@ -821,6 +2290,332 @@
       document.addEventListener('keydown', e => {
         if (e.key === 'Escape') closeMenu();
       });
+
+      /* ─── Before / After Slider ──────────────────────────────────── */
+      document.querySelectorAll('.ba-slider').forEach(slider => {
+        let active = false;
+        const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
+
+        const setPos = clientX => {
+          const { left, width } = slider.getBoundingClientRect();
+          const pct = clamp((clientX - left) / width * 100, 0, 100);
+          slider.style.setProperty('--split', pct.toFixed(2) + '%');
+          slider.querySelector('.ba-slider__handle')
+                .setAttribute('aria-valuenow', Math.round(pct));
+        };
+
+        slider.addEventListener('mousedown',  e => { active = true; setPos(e.clientX); });
+        window.addEventListener('mousemove',  e => { if (active) setPos(e.clientX); });
+        window.addEventListener('mouseup',    ()  => { active = false; });
+
+        slider.addEventListener('touchstart', e => { active = true; setPos(e.touches[0].clientX); }, { passive: true });
+        window.addEventListener('touchmove',  e => { if (active) setPos(e.touches[0].clientX); },   { passive: true });
+        window.addEventListener('touchend',   ()  => { active = false; });
+
+        slider.querySelector('.ba-slider__handle').addEventListener('keydown', e => {
+          const cur  = parseFloat(slider.style.getPropertyValue('--split') || '50');
+          const step = e.shiftKey ? 10 : 2;
+          if (e.key === 'ArrowLeft')  slider.style.setProperty('--split', clamp(cur - step, 0, 100).toFixed(2) + '%');
+          if (e.key === 'ArrowRight') slider.style.setProperty('--split', clamp(cur + step, 0, 100).toFixed(2) + '%');
+        });
+
+        // One-shot viewport hint
+        const observer = new IntersectionObserver(([entry], obs) => {
+          if (!entry.isIntersecting) return;
+          slider.classList.add('is-hinting');
+          slider.addEventListener('animationend', () => {
+            slider.classList.remove('is-hinting');
+          }, { once: true });
+          obs.disconnect();
+        }, { threshold: 0.5 });
+        observer.observe(slider);
+      });
+
+      /* ─── Patient Stories Carousel ───────────────────────────────── */
+      const storiesTrack = document.querySelector('.stories__track');
+      if (storiesTrack) {
+        const storiesSlides = [...storiesTrack.querySelectorAll('.stories__slide')];
+        const storiesDots   = [...document.querySelectorAll('.stories__dot')];
+        const storiesPrev   = document.querySelector('.stories__arrow--prev');
+        const storiesNext   = document.querySelector('.stories__arrow--next');
+
+        let storiesActive = 0;
+        let storiesRaf = false;
+        const updateStories = () => {
+          storiesRaf = false;
+          const trackRect = storiesTrack.getBoundingClientRect();
+          const trackCenter = trackRect.left + trackRect.width / 2;
+          let closest = 0;
+          let minDist = Infinity;
+          storiesSlides.forEach((slide, i) => {
+            const r = slide.getBoundingClientRect();
+            const c = r.left + r.width / 2;
+            const d = Math.abs(c - trackCenter);
+            if (d < minDist) { minDist = d; closest = i; }
+          });
+          storiesActive = closest;
+          storiesSlides.forEach((s, i) => s.classList.toggle('is-active', i === closest));
+          storiesDots.forEach((d, i) => d.classList.toggle('is-active', i === closest));
+          if (storiesPrev) storiesPrev.disabled = closest === 0;
+          if (storiesNext) storiesNext.disabled = closest === storiesSlides.length - 1;
+        };
+
+        const goToSlide = i => {
+          const target = storiesSlides[Math.max(0, Math.min(storiesSlides.length - 1, i))];
+          target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        };
+
+        if (storiesPrev) {
+          storiesPrev.addEventListener('click', () => goToSlide(storiesActive - 1));
+        }
+        if (storiesNext) {
+          storiesNext.addEventListener('click', () => goToSlide(storiesActive + 1));
+        }
+
+        storiesTrack.addEventListener('scroll', () => {
+          if (!storiesRaf) {
+            requestAnimationFrame(updateStories);
+            storiesRaf = true;
+          }
+        }, { passive: true });
+
+        storiesDots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            storiesSlides[i].scrollIntoView({
+              behavior: 'smooth',
+              inline: 'center',
+              block: 'nearest'
+            });
+          });
+        });
+
+        // Tap an inactive slide to bring it to center (active iframe still
+        // captures clicks normally so video playback isn't intercepted)
+        storiesSlides.forEach((slide, i) => {
+          slide.addEventListener('click', () => {
+            if (i !== storiesActive) goToSlide(i);
+          });
+        });
+
+        /* Mouse drag-to-scroll (touch uses native scroll-snap) */
+        let dragActive    = false;
+        let dragStartX    = 0;
+        let dragStartLeft = 0;
+        let dragMoved     = false;
+
+        storiesTrack.addEventListener('pointerdown', e => {
+          if (e.pointerType !== 'mouse' || e.button !== 0) return;
+          dragActive    = true;
+          dragMoved     = false;
+          dragStartX    = e.clientX;
+          dragStartLeft = storiesTrack.scrollLeft;
+          storiesTrack.classList.add('is-dragging');
+          storiesTrack.setPointerCapture(e.pointerId);
+        });
+
+        storiesTrack.addEventListener('pointermove', e => {
+          if (!dragActive) return;
+          const dx = e.clientX - dragStartX;
+          if (Math.abs(dx) > 3) dragMoved = true;
+          storiesTrack.scrollLeft = dragStartLeft - dx;
+        });
+
+        const endStoriesDrag = e => {
+          if (!dragActive) return;
+          dragActive = false;
+          storiesTrack.classList.remove('is-dragging');
+          if (storiesTrack.hasPointerCapture(e.pointerId)) {
+            storiesTrack.releasePointerCapture(e.pointerId);
+          }
+          // Snap to closest slide after release
+          const trackRect = storiesTrack.getBoundingClientRect();
+          const trackCenter = trackRect.left + trackRect.width / 2;
+          let closest = storiesSlides[0];
+          let minDist = Infinity;
+          storiesSlides.forEach(slide => {
+            const r = slide.getBoundingClientRect();
+            const c = r.left + r.width / 2;
+            const d = Math.abs(c - trackCenter);
+            if (d < minDist) { minDist = d; closest = slide; }
+          });
+          closest.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        };
+
+        storiesTrack.addEventListener('pointerup',     endStoriesDrag);
+        storiesTrack.addEventListener('pointercancel', endStoriesDrag);
+
+        // Suppress synthetic click after a drag so dots/iframes don't fire
+        storiesTrack.addEventListener('click', e => {
+          if (dragMoved) {
+            e.stopPropagation();
+            e.preventDefault();
+            dragMoved = false;
+          }
+        }, true);
+
+        // Prevent native image/text drag from interfering
+        storiesTrack.addEventListener('dragstart', e => e.preventDefault());
+
+        window.addEventListener('resize', () => {
+          if (!storiesRaf) {
+            requestAnimationFrame(updateStories);
+            storiesRaf = true;
+          }
+        });
+
+        updateStories();
+      }
+
+      /* ─── Reviews: stars, dialog, drag (ported from back-to-action) ─ */
+      const reviewsRoot = document.querySelector('.reviews');
+      if (reviewsRoot) {
+        const STAR_SVG = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+        const STARS = STAR_SVG.repeat(5);
+
+        // Inject stars into all card and dialog star slots
+        document.querySelectorAll('.review-card__stars, .review-dialog__stars').forEach(el => {
+          el.innerHTML = STARS;
+        });
+
+        // ── Dialog handling ─────────────────────────────────────
+        const overlay   = document.getElementById('review-dialog');
+        const rdAvatar  = document.getElementById('rd-avatar');
+        const rdName    = document.getElementById('rd-name');
+        const rdLoc     = document.getElementById('rd-location');
+        const rdStars   = document.getElementById('rd-stars');
+        const rdBody    = document.getElementById('rd-body');
+        const rdDate    = document.getElementById('rd-date');
+        const closeBtn  = document.getElementById('review-dialog-close');
+        const backdrop  = document.getElementById('review-dialog-backdrop');
+
+        const openDialog = card => {
+          const avatarImg  = card.querySelector('.review-card__avatar img');
+          const avatarInit = card.querySelector('.review-card__avatar-initials');
+
+          rdAvatar.innerHTML = avatarImg
+            ? `<img src="${avatarImg.src}" alt="${avatarImg.alt}">`
+            : `<div class="review-dialog__avatar-initials">${avatarInit.textContent}</div>`;
+
+          rdName.textContent  = card.querySelector('.review-card__name').textContent;
+          rdLoc.textContent   = card.querySelector('.review-card__location').textContent;
+          rdBody.textContent  = card.querySelector('.review-card__text').textContent;
+          rdDate.textContent  = card.querySelector('.review-card__date').textContent;
+          rdStars.innerHTML   = STARS;
+
+          overlay.removeAttribute('hidden');
+          requestAnimationFrame(() => overlay.classList.add('is-open'));
+          closeBtn.focus();
+          document.body.style.overflow = 'hidden';
+        };
+
+        const closeDialog = () => {
+          overlay.classList.remove('is-open');
+          overlay.addEventListener('transitionend', () => {
+            overlay.setAttribute('hidden', '');
+            document.body.style.overflow = '';
+          }, { once: true });
+        };
+
+        closeBtn.addEventListener('click', closeDialog);
+        backdrop.addEventListener('click', closeDialog);
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeDialog();
+        });
+
+        // ── Each card: show "See more" only when text is actually clamped ──
+        document.querySelectorAll('.review-card').forEach(card => {
+          const text = card.querySelector('.review-card__text');
+          const btn  = card.querySelector('.review-card__more');
+
+          const check = () => {
+            if (text.scrollHeight > text.clientHeight + 2) {
+              btn.removeAttribute('hidden');
+            } else {
+              btn.setAttribute('hidden', '');
+            }
+          };
+
+          check();
+          window.addEventListener('resize', check, { passive: true });
+
+          btn.addEventListener('click', () => openDialog(card));
+        });
+
+        // ── Row drag-to-scroll with kinetic momentum and snap easing ──
+        const FRICTION = 0.92;
+
+        document.querySelectorAll('.reviews__row').forEach(row => {
+          let isDown = false, dragged = false;
+          let startX = 0, startScroll = 0;
+          let velX = 0, lastX = 0, lastT = 0;
+          let rafId = null;
+
+          const nearestSnap = () => {
+            const rowLeft = row.getBoundingClientRect().left;
+            let best = null, bestDist = Infinity;
+            row.querySelectorAll('.review-card').forEach(card => {
+              const dist = Math.abs(card.getBoundingClientRect().left - rowLeft);
+              if (dist < bestDist) { bestDist = dist; best = card; }
+            });
+            if (!best) return row.scrollLeft;
+            return best.getBoundingClientRect().left - rowLeft + row.scrollLeft;
+          };
+
+          const tick = () => {
+            velX *= FRICTION;
+            row.scrollLeft -= velX;
+            if (Math.abs(velX) > 1) {
+              rafId = requestAnimationFrame(tick);
+            } else {
+              row.style.scrollSnapType = '';
+              const target = nearestSnap();
+              const ease = () => {
+                const diff = target - row.scrollLeft;
+                if (Math.abs(diff) < 0.3) { row.scrollLeft = target; rafId = null; return; }
+                row.scrollLeft += diff * 0.15;
+                rafId = requestAnimationFrame(ease);
+              };
+              ease();
+            }
+          };
+
+          row.addEventListener('mousedown', e => {
+            if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+            isDown = true; dragged = false;
+            row.classList.add('is-dragging');
+            row.style.scrollSnapType = 'none';
+            startX = e.pageX; startScroll = row.scrollLeft;
+            lastX  = e.pageX; lastT = Date.now();
+            velX   = 0;
+            e.preventDefault();
+          });
+
+          const release = () => {
+            if (!isDown) return;
+            isDown = false;
+            row.classList.remove('is-dragging');
+            rafId = requestAnimationFrame(tick);
+          };
+
+          row.addEventListener('mouseup',    release);
+          row.addEventListener('mouseleave', release);
+
+          row.addEventListener('mousemove', e => {
+            if (!isDown) return;
+            dragged = true;
+            const now = Date.now();
+            velX = (e.pageX - lastX) / Math.max(1, now - lastT) * 16;
+            lastX = e.pageX; lastT = now;
+            row.scrollLeft = startScroll - (e.pageX - startX);
+          });
+
+          row.addEventListener('click', e => { if (dragged) e.stopPropagation(); }, true);
+        });
+
+        document.addEventListener('dragstart', e => {
+          if (e.target.closest('.reviews__row')) e.preventDefault();
+        });
+      }
 
     })();
   </script>
