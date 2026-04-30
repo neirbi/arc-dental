@@ -1026,16 +1026,6 @@
       overflow: hidden;
     }
 
-    .stories__head {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto var(--space-2xl);
-      padding: 0 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-sm);
-    }
-
     .stories__viewport {
       position: relative;
     }
@@ -1390,19 +1380,13 @@
 
     <!-- ─── PATIENT STORIES CAROUSEL ──────────────────────────────── -->
     <section class="stories" id="stories" aria-labelledby="stories-headline">
-      <div class="stories__head">
-        <span class="eyebrow">Patient Stories</span>
-        <h2 class="h2" id="stories-headline">Real Stories from our patients</h2>
-        <p class="body-large">See how we transformed our patients lives</p>
-      </div>
-
       <div class="stories__viewport">
         <div class="stories__track" role="region" aria-label="Patient stories carousel" tabindex="0">
 
           <article class="stories__slide stories__slide--text" aria-roledescription="slide" aria-label="Slide 1 of 3: Intro">
             <div>
               <span class="eyebrow">Patient Stories</span>
-              <h3>Real Stories from our patients</h3>
+              <h3 id="stories-headline">Real Stories from our patients</h3>
               <p>See how we transformed our patients lives — swipe to watch their journeys.</p>
             </div>
           </article>
