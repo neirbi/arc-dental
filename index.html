@@ -1041,6 +1041,18 @@
       padding-block: clamp(2rem, 6vw, 4rem);
       padding-inline: max(1rem, calc(50vw - 210px));
       scroll-padding-inline: max(1rem, calc(50vw - 210px));
+      cursor: grab;
+    }
+
+    .stories__track.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+      scroll-behavior: auto;
+      user-select: none;
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .stories__track { cursor: auto; }
     }
 
     .stories__track::-webkit-scrollbar { display: none; }
@@ -1598,6 +1610,65 @@
             });
           });
         });
+
+        /* Mouse drag-to-scroll (touch uses native scroll-snap) */
+        let dragActive    = false;
+        let dragStartX    = 0;
+        let dragStartLeft = 0;
+        let dragMoved     = false;
+
+        storiesTrack.addEventListener('pointerdown', e => {
+          if (e.pointerType !== 'mouse' || e.button !== 0) return;
+          dragActive    = true;
+          dragMoved     = false;
+          dragStartX    = e.clientX;
+          dragStartLeft = storiesTrack.scrollLeft;
+          storiesTrack.classList.add('is-dragging');
+          storiesTrack.setPointerCapture(e.pointerId);
+        });
+
+        storiesTrack.addEventListener('pointermove', e => {
+          if (!dragActive) return;
+          const dx = e.clientX - dragStartX;
+          if (Math.abs(dx) > 3) dragMoved = true;
+          storiesTrack.scrollLeft = dragStartLeft - dx;
+        });
+
+        const endStoriesDrag = e => {
+          if (!dragActive) return;
+          dragActive = false;
+          storiesTrack.classList.remove('is-dragging');
+          if (storiesTrack.hasPointerCapture(e.pointerId)) {
+            storiesTrack.releasePointerCapture(e.pointerId);
+          }
+          // Snap to closest slide after release
+          const trackRect = storiesTrack.getBoundingClientRect();
+          const trackCenter = trackRect.left + trackRect.width / 2;
+          let closest = storiesSlides[0];
+          let minDist = Infinity;
+          storiesSlides.forEach(slide => {
+            const r = slide.getBoundingClientRect();
+            const c = r.left + r.width / 2;
+            const d = Math.abs(c - trackCenter);
+            if (d < minDist) { minDist = d; closest = slide; }
+          });
+          closest.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        };
+
+        storiesTrack.addEventListener('pointerup',     endStoriesDrag);
+        storiesTrack.addEventListener('pointercancel', endStoriesDrag);
+
+        // Suppress synthetic click after a drag so dots/iframes don't fire
+        storiesTrack.addEventListener('click', e => {
+          if (dragMoved) {
+            e.stopPropagation();
+            e.preventDefault();
+            dragMoved = false;
+          }
+        }, true);
+
+        // Prevent native image/text drag from interfering
+        storiesTrack.addEventListener('dragstart', e => e.preventDefault());
 
         window.addEventListener('resize', () => {
           if (!storiesRaf) {
