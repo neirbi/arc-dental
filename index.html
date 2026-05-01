@@ -1872,8 +1872,21 @@
     }
 
     .page-cta__body {
-      color: var(--color-text-muted);
-      max-width: 48ch;
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: -0.015em;
+      color: var(--color-text-faint);
+      max-width: 28ch;
+    }
+
+    .page-cta__body .sentence {
+      transition: color 0.3s ease;
+    }
+
+    .page-cta__body .sentence.is-lit {
+      color: var(--color-text);
     }
 
     .btn-gradient--caps {
@@ -3982,6 +3995,34 @@ Free consultation and special promotion: $2,495 per implant.</p>
           }
         }, { passive: true });
 
+        update();
+      })();
+
+      // ── Scroll-lit text (page-cta paragraph) ───────────────────────────
+      (function () {
+        document.querySelectorAll('.page-cta__body').forEach(p => {
+          const sentences = p.textContent.trim().match(/[^.!?]+[.!?]+/g) || [p.textContent.trim()];
+          p.innerHTML = sentences.map(s => `<span class="sentence">${s.trim()}</span>`).join(' ');
+        });
+
+        const sentences = document.querySelectorAll('.page-cta__body .sentence');
+        if (!sentences.length) return;
+
+        const update = () => {
+          const mid = window.innerHeight * 0.5;
+          let closestEl = null;
+          let closestDist = Infinity;
+          sentences.forEach(s => {
+            const rect = s.getBoundingClientRect();
+            const center = rect.top + rect.height / 2;
+            const dist = Math.abs(center - mid);
+            if (dist < closestDist) { closestDist = dist; closestEl = s; }
+          });
+          sentences.forEach(s => s.classList.toggle('is-lit', s === closestEl));
+        };
+
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
         update();
       })();
 
