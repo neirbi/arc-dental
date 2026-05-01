@@ -15,6 +15,7 @@
   <meta property="og:title"       content="ARC Dental Implant Center | Restore Your Smile With Confidence" />
   <meta property="og:description" content="ARC Dental Implant Center has helped over 400 people reclaim their smile. Learn about our confidence restoration system. 5-star rated, free consultation." />
   <meta property="og:image"       content="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/branding/arc-dental-open-graph.png" />
+  <meta property="og:image:alt"   content="ARC Dental Implant Center — dental implant and smile restoration practice in Tustin, CA" />
   <meta property="og:url"         content="https://arcdental.com" />
 
   <!-- Twitter / X card -->
@@ -25,7 +26,7 @@
 
   <!-- Canonical & crawl directives -->
   <link rel="canonical" href="https://arcdental.com" />
-  <meta name="robots" content="index, follow, noarchive" />
+  <meta name="robots" content="index, follow, noarchive, max-image-preview:large" />
   <meta name="archive" content="noindex" />
 
   <!-- Browser chrome colour per mode -->
@@ -2443,7 +2444,26 @@
           "bestRating": "5",
           "worstRating": "1"
         },
-        "priceRange": "$$"
+        "priceRange": "$$",
+        "sameAs": [
+          "https://www.facebook.com/profile.php?id=61578886537370",
+          "https://www.instagram.com/drtarekhussein/",
+          "https://www.youtube.com/@ARCDentalImplantCenter",
+          "https://www.yelp.com/biz/arc-dental-implant-center-tustin-2"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://arcdental.com/#dr-tarek-hussein",
+        "name": "Dr. Tarek Hussein",
+        "honorificPrefix": "Dr.",
+        "jobTitle": "Dentist",
+        "description": "Dr. Tarek Hussein, DDS, is the founder and lead implant dentist at ARC Dental Implant Center in Tustin, CA, specializing in full-mouth dental implants and cosmetic smile restoration.",
+        "image": "https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/dr-tarek-photos/arc-dental-dr-tarek-photo.avif",
+        "worksFor": { "@id": "https://arcdental.com/#business" },
+        "sameAs": [
+          "https://www.instagram.com/drtarekhussein/"
+        ]
       },
       {
         "@type": "FAQPage",
@@ -2660,10 +2680,12 @@
             <img class="ba-slider__before"
                  src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/before-after/arc-dental-before-photo.png"
                  alt="Patient smile before dental implant treatment — missing and damaged teeth"
+                 width="800" height="800"
                  draggable="false" />
             <img class="ba-slider__after"
                  src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/before-after/arc-dental-after-photo.png"
                  alt="Patient smile after full-mouth dental implant restoration at ARC Dental"
+                 width="800" height="800"
                  draggable="false" />
 
             <span class="ba-slider__label ba-slider__label--before" aria-hidden="true">Before</span>
@@ -2720,8 +2742,9 @@
           <div class="meet-doctor__image-wrap" data-reveal style="transition-delay:0.45s">
             <img
               src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/dr-tarek-photos/arc-dental-dr-tarek-photo.avif"
-              alt="Dr. Tarek Hussein, DDS"
+              alt="Dr. Tarek Hussein, DDS — lead implant dentist at ARC Dental Implant Center"
               class="meet-doctor__image"
+              width="600" height="720"
               loading="lazy"
             >
           </div>
@@ -3480,11 +3503,11 @@ Free consultation and special promotion: $2,495 per implant.</p>
         <div class="faq__list" data-reveal style="transition-delay:0.45s">
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
+            <button class="faq__question" id="faq-q1" aria-expanded="false" aria-controls="faq-panel-1">
               Do I need new teeth, or can you fix the teeth I have?
               <svg class="faq__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7.5l5 5 5-5"/></svg>
             </button>
-            <div class="faq__panel" role="region">
+            <div class="faq__panel" id="faq-panel-1" role="region" aria-labelledby="faq-q1">
               <div class="faq__panel-inner">
                 <p class="faq__answer">Most people do not know the answer yet. That is what we help you figure out. We look at your teeth, gums, bone, and smile. Then we tell you if veneers, crowns, implants, or a mix of treatments makes the most sense. The goal is to give you a strong, natural-looking smile without doing more than you need.</p>
               </div>
@@ -3492,11 +3515,11 @@ Free consultation and special promotion: $2,495 per implant.</p>
           </div>
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
+            <button class="faq__question" id="faq-q2" aria-expanded="false" aria-controls="faq-panel-2">
               Can I get dental implants if my teeth are really bad?
               <svg class="faq__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7.5l5 5 5-5"/></svg>
             </button>
-            <div class="faq__panel" role="region">
+            <div class="faq__panel" id="faq-panel-2" role="region" aria-labelledby="faq-q2">
               <div class="faq__panel-inner">
                 <p class="faq__answer">You might be able to. Even if you have bad teeth, missing teeth, old root canals, or dentures, implants may still be an option. We check your health, gums, bone, and habits like smoking. If you need extra steps first, like bone work or gum care, we will tell you before you start.</p>
               </div>
@@ -3504,11 +3527,11 @@ Free consultation and special promotion: $2,495 per implant.</p>
           </div>
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
+            <button class="faq__question" id="faq-q3" aria-expanded="false" aria-controls="faq-panel-3">
               Will it hurt? Can I be asleep or relaxed?
               <svg class="faq__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7.5l5 5 5-5"/></svg>
             </button>
-            <div class="faq__panel" role="region">
+            <div class="faq__panel" id="faq-panel-3" role="region" aria-labelledby="faq-q3">
               <div class="faq__panel-inner">
                 <p class="faq__answer">During the visit, your mouth will be numb, and we can help you feel calm and relaxed. Many people remember little or nothing from the visit. We offer sedation options and watch your breathing, heart rate, and blood pressure the whole time. Afterward, you may feel sore, but most people manage it with medicine and clear care instructions.</p>
               </div>
@@ -3516,11 +3539,11 @@ Free consultation and special promotion: $2,495 per implant.</p>
           </div>
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
+            <button class="faq__question" id="faq-q4" aria-expanded="false" aria-controls="faq-panel-4">
               What could go wrong?
               <svg class="faq__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7.5l5 5 5-5"/></svg>
             </button>
-            <div class="faq__panel" role="region">
+            <div class="faq__panel" id="faq-panel-4" role="region" aria-labelledby="faq-q4">
               <div class="faq__panel-inner">
                 <p class="faq__answer">Like any surgery, there are risks. You could have swelling, infection, slow healing, or an implant that does not attach to the bone. Rarely, there can be nerve or sinus problems. We use 3D scans to plan carefully, lower the risks, and explain what matters for your case.</p>
               </div>
@@ -3528,11 +3551,11 @@ Free consultation and special promotion: $2,495 per implant.</p>
           </div>
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
+            <button class="faq__question" id="faq-q5" aria-expanded="false" aria-controls="faq-panel-5">
               How long will my new teeth last?
               <svg class="faq__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7.5l5 5 5-5"/></svg>
             </button>
-            <div class="faq__panel" role="region">
+            <div class="faq__panel" id="faq-panel-5" role="region" aria-labelledby="faq-q5">
               <div class="faq__panel-inner">
                 <p class="faq__answer">Dental implants can last many years, sometimes even a lifetime, if you take care of them. Crowns and veneers can also last a long time, often 10 to 15 years or more. You will need to brush, floss, use the right cleaning tools, and come in for checkups so we can keep everything healthy.</p>
               </div>
@@ -3540,11 +3563,11 @@ Free consultation and special promotion: $2,495 per implant.</p>
           </div>
 
           <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">
+            <button class="faq__question" id="faq-q6" aria-expanded="false" aria-controls="faq-panel-6">
               How much does it cost, and why does it cost so much?
               <svg class="faq__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7.5l5 5 5-5"/></svg>
             </button>
-            <div class="faq__panel" role="region">
+            <div class="faq__panel" id="faq-panel-6" role="region" aria-labelledby="faq-q6">
               <div class="faq__panel-inner">
                 <p class="faq__answer">Full mouth treatment costs more because it takes careful planning, surgery, custom teeth, strong materials, and several visits. It is not a quick patch. It is meant to fix bigger problems for the long term. We give you a clear written plan, show you the costs, talk about payment options, and help you understand what makes the most sense for your mouth.</p>
               </div>
