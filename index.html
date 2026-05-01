@@ -2411,6 +2411,11 @@
 
     /* Body scroll lock when menu open */
     body.menu-open { overflow: hidden; }
+
+    /* ── Anti-copy ────────────────────────────────────────────────────── */
+    body { -webkit-user-select: none; user-select: none; }
+    input, textarea, select, [contenteditable] { -webkit-user-select: text; user-select: text; }
+    img { pointer-events: none; -webkit-user-drag: none; }
   </style>
 
   <!-- Structured data -->
@@ -4652,6 +4657,17 @@ Free consultation and special promotion: $2,495 per implant.</p>
       });
 
     })();
+
+    // Anti-copy layer
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('dragstart',   e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      const isField = ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName) || e.target.isContentEditable;
+      if (e.ctrlKey || e.metaKey) {
+        if (e.key === 's' || e.key === 'u') e.preventDefault();
+        if (e.key === 'a' && !isField)      e.preventDefault();
+      }
+    });
 
     // Tab away title nudge
     const originalTitle = document.title;
