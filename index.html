@@ -23,6 +23,10 @@
   <meta name="twitter:description" content="ARC Dental Implant Center has helped over 400 people reclaim their smile. 5-star rated, free consultation." />
   <meta name="twitter:image"       content="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/branding/arc-dental-open-graph.png" />
 
+  <!-- Canonical & crawl directives -->
+  <link rel="canonical" href="https://arcdental.com" />
+  <meta name="robots" content="index, follow" />
+
   <!-- Browser chrome colour per mode -->
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F5F5F7" />
   <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#0E1014" />
@@ -2401,6 +2405,101 @@
     /* Body scroll lock when menu open */
     body.menu-open { overflow: hidden; }
   </style>
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Dentist", "LocalBusiness"],
+        "@id": "https://arcdental.com/#business",
+        "name": "ARC Dental Implant Center",
+        "url": "https://arcdental.com",
+        "telephone": "+17147901664",
+        "image": "https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/branding/arc-dental-open-graph.png",
+        "description": "ARC Dental Implant Center specializes in dental implants, full-mouth restorations, and cosmetic dentistry in Tustin, CA. Led by Dr. Tarek Hussein, DDS.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "13891 Newport Ave, #110",
+          "addressLocality": "Tustin",
+          "addressRegion": "CA",
+          "postalCode": "92780",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+            "opens": "09:00",
+            "closes": "17:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "reviewCount": "117",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "priceRange": "$$"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I need new teeth, or can you fix the teeth I have?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most people do not know the answer yet. That is what we help you figure out. We look at your teeth, gums, bone, and smile. Then we tell you if veneers, crowns, implants, or a mix of treatments makes the most sense. The goal is to give you a strong, natural-looking smile without doing more than you need."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I get dental implants if my teeth are really bad?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You might be able to. Even if you have bad teeth, missing teeth, old root canals, or dentures, implants may still be an option. We check your health, gums, bone, and habits like smoking. If you need extra steps first, like bone work or gum care, we will tell you before you start."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will it hurt? Can I be asleep or relaxed?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "During the visit, your mouth will be numb, and we can help you feel calm and relaxed. Many people remember little or nothing from the visit. We offer sedation options and watch your breathing, heart rate, and blood pressure the whole time. Afterward, you may feel sore, but most people manage it with medicine and clear care instructions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What could go wrong?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Like any surgery, there are risks. You could have swelling, infection, slow healing, or an implant that does not attach to the bone. Rarely, there can be nerve or sinus problems. We use 3D scans to plan carefully, lower the risks, and explain what matters for your case."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long will my new teeth last?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Dental implants can last many years, sometimes even a lifetime, if you take care of them. Crowns and veneers can also last a long time, often 10 to 15 years or more. You will need to brush, floss, use the right cleaning tools, and come in for checkups so we can keep everything healthy."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does it cost, and why does it cost so much?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Full mouth treatment costs more because it takes careful planning, surgery, custom teeth, strong materials, and several visits. It is not a quick patch. It is meant to fix bigger problems for the long term. We give you a clear written plan, show you the costs, talk about payment options, and help you understand what makes the most sense for your mouth."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -2559,11 +2658,11 @@
           <div class="ba-slider" data-reveal style="--split: 50%; transition-delay:0.45s" role="img" aria-label="Before and after dental treatment comparison">
             <img class="ba-slider__before"
                  src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/before-after/arc-dental-before-photo.png"
-                 alt="Before dental treatment"
+                 alt="Patient smile before dental implant treatment — missing and damaged teeth"
                  draggable="false" />
             <img class="ba-slider__after"
                  src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/before-after/arc-dental-after-photo.png"
-                 alt="After dental treatment"
+                 alt="Patient smile after full-mouth dental implant restoration at ARC Dental"
                  draggable="false" />
 
             <span class="ba-slider__label ba-slider__label--before" aria-hidden="true">Before</span>
@@ -2597,13 +2696,13 @@
     <section class="video-reveal" id="see-how-its-done" aria-label="Surgical walkthrough video">
       <div class="video-reveal__sticky">
         <div class="video-reveal__copy">
-          <h2 class="video-reveal__heading" data-reveal style="transition-delay:0.08s">Behind Your <span class="text-gradient">New Smile</span></h2>
+          <h2 class="video-reveal__heading" id="see-how-its-done-heading" data-reveal style="transition-delay:0.08s">Behind Your <span class="text-gradient">New Smile</span></h2>
           <p class="video-reveal__body" data-reveal style="transition-delay:0.16s">See How It's Done <span class="emoji-desktop">👉🏼</span><span class="emoji-mobile">👇🏼</span></p>
         </div>
         <div class="video-reveal__frame">
           <iframe
             src="https://www.youtube.com/embed/E8gm3iMconU?rel=0&modestbranding=1&controls=1"
-            title="ARC Dental — patient story"
+            title="ARC Dental — dental implant surgery walkthrough"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
             loading="lazy"
