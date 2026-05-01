@@ -559,25 +559,71 @@
       align-items: center;
     }
 
-    /* Stagger fade-in */
-    .hero__eyebrow,
-    .hero__headline,
-    .hero__subhead,
-    .hero__actions,
-    .hero__reviews {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp .8s var(--ease-out-expo) forwards;
-    }
+    /*
+     * ═══════════════════════════════════════════════════════════════
+     * ANIMATION SYSTEM
+     * ───────────────────────────────────────────────────────────────
+     * Core values (locked — do not abstract into tokens)
+     *   Distance : 20px Y-axis up
+     *   Easing   : ease-out
+     *   Threshold: 20% viewport
+     *
+     * Hero (on-load)
+     *   Trigger  : DOMContentLoaded → body.is-loaded
+     *   Method   : CSS animation + forwards
+     *   Duration : 0.5s
+     *   Stagger  : heading 0.05s · subheading 0.15s · CTA 0.25s · rating 0.30s
+     *
+     * Scroll sections
+     *   Trigger  : IntersectionObserver at 20% viewport
+     *   Method   : CSS transition + .is-visible class toggle
+     *   Duration : 0.4s
+     *   Once per element, then unobserved
+     *   Group 1 — eyebrow + heading cluster : 0.08 / 0.16 / 0.24s
+     *   Group 2 — content elements          : 0.45 / 0.53 / 0.61 / 0.69 / 0.77 / 0.85s
+     *   Step within each group: 0.08s
+     * ═══════════════════════════════════════════════════════════════
+     */
 
-    .hero__eyebrow  { animation-delay: .05s; }
-    .hero__headline { animation-delay: .15s; }
-    .hero__subhead  { animation-delay: .25s; }
-    .hero__actions  { animation-delay: .35s; }
-    .hero__reviews  { animation-delay: .45s; }
+    @media (prefers-reduced-motion: no-preference) {
 
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
+      /* ── Hero: on-load reveal ────────────────────────────────── */
+      .hero__headline,
+      .hero__subhead,
+      .hero__actions,
+      .hero__reviews {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      body.is-loaded .hero__headline,
+      body.is-loaded .hero__subhead,
+      body.is-loaded .hero__actions,
+      body.is-loaded .hero__reviews {
+        animation: heroFadeUp 0.5s ease-out forwards;
+      }
+
+      body.is-loaded .hero__headline { animation-delay: 0.05s; }
+      body.is-loaded .hero__subhead  { animation-delay: 0.15s; }
+      body.is-loaded .hero__actions  { animation-delay: 0.25s; }
+      body.is-loaded .hero__reviews  { animation-delay: 0.30s; }
+
+      @keyframes heroFadeUp {
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ── Scroll reveal ───────────────────────────────────────── */
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+      }
+
+      [data-reveal].is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
     }
 
     /* Eyebrow pill */
@@ -2301,9 +2347,9 @@
         <div class="solutions__inner">
 
           <div class="solutions__copy">
-            <span class="eyebrow">What We Do</span>
-            <h2 class="h2" id="solutions-headline">Solutions Built Around Your Smile</h2>
-            <p class="body-large">
+            <span class="eyebrow" data-reveal style="transition-delay:0.08s">What We Do</span>
+            <h2 class="h2" id="solutions-headline" data-reveal style="transition-delay:0.16s">Solutions Built Around Your Smile</h2>
+            <p class="body-large" data-reveal style="transition-delay:0.24s">
               We can rebuild your smile, whether you're missing one tooth or need a full-arch
               restoration. We focus on precision and comfort. From All-on-4®, All-on-6, and
               All-on-X to zirconia implant bridges and cosmetic makeovers, we customize your
@@ -2313,7 +2359,7 @@
           </div>
 
           <!-- Before / After Slider -->
-          <div class="ba-slider" style="--split: 50%;" role="img" aria-label="Before and after dental treatment comparison">
+          <div class="ba-slider" data-reveal style="transition-delay:0.45s" style="--split: 50%;" role="img" aria-label="Before and after dental treatment comparison">
             <img class="ba-slider__before"
                  src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/before-after/arc-dental-before-photo.png"
                  alt="Before dental treatment"
@@ -2354,8 +2400,8 @@
     <section class="video-reveal" id="see-how-its-done" aria-label="Surgical walkthrough video">
       <div class="video-reveal__sticky">
         <div class="video-reveal__copy">
-          <h2 class="video-reveal__heading">Behind Your <span class="text-gradient">New Smile</span></h2>
-          <p class="video-reveal__body">See How It's Done <span class="emoji-desktop">👉🏼</span><span class="emoji-mobile">👇🏼</span></p>
+          <h2 class="video-reveal__heading" data-reveal style="transition-delay:0.08s">Behind Your <span class="text-gradient">New Smile</span></h2>
+          <p class="video-reveal__body" data-reveal style="transition-delay:0.16s">See How It's Done <span class="emoji-desktop">👉🏼</span><span class="emoji-mobile">👇🏼</span></p>
         </div>
         <div class="video-reveal__frame">
           <iframe
@@ -2374,7 +2420,7 @@
       <div class="wrapper">
         <div class="meet-doctor__inner">
 
-          <div class="meet-doctor__image-wrap">
+          <div class="meet-doctor__image-wrap" data-reveal style="transition-delay:0.45s">
             <img
               src="https://pub-9a939dd84d0a498882a8923655eac008.r2.dev/dr-tarek-photos/arc-dental-dr-tarek-photo.avif"
               alt="Dr. Tarek Hussein, DDS"
@@ -2384,9 +2430,9 @@
           </div>
 
           <div class="meet-doctor__copy">
-            <span class="eyebrow">Meet the Doctor</span>
-            <h2 class="h2" id="doctor-headline">Dr. Tarek Hussein, DDS</h2>
-            <p class="body-large">Dr. Hussein graduated from the University of Buffalo School of Dental Medicine in 2018. Since then, he has helped hundreds of people get the smile they always wanted. He uses the latest dental technology and treats every patient as an individual. He will walk you through all your options and answer every question you have. His goal is simple. He wants you to leave better than you came, even if you choose someone else.</p>
+            <span class="eyebrow" data-reveal style="transition-delay:0.08s">Meet the Doctor</span>
+            <h2 class="h2" id="doctor-headline" data-reveal style="transition-delay:0.16s">Dr. Tarek Hussein, DDS</h2>
+            <p class="body-large" data-reveal style="transition-delay:0.24s">Dr. Hussein graduated from the University of Buffalo School of Dental Medicine in 2018. Since then, he has helped hundreds of people get the smile they always wanted. He uses the latest dental technology and treats every patient as an individual. He will walk you through all your options and answer every question you have. His goal is simple. He wants you to leave better than you came, even if you choose someone else.</p>
           </div>
 
         </div>
@@ -2400,9 +2446,9 @@
 
           <article class="stories__slide stories__slide--text is-active" aria-roledescription="slide" aria-label="Slide 1 of 3: Intro">
             <div>
-              <span class="eyebrow">Patient Testimonials</span>
-              <h3 id="stories-headline">Wondering what a new smile feels like?</h3>
-              <p>Hear directly from real patients about their experience, their comfort, and their results.</p>
+              <span class="eyebrow" data-reveal style="transition-delay:0.08s">Patient Testimonials</span>
+              <h3 id="stories-headline" data-reveal style="transition-delay:0.16s">Wondering what a new smile feels like?</h3>
+              <p data-reveal style="transition-delay:0.24s">Hear directly from real patients about their experience, their comfort, and their results.</p>
             </div>
           </article>
 
@@ -2455,11 +2501,11 @@
       <div class="reviews__inner">
 
         <div class="reviews__header">
-          <span class="eyebrow">Reviews</span>
-          <h2 class="reviews__heading" id="reviews-heading">What our patients say</h2>
+          <span class="eyebrow" data-reveal style="transition-delay:0.08s">Reviews</span>
+          <h2 class="reviews__heading" id="reviews-heading" data-reveal style="transition-delay:0.16s">What our patients say</h2>
         </div>
 
-        <div class="reviews__viewport">
+        <div class="reviews__viewport" data-reveal style="transition-delay:0.45s">
           <div class="reviews__grid">
 
             <!-- Row 1 -->
@@ -3063,12 +3109,12 @@ Free consultation and special promotion: $2,495 per implant.</p>
       <div class="process__inner">
 
         <div class="process__header">
-          <span class="eyebrow">How it works</span>
-          <h2 class="h2 process__heading" id="process-heading">Five Steps to the Smile You've Always Wanted</h2>
+          <span class="eyebrow" data-reveal style="transition-delay:0.08s">How it works</span>
+          <h2 class="h2 process__heading" id="process-heading" data-reveal style="transition-delay:0.16s">Five Steps to the Smile You've Always Wanted</h2>
         </div>
 
         <ol class="process__steps">
-          <li class="process__step">
+          <li class="process__step" data-reveal style="transition-delay:0.45s">
             <div class="process__step-marker">
               <div class="process__step-num" aria-hidden="true">1</div>
               <div class="process__step-connector" aria-hidden="true"></div>
@@ -3079,7 +3125,7 @@ Free consultation and special promotion: $2,495 per implant.</p>
             </div>
           </li>
 
-          <li class="process__step">
+          <li class="process__step" data-reveal style="transition-delay:0.53s">
             <div class="process__step-marker">
               <div class="process__step-num" aria-hidden="true">2</div>
               <div class="process__step-connector" aria-hidden="true"></div>
@@ -3090,7 +3136,7 @@ Free consultation and special promotion: $2,495 per implant.</p>
             </div>
           </li>
 
-          <li class="process__step">
+          <li class="process__step" data-reveal style="transition-delay:0.61s">
             <div class="process__step-marker">
               <div class="process__step-num" aria-hidden="true">3</div>
               <div class="process__step-connector" aria-hidden="true"></div>
@@ -3101,7 +3147,7 @@ Free consultation and special promotion: $2,495 per implant.</p>
             </div>
           </li>
 
-          <li class="process__step">
+          <li class="process__step" data-reveal style="transition-delay:0.69s">
             <div class="process__step-marker">
               <div class="process__step-num" aria-hidden="true">4</div>
               <div class="process__step-connector" aria-hidden="true"></div>
@@ -3112,7 +3158,7 @@ Free consultation and special promotion: $2,495 per implant.</p>
             </div>
           </li>
 
-          <li class="process__step">
+          <li class="process__step" data-reveal style="transition-delay:0.77s">
             <div class="process__step-marker">
               <div class="process__step-num" aria-hidden="true">5</div>
             </div>
@@ -3130,11 +3176,11 @@ Free consultation and special promotion: $2,495 per implant.</p>
       <div class="faq__inner">
 
         <div class="faq__header">
-          <span class="eyebrow">Common Questions</span>
-          <h2 class="h2" id="faq-heading">Everything you want to know</h2>
+          <span class="eyebrow" data-reveal style="transition-delay:0.08s">Common Questions</span>
+          <h2 class="h2" id="faq-heading" data-reveal style="transition-delay:0.16s">Everything you want to know</h2>
         </div>
 
-        <div class="faq__list">
+        <div class="faq__list" data-reveal style="transition-delay:0.45s">
 
           <div class="faq__item">
             <button class="faq__question" aria-expanded="false">
@@ -3214,16 +3260,16 @@ Free consultation and special promotion: $2,495 per implant.</p>
 
     <section class="page-cta" id="get-started" aria-labelledby="page-cta-heading">
       <div class="page-cta__inner">
-        <h2 class="display page-cta__heading" id="page-cta-heading"><span class="text-gradient">You've waited long enough</span></h2>
-        <p class="body-large page-cta__body">Most people put it off for years. Too complicated. Too scary. Not the right time. It's none of those things. Book your free visit below and see for yourself.</p>
-        <a href="#get-started" class="btn-gradient btn-gradient--caps button-text">
+        <h2 class="display page-cta__heading" id="page-cta-heading" data-reveal style="transition-delay:0.08s"><span class="text-gradient">You've waited long enough</span></h2>
+        <p class="body-large page-cta__body" data-reveal style="transition-delay:0.16s">Most people put it off for years. Too complicated. Too scary. Not the right time. It's none of those things. Book your free visit below and see for yourself.</p>
+        <a href="#get-started" class="btn-gradient btn-gradient--caps button-text" data-reveal style="transition-delay:0.24s">
           I'm ready to smile again
           <svg class="btn-primary__arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
 
-        <a href="#reviews" class="hero__reviews" aria-label="Customer reviews — view all reviews">
+        <a href="#reviews" class="hero__reviews" aria-label="Customer reviews — view all reviews" data-reveal style="transition-delay:0.45s">
           <div class="hero__stars" aria-label="5 stars">
             <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
             <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
@@ -3481,6 +3527,22 @@ Free consultation and special promotion: $2,495 per implant.</p>
   <script>
     (() => {
       'use strict';
+
+      /* ─── Hero on-load reveal ────────────────────────────────────── */
+      document.addEventListener('DOMContentLoaded', () => {
+        document.body.classList.add('is-loaded');
+      });
+
+      /* ─── Scroll reveal ──────────────────────────────────────────── */
+      const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          revealObs.unobserve(entry.target);
+        });
+      }, { threshold: 0.2 });
+
+      document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
 
       /* ─── Theme toggle ───────────────────────────────────────────── */
       const html   = document.documentElement;
