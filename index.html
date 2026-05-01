@@ -1222,7 +1222,7 @@
 
     /* ─── REVIEWS SECTION (ported from back-to-action) ───────────────── */
     .reviews {
-      padding: var(--space-3xl) 1.5rem;
+      padding: var(--space-3xl) clamp(1.25rem, 5vw, 3rem);
       background: var(--color-surface);
     }
 
@@ -1534,13 +1534,13 @@
 
     @media (max-width: 768px) {
       .review-card { flex: 0 0 calc(100% - 2rem); }
-      .reviews { padding: 3rem 1.5rem; }
+      .reviews { padding: 3rem clamp(1.25rem, 5vw, 3rem); }
       .reviews__header { margin-bottom: 1.5rem; }
     }
 
     /* ─── PROCESS / HOW IT WORKS ─────────────────────────────────────── */
     .process {
-      padding: var(--space-3xl) 1.5rem;
+      padding: var(--space-3xl) clamp(1.25rem, 5vw, 3rem);
       background: var(--color-bg);
     }
 
@@ -1685,7 +1685,7 @@
     }
 
     @media (max-width: 640px) {
-      .process { padding: 3.5rem 1.25rem; }
+      .process { padding: 3.5rem clamp(1.25rem, 5vw, 3rem); }
       .process__header { margin-bottom: 2.5rem; }
       .process__step {
         grid-template-columns: 44px 1fr;
@@ -1703,7 +1703,7 @@
 
     /* ─── FAQ ───────────────────────────────────────────────────────────── */
     .faq {
-      padding: var(--space-3xl) 1.5rem;
+      padding: var(--space-3xl) clamp(1.25rem, 5vw, 3rem);
       background: var(--color-surface);
     }
 
@@ -1792,13 +1792,13 @@
     }
 
     @media (max-width: 640px) {
-      .faq { padding: 3.5rem 1.25rem; }
+      .faq { padding: 3.5rem clamp(1.25rem, 5vw, 3rem); }
       .faq__question { font-size: 1rem; padding: 1.125rem 0; }
     }
 
     /* ─── PAGE-END CTA ──────────────────────────────────────────────────── */
     .page-cta {
-      padding: var(--space-3xl) 1.5rem;
+      padding: var(--space-3xl) clamp(1.25rem, 5vw, 3rem);
       background: var(--color-bg);
       text-align: center;
     }
@@ -1829,12 +1829,12 @@
     }
 
     @media (max-width: 640px) {
-      .page-cta { padding: 4rem 1.25rem; }
+      .page-cta { padding: 4rem clamp(1.25rem, 5vw, 3rem); }
     }
 
     /* ─── SEO KEYWORD LINKS ─────────────────────────────────────────────── */
     .kw-links {
-      padding: var(--space-3xl) 1.5rem;
+      padding: var(--space-3xl) clamp(1.25rem, 5vw, 3rem);
       background: var(--color-surface);
     }
 
