@@ -1586,6 +1586,168 @@
       .reviews__header { margin-bottom: 1.5rem; }
     }
 
+    /* ─── CONSULTATION DIALOG ───────────────────────────────────────────── */
+    .consult-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s cubic-bezier(.4,0,.2,1);
+    }
+    .consult-overlay.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .consult-overlay__backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .consult-panel {
+      position: relative;
+      z-index: 1;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 560px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,.35);
+    }
+    .consult-overlay.is-open .consult-panel {
+      transform: translateY(0) scale(1);
+    }
+
+    .consult-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(128,128,128,0.12);
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      transition: background 0.15s, color 0.15s;
+    }
+    .consult-close:hover { background: rgba(128,128,128,0.22); color: var(--color-text); }
+
+    .consult-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      padding-right: 2.5rem;
+    }
+
+    .consult-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    @media (max-width: 480px) {
+      .consult-row { grid-template-columns: 1fr; }
+      .consult-panel { padding: 1.75rem 1.25rem; }
+    }
+
+    .consult-input {
+      width: 100%;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--color-text);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .consult-input::placeholder { color: var(--color-text-faint); }
+    .consult-input:focus { border-color: var(--color-primary); }
+
+    .consult-section { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .consult-section__label {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+    }
+
+    .consult-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .consult-chip {
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      border: 1.5px solid var(--color-border);
+      background: transparent;
+      color: var(--color-text-muted);
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      line-height: 1.4;
+      text-align: left;
+    }
+    .consult-chip:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      background: var(--color-primary-soft);
+    }
+    .consult-chip.is-selected {
+      border-color: var(--color-primary);
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      font-weight: 500;
+    }
+
+    .consult-submit {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 100px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 4px 24px rgba(10,92,255,.28);
+    }
+    .consult-submit:hover  { opacity: 0.9; transform: translateY(-2px); }
+    .consult-submit:active { transform: translateY(0); }
+
     /* ─── PROCESS / HOW IT WORKS ─────────────────────────────────────── */
     .process {
       padding: var(--space-3xl) 0;
@@ -3516,6 +3678,73 @@ Free consultation and special promotion: $2,495 per implant.</p>
   </footer>
 
   <!-- Review dialog (div-based overlay) -->
+  <!-- ─── CONSULTATION DIALOG ──────────────────────────────────────── -->
+  <div class="consult-overlay" id="consult-dialog" role="dialog" aria-modal="true" aria-labelledby="consult-title">
+    <div class="consult-overlay__backdrop" id="consult-backdrop"></div>
+    <div class="consult-panel">
+      <button class="consult-close" id="consult-close" type="button" aria-label="Close">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" width="14" height="14">
+          <path d="M1 1l12 12M13 1L1 13"/>
+        </svg>
+      </button>
+
+      <p class="consult-title" id="consult-title">Request a Free Consultation</p>
+
+      <div class="consult-section">
+        <div class="consult-row">
+          <input class="consult-input" type="text" id="consult-first" name="first_name" placeholder="First Name" autocomplete="given-name" required>
+          <input class="consult-input" type="text" id="consult-last" name="last_name" placeholder="Last Name" autocomplete="family-name" required>
+        </div>
+        <div class="consult-row">
+          <input class="consult-input" type="tel" id="consult-phone" name="phone" placeholder="Phone" autocomplete="tel" required>
+          <input class="consult-input" type="email" id="consult-email" name="email" placeholder="Email" autocomplete="email" required>
+        </div>
+      </div>
+
+      <div class="consult-section">
+        <p class="consult-section__label">What is your main dental concern?</p>
+        <div class="consult-chips" data-multi="true">
+          <button type="button" class="consult-chip" data-group="concern" data-value="missing-teeth">Missing teeth</button>
+          <button type="button" class="consult-chip" data-group="concern" data-value="broken-failing">Broken / failing teeth</button>
+          <button type="button" class="consult-chip" data-group="concern" data-value="dentures">I have dentures but want something permanent</button>
+          <button type="button" class="consult-chip" data-group="concern" data-value="improve-smile">I want to improve my smile</button>
+        </div>
+      </div>
+
+      <div class="consult-section">
+        <p class="consult-section__label">How many teeth are you looking to replace or fix?</p>
+        <div class="consult-chips">
+          <button type="button" class="consult-chip" data-group="count" data-value="one">Just one</button>
+          <button type="button" class="consult-chip" data-group="count" data-value="few">A few</button>
+          <button type="button" class="consult-chip" data-group="count" data-value="top">Most or all on top</button>
+          <button type="button" class="consult-chip" data-group="count" data-value="bottom">Most or all on bottom</button>
+          <button type="button" class="consult-chip" data-group="count" data-value="both">Both top &amp; bottom</button>
+        </div>
+      </div>
+
+      <div class="consult-section">
+        <p class="consult-section__label">How soon are you looking to get started?</p>
+        <div class="consult-chips">
+          <button type="button" class="consult-chip" data-group="timeline" data-value="asap">As soon as possible</button>
+          <button type="button" class="consult-chip" data-group="timeline" data-value="3months">Within 3 months</button>
+          <button type="button" class="consult-chip" data-group="timeline" data-value="exploring">Just exploring my options</button>
+        </div>
+      </div>
+
+      <div class="consult-section">
+        <p class="consult-section__label">How are you planning to cover treatment?</p>
+        <div class="consult-chips">
+          <button type="button" class="consult-chip" data-group="payment" data-value="cash">Cash / self-pay</button>
+          <button type="button" class="consult-chip" data-group="payment" data-value="insurance">Dental insurance</button>
+          <button type="button" class="consult-chip" data-group="payment" data-value="financing">I'll need financing</button>
+          <button type="button" class="consult-chip" data-group="payment" data-value="unsure">Not sure yet</button>
+        </div>
+      </div>
+
+      <button type="button" class="consult-submit" id="consult-submit">Book My Free Consultation</button>
+    </div>
+  </div>
+
   <div class="review-dialog-overlay" id="review-dialog" role="dialog" aria-modal="true" aria-label="Full review" hidden>
     <div class="review-dialog__backdrop" id="review-dialog-backdrop"></div>
     <div class="review-dialog__panel">
@@ -3540,6 +3769,43 @@ Free consultation and special promotion: $2,495 per implant.</p>
   <script>
     (() => {
       'use strict';
+
+      /* ─── Consultation dialog ───────────────────────────────────────── */
+      const consultOverlay  = document.getElementById('consult-dialog');
+      const consultClose    = document.getElementById('consult-close');
+      const consultBackdrop = document.getElementById('consult-backdrop');
+
+      const openConsult = e => {
+        if (e) e.preventDefault();
+        consultOverlay.classList.add('is-open');
+        document.body.classList.add('menu-open');
+        consultClose.focus();
+      };
+      const closeConsult = () => {
+        consultOverlay.classList.remove('is-open');
+        document.body.classList.remove('menu-open');
+      };
+
+      document.querySelectorAll('a[href="#get-started"]').forEach(el => {
+        el.addEventListener('click', openConsult);
+      });
+
+      consultClose.addEventListener('click', closeConsult);
+      consultBackdrop.addEventListener('click', closeConsult);
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && consultOverlay.classList.contains('is-open')) closeConsult();
+      });
+
+      // Multi-select for dental concern, single-select for all other groups
+      document.querySelectorAll('.consult-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const isMulti = chip.closest('[data-multi]');
+          if (!isMulti) {
+            chip.closest('.consult-chips').querySelectorAll('.consult-chip').forEach(c => c.classList.remove('is-selected'));
+          }
+          chip.classList.toggle('is-selected');
+        });
+      });
 
       /* ─── Hero on-load reveal ────────────────────────────────────── */
       document.addEventListener('DOMContentLoaded', () => {
