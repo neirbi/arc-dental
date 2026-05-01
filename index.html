@@ -4423,27 +4423,6 @@ Free consultation and special promotion: $2,495 per implant.</p>
           if (e.target.closest('.reviews__row')) e.preventDefault();
         });
 
-        // One-shot scroll hint on the first row — fires once the reveal wrapper gets is-visible
-        const firstRow = document.querySelector('.reviews__row');
-        if (firstRow) {
-          const revealTarget = firstRow.closest('[data-reveal]') ?? firstRow;
-          const runHint = () => {
-            if (firstRow.scrollLeft > 0) return;
-            firstRow.scrollTo({ left: 180, behavior: 'smooth' });
-            setTimeout(() => { firstRow.scrollTo({ left: 0, behavior: 'smooth' }); }, 900);
-          };
-          const hintObs = new IntersectionObserver(([entry], obs) => {
-            if (!entry.isIntersecting) return;
-            obs.disconnect();
-            if (revealTarget.classList.contains('is-visible')) {
-              runHint();
-            } else {
-              const mo = new MutationObserver(() => { mo.disconnect(); runHint(); });
-              mo.observe(revealTarget, { attributeFilter: ['class'] });
-            }
-          }, { threshold: 0.3 });
-          hintObs.observe(firstRow);
-        }
       }
 
       // ── How it Works — scroll-driven step progress ──────────────────
