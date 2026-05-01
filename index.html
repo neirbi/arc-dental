@@ -603,7 +603,7 @@
     .hero-title {
       font-family: var(--font-body);
       font-weight: 800;
-      font-size: clamp(3.5rem, 7vw, 6.25rem);
+      font-size: clamp(2.25rem, 8vw, 6.25rem);
       line-height: 0.95;
       letter-spacing: -0.06em;
       max-width: 12ch;
@@ -1834,6 +1834,17 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       padding: 1rem 2.75rem;
+    }
+
+    @media (max-width: 480px) {
+      .btn-gradient--caps {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+      }
+      .hero__actions {
+        width: 100%;
+      }
     }
 
     @media (max-width: 640px) {
