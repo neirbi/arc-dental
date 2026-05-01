@@ -1697,6 +1697,25 @@
     }
     .consult-input::placeholder { color: var(--color-text-faint); }
     .consult-input:focus { border-color: var(--color-primary); }
+    .consult-input.is-error { border-color: #e44b4b; background: rgba(228, 75, 75, 0.05); }
+    .consult-chips.is-error .consult-chip { border-color: #e44b4b; }
+
+    .consult-error {
+      display: none;
+      color: #e44b4b;
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      text-align: center;
+      margin: 0.5rem 0 0;
+    }
+    .consult-error.is-visible { display: block; }
+
+    @keyframes consultShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+    .consult-panel.is-shaking { animation: consultShake 0.3s ease-in-out; }
 
     .consult-section { display: flex; flex-direction: column; gap: 0.75rem; }
 
@@ -3902,6 +3921,8 @@ Free consultation and special promotion: $2,495 per implant.</p>
 
       <button type="button" class="consult-submit" id="consult-submit">Book My Free Consultation</button>
 
+      <p class="consult-error" id="consult-error" role="alert" aria-live="polite"></p>
+
       <p class="consult-social" aria-live="polite">
         <span class="consult-social__dot" aria-hidden="true"></span>
         <span id="consult-social-text"></span>
@@ -4083,13 +4104,58 @@ Free consultation and special promotion: $2,495 per implant.</p>
       restoreDraft();
 
       // Submit — POST named payload to webhook
+      const errorEl = document.getElementById('consult-error');
+      const panelEl = document.querySelector('.consult-panel');
+
+      const showError = (msg, badEls) => {
+        errorEl.textContent = msg;
+        errorEl.classList.add('is-visible');
+        badEls.forEach(el => el.classList.add('is-error'));
+        panelEl.classList.remove('is-shaking');
+        void panelEl.offsetWidth;
+        panelEl.classList.add('is-shaking');
+        if (badEls[0]) badEls[0].focus();
+      };
+
+      const clearError = el => {
+        el.classList.remove('is-error');
+        if (!document.querySelector('.consult-input.is-error, .consult-chips.is-error')) {
+          errorEl.classList.remove('is-visible');
+        }
+      };
+
+      ['consult-first','consult-last','consult-phone','consult-email'].forEach(id => {
+        document.getElementById(id).addEventListener('input', e => clearError(e.target));
+      });
+      document.querySelectorAll('.consult-chips').forEach(chips => {
+        chips.addEventListener('click', () => clearError(chips));
+      });
+
       document.getElementById('consult-submit').addEventListener('click', () => {
         const WEBHOOK_URL = ''; // TODO: add Zapier/webhook URL here
+        const firstEl = document.getElementById('consult-first');
+        const lastEl  = document.getElementById('consult-last');
+        const phoneEl = document.getElementById('consult-phone');
+        const emailEl = document.getElementById('consult-email');
+
+        const first_name = firstEl.value.trim();
+        const last_name  = lastEl.value.trim();
+        const phone      = phoneEl.value.trim();
+        const email      = emailEl.value.trim();
+
+        const bad = [];
+        if (!first_name) bad.push(firstEl);
+        if (!last_name)  bad.push(lastEl);
+        if (phone.replace(/\D/g, '').length < 10) bad.push(phoneEl);
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) bad.push(emailEl);
+
+        if (bad.length) {
+          showError('Please fill in all required fields correctly.', bad);
+          return;
+        }
+
         const payload = {
-          first_name:     document.getElementById('consult-first').value.trim(),
-          last_name:      document.getElementById('consult-last').value.trim(),
-          phone:          document.getElementById('consult-phone').value.trim(),
-          email:          document.getElementById('consult-email').value.trim(),
+          first_name, last_name, phone, email,
           dental_concern: document.getElementById('field-dental_concern').value,
           teeth_count:    document.getElementById('field-teeth_count').value,
           timeline:       document.getElementById('field-timeline').value,
@@ -4097,7 +4163,6 @@ Free consultation and special promotion: $2,495 per implant.</p>
           source:         'ARC Dental Website',
           submitted_at:   new Date().toISOString(),
         };
-        if (!payload.first_name || !payload.phone || !payload.email) return;
         if (WEBHOOK_URL) {
           fetch(WEBHOOK_URL, {
             method: 'POST',
