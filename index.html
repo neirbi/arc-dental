@@ -676,7 +676,8 @@
       transition: transform .25s var(--ease-out-expo);
     }
 
-    .btn-primary:hover .btn-primary__arrow {
+    .btn-primary:hover .btn-primary__arrow,
+    .btn-gradient:hover .btn-primary__arrow {
       transform: translateX(3px);
     }
 
@@ -2899,7 +2900,26 @@ Free consultation and special promotion: $2,495 per implant.</p>
       <div class="page-cta__inner">
         <h2 class="display page-cta__heading" id="page-cta-heading"><span class="text-gradient">You've waited long enough</span></h2>
         <p class="body-large page-cta__body">Most people put it off for years. Too complicated. Too scary. Not the right time. It's none of those things. Book your free visit below and see for yourself.</p>
-        <a href="#get-started" class="btn-gradient btn-gradient--caps button-text">I'm ready to smile again</a>
+        <a href="#get-started" class="btn-gradient btn-gradient--caps button-text">
+          I'm ready to smile again
+          <svg class="btn-primary__arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+
+        <div class="hero__reviews" aria-label="Customer reviews">
+          <div class="hero__stars" aria-label="5 stars">
+            <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
+            <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
+            <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
+            <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
+            <svg class="hero__star" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 1l2.39 4.84 5.34.77-3.87 3.77.91 5.32L9 13.27l-4.77 2.53.91-5.32L1.27 6.61l5.34-.77L9 1z"/></svg>
+          </div>
+          <div class="hero__review-text">
+            <span class="hero__review-label">5 stars out of 117 reviews</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
