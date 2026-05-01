@@ -1936,6 +1936,145 @@
       .kw-links__list { columns: 1; }
     }
 
+    /* ─── FOOTER ────────────────────────────────────────────────────────── */
+    .footer {
+      padding: var(--space-3xl) 0 var(--space-xl);
+      background: var(--color-bg);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .footer__inner {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.4fr 0.8fr;
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+
+    .footer__col-heading {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+      margin: 0 0 1.25rem;
+    }
+
+    .footer__contact {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .footer__contact-block { display: flex; flex-direction: column; gap: 0.25rem; }
+    .footer__contact-label {
+      font-size: 0.75rem;
+      color: var(--color-text-faint);
+      letter-spacing: 0.02em;
+    }
+    .footer__contact-value {
+      font-size: 0.95rem;
+      color: var(--color-text);
+      line-height: 1.5;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a.footer__contact-value:hover { color: var(--color-primary); }
+    .footer__hours-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: var(--color-text);
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .footer__social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      transition: color 0.15s, border-color 0.15s, transform 0.15s;
+    }
+    .footer__social a:hover {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+      transform: translateY(-1px);
+    }
+    .footer__social svg { width: 16px; height: 16px; }
+
+    .footer__map {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+    }
+    .footer__map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .footer__nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .footer__nav-list a {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer__nav-list a:hover { color: var(--color-primary); }
+
+    .footer__bottom {
+      margin-top: var(--space-2xl);
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      color: var(--color-text-faint);
+    }
+
+    @media (max-width: 900px) {
+      .footer__grid { grid-template-columns: 1fr 1fr; }
+      .footer__col--nav { grid-column: 1 / -1; }
+      .footer__nav-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .footer__grid { grid-template-columns: 1fr; }
+      .footer__nav-list { grid-template-columns: 1fr; }
+    }
+
     /* ─── Responsive ─────────────────────────────────────────────────── */
 
     /* Show desktop nav links, hide burger below 768 */
@@ -3144,6 +3283,88 @@ Free consultation and special promotion: $2,495 per implant.</p>
     </section>
 
   </main>
+
+  <!-- ─── FOOTER ─────────────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__grid">
+
+        <!-- Business info -->
+        <div class="footer__col footer__col--business">
+          <h3 class="footer__col-heading">ARC Dental Implant Center</h3>
+          <div class="footer__contact">
+            <div class="footer__contact-block">
+              <span class="footer__contact-label">Hours</span>
+              <div class="footer__hours-row">
+                <span>Monday &ndash; Friday</span>
+                <span>9:00 am &ndash; 5:00 pm</span>
+              </div>
+            </div>
+            <div class="footer__contact-block">
+              <span class="footer__contact-label">Phone</span>
+              <a class="footer__contact-value" href="tel:+17147901664">(714) 790-1664</a>
+            </div>
+            <div class="footer__contact-block">
+              <span class="footer__contact-label">Email</span>
+              <a class="footer__contact-value" href="mailto:info@arcdentalimplantcenter.com">info@arcdentalimplantcenter.com</a>
+            </div>
+            <div class="footer__contact-block">
+              <span class="footer__contact-label">Address</span>
+              <a class="footer__contact-value" href="https://maps.google.com/?q=13891+Newport+Ave+%23110,+Tustin,+CA+92780" target="_blank" rel="noopener">13891 Newport Ave, #110<br>Tustin, CA 92780</a>
+            </div>
+            <div class="footer__social" aria-label="Social media">
+              <a href="https://www.facebook.com/profile.php?id=61578886537370" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.86.24-1.45 1.5-1.45H16.5V4.4c-.27-.04-1.2-.13-2.27-.13-2.25 0-3.79 1.37-3.79 3.89V10.5H7.9v3h2.54V21h3.06z"/></svg>
+              </a>
+              <a href="https://x.com/ARCImplants" target="_blank" rel="noopener" aria-label="X (Twitter)">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg>
+              </a>
+              <a href="https://www.instagram.com/drtarekhussein/" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </a>
+              <a href="https://www.youtube.com/@ARCDentalImplantCenter" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15V9l5.2 3-5.2 3Z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="footer__col footer__col--map">
+          <h3 class="footer__col-heading">Find Us</h3>
+          <div class="footer__map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53089.15502396771!2d-117.84218975158811!3d33.7329493824504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa342d2e5de88ca03%3A0xc3617f9a02ca8563!2sARC%20Dental%20Implant%20Center!5e0!3m2!1sen!2sus!4v1777602047017!5m2!1sen!2sus"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+              title="ARC Dental Implant Center on Google Maps"></iframe>
+          </div>
+        </div>
+
+        <!-- Site nav -->
+        <div class="footer__col footer__col--nav">
+          <h3 class="footer__col-heading">Explore</h3>
+          <ul class="footer__nav-list" role="list">
+            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#see-how-its-done">See It Done</a></li>
+            <li><a href="#meet-the-doctor">Meet the Doctor</a></li>
+            <li><a href="#stories">Stories</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#how-it-works">How it Works</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#get-started">Get Started</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <span>&copy; 2026 ARC Dental Implant Center. All rights reserved.</span>
+        <span>Tustin, California</span>
+      </div>
+    </div>
+  </footer>
 
   <!-- Review dialog (div-based overlay) -->
   <div class="review-dialog-overlay" id="review-dialog" role="dialog" aria-modal="true" aria-label="Full review" hidden>
