@@ -4524,6 +4524,15 @@ Free consultation and special promotion: $2,495 per implant.</p>
       });
 
     })();
+
+    // Tab away title nudge
+    const originalTitle = document.title;
+    document.addEventListener('visibilitychange', () => {
+      document.title = document.hidden
+        ? '(1) New Message from Dr. Hussein | ARC Dental Implant Center'
+        : originalTitle;
+    });
+
   </script>
 
 </body>
