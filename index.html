@@ -4143,23 +4143,34 @@ Free consultation and special promotion: $2,495 per implant.</p>
         const phone      = phoneEl.value.trim();
         const email      = emailEl.value.trim();
 
+        const dental_concern = document.getElementById('field-dental_concern').value;
+        const teeth_count    = document.getElementById('field-teeth_count').value;
+        const timeline       = document.getElementById('field-timeline').value;
+        const payment_method = document.getElementById('field-payment_method').value;
+
+        const chipEl = field => document.querySelector(`.consult-chips[data-field="${field}"]`);
+
         const bad = [];
         if (!first_name) bad.push(firstEl);
         if (!last_name)  bad.push(lastEl);
         if (phone.replace(/\D/g, '').length < 10) bad.push(phoneEl);
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) bad.push(emailEl);
+        if (!dental_concern)  bad.push(chipEl('dental_concern'));
+        if (!teeth_count)     bad.push(chipEl('teeth_count'));
+        if (!timeline)        bad.push(chipEl('timeline'));
+        if (!payment_method)  bad.push(chipEl('payment_method'));
 
         if (bad.length) {
-          showError('Please fill in all required fields correctly.', bad);
+          showError('Please complete all fields before submitting.', bad);
           return;
         }
 
         const payload = {
           first_name, last_name, phone, email,
-          dental_concern: document.getElementById('field-dental_concern').value,
-          teeth_count:    document.getElementById('field-teeth_count').value,
-          timeline:       document.getElementById('field-timeline').value,
-          payment_method: document.getElementById('field-payment_method').value,
+          dental_concern,
+          teeth_count,
+          timeline,
+          payment_method,
           source:         'ARC Dental Website',
           submitted_at:   new Date().toISOString(),
         };
