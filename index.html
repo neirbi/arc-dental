@@ -1985,12 +1985,23 @@
       transition: color 0.15s;
     }
     a.footer__contact-value:hover { color: var(--color-primary); }
-    .footer__hours-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      font-size: 0.95rem;
+    .footer__hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .footer__hours-table td {
+      padding: 0.2rem 0;
       color: var(--color-text);
+      vertical-align: top;
+    }
+    .footer__hours-table td:last-child {
+      text-align: right;
+      padding-left: 1.5rem;
+      color: var(--color-text-muted);
+    }
+    .footer__hours-table tr.is-closed td {
+      color: var(--color-text-faint);
     }
 
     .footer__social {
@@ -3330,10 +3341,17 @@ Free consultation and special promotion: $2,495 per implant.</p>
           <div class="footer__contact">
             <div class="footer__contact-block">
               <span class="footer__contact-label">Hours</span>
-              <div class="footer__hours-row">
-                <span>Monday &ndash; Friday</span>
-                <span>9:00 am &ndash; 5:00 pm</span>
-              </div>
+              <table class="footer__hours-table" aria-label="Office hours">
+                <tbody>
+                  <tr><td>Monday</td><td>9:00 am &ndash; 5:00 pm</td></tr>
+                  <tr><td>Tuesday</td><td>9:00 am &ndash; 5:00 pm</td></tr>
+                  <tr><td>Wednesday</td><td>9:00 am &ndash; 5:00 pm</td></tr>
+                  <tr><td>Thursday</td><td>9:00 am &ndash; 5:00 pm</td></tr>
+                  <tr><td>Friday</td><td>9:00 am &ndash; 5:00 pm</td></tr>
+                  <tr class="is-closed"><td>Saturday</td><td>Closed</td></tr>
+                  <tr class="is-closed"><td>Sunday</td><td>Closed</td></tr>
+                </tbody>
+              </table>
             </div>
             <div class="footer__contact-block">
               <span class="footer__contact-label">Phone</span>
