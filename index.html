@@ -3725,42 +3725,46 @@ Free consultation and special promotion: $2,495 per implant.</p>
 
       <div class="consult-section">
         <p class="consult-section__label">What is your main dental concern?</p>
-        <div class="consult-chips" data-multi="true">
-          <button type="button" class="consult-chip" data-group="concern" data-value="missing-teeth">Missing teeth</button>
-          <button type="button" class="consult-chip" data-group="concern" data-value="broken-failing">Broken / failing teeth</button>
-          <button type="button" class="consult-chip" data-group="concern" data-value="dentures">I have dentures but want something permanent</button>
-          <button type="button" class="consult-chip" data-group="concern" data-value="improve-smile">I want to improve my smile</button>
+        <div class="consult-chips" data-multi="true" data-field="dental_concern">
+          <button type="button" class="consult-chip" data-value="Missing teeth">Missing teeth</button>
+          <button type="button" class="consult-chip" data-value="Broken / failing teeth">Broken / failing teeth</button>
+          <button type="button" class="consult-chip" data-value="I have dentures but want something permanent">I have dentures but want something permanent</button>
+          <button type="button" class="consult-chip" data-value="I want to improve my smile">I want to improve my smile</button>
         </div>
+        <input type="hidden" name="dental_concern" id="field-dental_concern">
       </div>
 
       <div class="consult-section">
         <p class="consult-section__label">How many teeth are you looking to replace or fix?</p>
-        <div class="consult-chips">
-          <button type="button" class="consult-chip" data-group="count" data-value="one">Just one</button>
-          <button type="button" class="consult-chip" data-group="count" data-value="few">A few</button>
-          <button type="button" class="consult-chip" data-group="count" data-value="top">Most or all on top</button>
-          <button type="button" class="consult-chip" data-group="count" data-value="bottom">Most or all on bottom</button>
-          <button type="button" class="consult-chip" data-group="count" data-value="both">Both top &amp; bottom</button>
+        <div class="consult-chips" data-field="teeth_count">
+          <button type="button" class="consult-chip" data-value="Just one">Just one</button>
+          <button type="button" class="consult-chip" data-value="A few">A few</button>
+          <button type="button" class="consult-chip" data-value="Most or all on top">Most or all on top</button>
+          <button type="button" class="consult-chip" data-value="Most or all on bottom">Most or all on bottom</button>
+          <button type="button" class="consult-chip" data-value="Both top &amp; bottom">Both top &amp; bottom</button>
         </div>
+        <input type="hidden" name="teeth_count" id="field-teeth_count">
       </div>
 
       <div class="consult-section">
         <p class="consult-section__label">How soon are you looking to get started?</p>
-        <div class="consult-chips">
-          <button type="button" class="consult-chip" data-group="timeline" data-value="asap">As soon as possible</button>
-          <button type="button" class="consult-chip" data-group="timeline" data-value="3months">Within 3 months</button>
-          <button type="button" class="consult-chip" data-group="timeline" data-value="exploring">Just exploring my options</button>
+        <div class="consult-chips" data-field="timeline">
+          <button type="button" class="consult-chip" data-value="As soon as possible">As soon as possible</button>
+          <button type="button" class="consult-chip" data-value="Within 3 months">Within 3 months</button>
+          <button type="button" class="consult-chip" data-value="Just exploring my options">Just exploring my options</button>
         </div>
+        <input type="hidden" name="timeline" id="field-timeline">
       </div>
 
       <div class="consult-section">
         <p class="consult-section__label">How are you planning to cover treatment?</p>
-        <div class="consult-chips">
-          <button type="button" class="consult-chip" data-group="payment" data-value="cash">Cash / self-pay</button>
-          <button type="button" class="consult-chip" data-group="payment" data-value="insurance">Dental insurance</button>
-          <button type="button" class="consult-chip" data-group="payment" data-value="financing">I'll need financing</button>
-          <button type="button" class="consult-chip" data-group="payment" data-value="unsure">Not sure yet</button>
+        <div class="consult-chips" data-field="payment_method">
+          <button type="button" class="consult-chip" data-value="Cash / self-pay">Cash / self-pay</button>
+          <button type="button" class="consult-chip" data-value="Dental insurance">Dental insurance</button>
+          <button type="button" class="consult-chip" data-value="I'll need financing">I'll need financing</button>
+          <button type="button" class="consult-chip" data-value="Not sure yet">Not sure yet</button>
         </div>
+        <input type="hidden" name="payment_method" id="field-payment_method">
       </div>
 
       <button type="button" class="consult-submit" id="consult-submit">Book My Free Consultation</button>
@@ -3823,15 +3827,51 @@ Free consultation and special promotion: $2,495 per implant.</p>
         if (e.key === 'Escape' && consultOverlay.classList.contains('is-open')) closeConsult();
       });
 
-      // Multi-select for dental concern, single-select for all other groups
+      // Chip selection — syncs to hidden input on each group
+      const syncChipField = chipsEl => {
+        const field = document.getElementById('field-' + chipsEl.dataset.field);
+        if (!field) return;
+        const selected = [...chipsEl.querySelectorAll('.consult-chip.is-selected')]
+          .map(c => c.dataset.value);
+        field.value = selected.join(', ');
+      };
+
       document.querySelectorAll('.consult-chip').forEach(chip => {
         chip.addEventListener('click', () => {
-          const isMulti = chip.closest('[data-multi]');
+          const chipsEl = chip.closest('.consult-chips');
+          const isMulti = chipsEl.dataset.multi;
           if (!isMulti) {
-            chip.closest('.consult-chips').querySelectorAll('.consult-chip').forEach(c => c.classList.remove('is-selected'));
+            chipsEl.querySelectorAll('.consult-chip').forEach(c => c.classList.remove('is-selected'));
           }
           chip.classList.toggle('is-selected');
+          syncChipField(chipsEl);
         });
+      });
+
+      // Submit — POST named payload to webhook
+      document.getElementById('consult-submit').addEventListener('click', () => {
+        const WEBHOOK_URL = ''; // TODO: add Zapier/webhook URL here
+        const payload = {
+          first_name:     document.getElementById('consult-first').value.trim(),
+          last_name:      document.getElementById('consult-last').value.trim(),
+          phone:          document.getElementById('consult-phone').value.trim(),
+          email:          document.getElementById('consult-email').value.trim(),
+          dental_concern: document.getElementById('field-dental_concern').value,
+          teeth_count:    document.getElementById('field-teeth_count').value,
+          timeline:       document.getElementById('field-timeline').value,
+          payment_method: document.getElementById('field-payment_method').value,
+          source:         'ARC Dental Website',
+          submitted_at:   new Date().toISOString(),
+        };
+        if (!payload.first_name || !payload.phone || !payload.email) return;
+        if (WEBHOOK_URL) {
+          fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+        }
+        closeConsult();
       });
 
       // Social proof count (3–12, 24h TTL)
