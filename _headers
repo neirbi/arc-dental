@@ -1,0 +1,16 @@
+/*
+  # Prevent this page from being embedded in iframes on other sites
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'
+
+  # Block MIME-type sniffing attacks
+  X-Content-Type-Options: nosniff
+
+  # Don't send full referrer URL to third parties
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Tell crawlers not to archive/cache this page
+  X-Robots-Tag: noarchive
+
+  # Restrict browser feature access
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
