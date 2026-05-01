@@ -1222,13 +1222,15 @@
 
     /* ─── REVIEWS SECTION (ported from back-to-action) ───────────────── */
     .reviews {
-      padding: var(--space-3xl) clamp(1.25rem, 5vw, 3rem);
+      padding: var(--space-3xl) 0;
       background: var(--color-surface);
     }
 
     .reviews__inner {
+      width: 100%;
       max-width: var(--max-width);
       margin: 0 auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
     }
 
     .reviews__header {
@@ -1534,19 +1536,21 @@
 
     @media (max-width: 768px) {
       .review-card { flex: 0 0 calc(100% - 2rem); }
-      .reviews { padding: 3rem clamp(1.25rem, 5vw, 3rem); }
+      .reviews { padding: 3rem 0; }
       .reviews__header { margin-bottom: 1.5rem; }
     }
 
     /* ─── PROCESS / HOW IT WORKS ─────────────────────────────────────── */
     .process {
-      padding: var(--space-3xl) clamp(1.25rem, 5vw, 3rem);
+      padding: var(--space-3xl) 0;
       background: var(--color-bg);
     }
 
     .process__inner {
+      width: 100%;
       max-width: 1040px;
       margin: 0 auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
     }
 
     .process__header {
@@ -1685,7 +1689,7 @@
     }
 
     @media (max-width: 640px) {
-      .process { padding: 3.5rem clamp(1.25rem, 5vw, 3rem); }
+      .process { padding: 3.5rem 0; }
       .process__header { margin-bottom: 2.5rem; }
       .process__step {
         grid-template-columns: 44px 1fr;
@@ -1703,13 +1707,15 @@
 
     /* ─── FAQ ───────────────────────────────────────────────────────────── */
     .faq {
-      padding: var(--space-3xl) clamp(1.25rem, 5vw, 3rem);
+      padding: var(--space-3xl) 0;
       background: var(--color-surface);
     }
 
     .faq__inner {
+      width: 100%;
       max-width: var(--max-width);
       margin: 0 auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
     }
 
     .faq__header {
@@ -1792,20 +1798,22 @@
     }
 
     @media (max-width: 640px) {
-      .faq { padding: 3.5rem clamp(1.25rem, 5vw, 3rem); }
+      .faq { padding: 3.5rem 0; }
       .faq__question { font-size: 1rem; padding: 1.125rem 0; }
     }
 
     /* ─── PAGE-END CTA ──────────────────────────────────────────────────── */
     .page-cta {
-      padding: var(--space-3xl) clamp(1.25rem, 5vw, 3rem);
+      padding: var(--space-3xl) 0;
       background: var(--color-bg);
       text-align: center;
     }
 
     .page-cta__inner {
+      width: 100%;
       max-width: var(--max-width);
       margin: 0 auto;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1829,16 +1837,18 @@
     }
 
     @media (max-width: 640px) {
-      .page-cta { padding: 4rem clamp(1.25rem, 5vw, 3rem); }
+      .page-cta { padding: 4rem 0; }
     }
 
     /* ─── SEO KEYWORD LINKS ─────────────────────────────────────────────── */
     .kw-links {
-      padding: var(--space-3xl) clamp(1.25rem, 5vw, 3rem);
+      padding: var(--space-3xl) 0;
       background: var(--color-surface);
     }
 
     .kw-links__inner {
+      width: 100%;
+      padding-inline: clamp(1.25rem, 5vw, 3rem);
       max-width: var(--max-width);
       margin: 0 auto;
     }
