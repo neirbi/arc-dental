@@ -1748,6 +1748,28 @@
     .consult-submit:hover  { opacity: 0.9; transform: translateY(-2px); }
     .consult-submit:active { transform: translateY(0); }
 
+    .consult-social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: -1rem;
+      font-size: 0.8rem;
+      color: var(--color-text-faint);
+    }
+    .consult-social__dot {
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #34c759;
+      animation: consultPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes consultPulse {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.35; }
+    }
+
     /* ─── PROCESS / HOW IT WORKS ─────────────────────────────────────── */
     .process {
       padding: var(--space-3xl) 0;
@@ -3742,6 +3764,11 @@ Free consultation and special promotion: $2,495 per implant.</p>
       </div>
 
       <button type="button" class="consult-submit" id="consult-submit">Book My Free Consultation</button>
+
+      <p class="consult-social" aria-live="polite">
+        <span class="consult-social__dot" aria-hidden="true"></span>
+        <span id="consult-social-text"></span>
+      </p>
     </div>
   </div>
 
@@ -3806,6 +3833,25 @@ Free consultation and special promotion: $2,495 per implant.</p>
           chip.classList.toggle('is-selected');
         });
       });
+
+      // Social proof count (3–12, 24h TTL)
+      (() => {
+        const socialText = document.getElementById('consult-social-text');
+        if (!socialText) return;
+        const KEY = 'arc_consult_count';
+        const TTL = 24 * 60 * 60 * 1000;
+        try {
+          const stored = JSON.parse(localStorage.getItem(KEY));
+          const count = (stored && Date.now() < stored.expires)
+            ? stored.count
+            : (() => {
+                const n = Math.floor(Math.random() * 10) + 3; // 3–12
+                localStorage.setItem(KEY, JSON.stringify({ count: n, expires: Date.now() + TTL }));
+                return n;
+              })();
+          socialText.textContent = count + ' locals recently requested a consultation';
+        } catch (_) { socialText.textContent = ''; }
+      })();
 
       /* ─── Hero on-load reveal ────────────────────────────────────── */
       document.addEventListener('DOMContentLoaded', () => {
