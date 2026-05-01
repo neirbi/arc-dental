@@ -3631,17 +3631,21 @@ Free consultation and special promotion: $2,495 per implant.</p>
         });
       })();
 
-      // SEO keyword expand/collapse
-      document.querySelectorAll('.kw-links__toggle').forEach(btn => {
+      // SEO keyword expand/collapse — one open at a time
+      const kwToggles = [...document.querySelectorAll('.kw-links__toggle')];
+      kwToggles.forEach(btn => {
         btn.addEventListener('click', () => {
           const wrap = btn.previousElementSibling;
           const isExpanded = wrap.classList.contains('is-expanded');
-          if (isExpanded) {
-            wrap.classList.remove('is-expanded');
-            wrap.style.maxHeight = '';
-            btn.classList.remove('is-expanded');
-            btn.childNodes[0].textContent = 'Expand';
-          } else {
+          // collapse all
+          kwToggles.forEach(b => {
+            b.previousElementSibling.classList.remove('is-expanded');
+            b.previousElementSibling.style.maxHeight = '';
+            b.classList.remove('is-expanded');
+            b.childNodes[0].textContent = 'Expand';
+          });
+          // if it wasn't already open, open it
+          if (!isExpanded) {
             wrap.classList.add('is-expanded');
             wrap.style.maxHeight = wrap.scrollHeight + 'px';
             btn.classList.add('is-expanded');
