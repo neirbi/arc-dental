@@ -1593,8 +1593,8 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: var(--color-primary);
-      color: #fff;
+      background: var(--color-border);
+      color: var(--color-text-muted);
       font-family: var(--font-display);
       font-size: 1.125rem;
       font-weight: 400;
@@ -1604,18 +1604,50 @@
       position: relative;
       z-index: 2;
       box-shadow: 0 0 0 6px var(--color-bg);
+      transition: background 0.35s ease, color 0.35s ease;
     }
 
-    .process__step:not(:last-child) .process__step-marker::after {
-      content: "";
+    .process__step.is-active .process__step-num,
+    .process__step.is-done .process__step-num {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .process__step-connector {
       position: absolute;
       top: 44px;
       bottom: -2.5rem;
       left: 50%;
       width: 2px;
       transform: translateX(-50%);
-      background: var(--color-border);
       z-index: 1;
+      overflow: hidden;
+    }
+
+    .process__step-connector::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--color-border);
+    }
+
+    .process__step-connector::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--color-primary);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+    }
+
+    .process__step.is-done .process__step-connector::after {
+      transform: scaleY(1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .process__step-num { transition: none; }
+      .process__step-connector::after { transition: none; }
     }
 
     .process__step-label {
@@ -1663,12 +1695,9 @@
         width: 36px;
         height: 36px;
         font-size: 1rem;
-        box-shadow: 0 0 0 4px var(--color-surface-alt);
       }
-      .process__step:not(:last-child) .process__step-marker::after {
-        top: 36px;
-        bottom: -2rem;
-      }
+      .process__step-connector { top: 36px; bottom: -2rem; }
+      .process__step-num { box-shadow: 0 0 0 4px var(--color-bg); }
     }
 
     /* ─── Responsive ─────────────────────────────────────────────────── */
@@ -2594,6 +2623,7 @@ Free consultation and special promotion: $2,495 per implant.</p>
           <li class="process__step">
             <div class="process__step-marker">
               <div class="process__step-num" aria-hidden="true">1</div>
+              <div class="process__step-connector" aria-hidden="true"></div>
             </div>
             <div class="process__step-content">
               <h3 class="process__step-title">Free consultation</h3>
@@ -2604,6 +2634,7 @@ Free consultation and special promotion: $2,495 per implant.</p>
           <li class="process__step">
             <div class="process__step-marker">
               <div class="process__step-num" aria-hidden="true">2</div>
+              <div class="process__step-connector" aria-hidden="true"></div>
             </div>
             <div class="process__step-content">
               <h3 class="process__step-title">Pain-free procedure</h3>
@@ -2614,6 +2645,7 @@ Free consultation and special promotion: $2,495 per implant.</p>
           <li class="process__step">
             <div class="process__step-marker">
               <div class="process__step-num" aria-hidden="true">3</div>
+              <div class="process__step-connector" aria-hidden="true"></div>
             </div>
             <div class="process__step-content">
               <h3 class="process__step-title">Test drive your smile</h3>
@@ -2624,6 +2656,7 @@ Free consultation and special promotion: $2,495 per implant.</p>
           <li class="process__step">
             <div class="process__step-marker">
               <div class="process__step-num" aria-hidden="true">4</div>
+              <div class="process__step-connector" aria-hidden="true"></div>
             </div>
             <div class="process__step-content">
               <h3 class="process__step-title">Final smile placed</h3>
@@ -3085,6 +3118,34 @@ Free consultation and special promotion: $2,495 per implant.</p>
           if (e.target.closest('.reviews__row')) e.preventDefault();
         });
       }
+
+      // ── How it Works — scroll-driven step progress ──────────────────
+      (function () {
+        const steps = [...document.querySelectorAll('.process__step')];
+        if (!steps.length) return;
+
+        function update() {
+          const trigger = window.innerHeight * 0.65;
+          let activeIdx = -1;
+          steps.forEach((step, i) => {
+            if (step.getBoundingClientRect().top < trigger) activeIdx = i;
+          });
+          steps.forEach((step, i) => {
+            step.classList.toggle('is-done',   i < activeIdx);
+            step.classList.toggle('is-active', i === activeIdx);
+          });
+        }
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => { update(); ticking = false; });
+            ticking = true;
+          }
+        }, { passive: true });
+
+        update();
+      })();
 
     })();
   </script>
