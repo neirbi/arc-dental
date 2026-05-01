@@ -1832,6 +1832,111 @@
       .page-cta { padding: 4rem 1.25rem; }
     }
 
+    /* ─── SEO KEYWORD LINKS ─────────────────────────────────────────────── */
+    .kw-links {
+      padding: var(--space-3xl) 1.5rem;
+      background: var(--color-surface);
+    }
+
+    .kw-links__inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .kw-links__group { margin-bottom: 2rem; }
+
+    .kw-links__heading {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+      margin: 0 0 0.75rem;
+    }
+
+    .kw-links__list-wrap {
+      position: relative;
+      max-height: 6.5rem;
+      overflow: hidden;
+      transition: max-height 0.45s ease-in-out;
+    }
+
+    .kw-links__list-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2.5rem;
+      background: linear-gradient(to top, var(--color-surface), transparent);
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .kw-links__list-wrap.is-expanded::after { opacity: 0; }
+
+    .kw-links__list {
+      columns: 4;
+      column-gap: 1.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .kw-links__list li { break-inside: avoid; margin-bottom: 0.3rem; }
+
+    .kw-links__list a {
+      font-size: 0.75rem;
+      color: var(--color-text-faint);
+      text-decoration: none;
+      line-height: 1.6;
+      transition: color 0.15s;
+    }
+
+    .kw-links__list a:hover { color: var(--color-primary); }
+
+    .kw-links__toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-faint);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+
+    .kw-links__toggle:hover { color: var(--color-primary); }
+    .kw-links__toggle svg { transition: transform 0.3s ease; }
+    .kw-links__toggle.is-expanded svg { transform: rotate(180deg); }
+
+    .kw-links__bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .kw-links__bottom .kw-links__list { columns: 2; }
+
+    @media (max-width: 900px) {
+      .kw-links__list { columns: 2; }
+    }
+    @media (max-width: 768px) {
+      .kw-links__bottom { grid-template-columns: 1fr; }
+      .kw-links__bottom .kw-links__list { columns: 2; }
+    }
+    @media (max-width: 480px) {
+      .kw-links__list { columns: 1; }
+      .kw-links__bottom .kw-links__list { columns: 1; }
+    }
+
     /* ─── Responsive ─────────────────────────────────────────────────── */
 
     /* Show desktop nav links, hide burger below 768 */
@@ -2931,6 +3036,164 @@ Free consultation and special promotion: $2,495 per implant.</p>
       </div>
     </section>
 
+    <section class="kw-links" id="seo-index" aria-label="Search index">
+      <div class="kw-links__inner">
+
+        <!-- Row 1: Full width -->
+        <div class="kw-links__group">
+          <h3 class="kw-links__heading">Trending Searches in Orange County, CA</h3>
+          <div class="kw-links__list-wrap">
+            <ul class="kw-links__list">
+              <li><a href="/">Dental Implants in Huntington Beach, California</a></li>
+              <li><a href="/">Dental Implant Center Near Me in Irvine, California</a></li>
+              <li><a href="/">Affordable Dental Implants in Tustin, California</a></li>
+              <li><a href="/">Same Day Dental Implants in Newport Beach, California</a></li>
+              <li><a href="/">Free Dental Implant Consultation in Laguna Beach, California</a></li>
+              <li><a href="/">Full Mouth Dental Implants in Costa Mesa, California</a></li>
+              <li><a href="/">Single Tooth Implant in Santa Ana, California</a></li>
+              <li><a href="/">Dental Implants Near Me in Anaheim, California</a></li>
+              <li><a href="/">Implant Dentist in Garden Grove, California</a></li>
+              <li><a href="/">Permanent Teeth Implants in Orange, California</a></li>
+              <li><a href="/">Dental Implant Specialist in Fountain Valley, California</a></li>
+              <li><a href="/">Affordable Implant Dentist in Seal Beach, California</a></li>
+              <li><a href="/">Full Arch Dental Implants in Aliso Viejo, California</a></li>
+              <li><a href="/">Dental Implants Cost in Mission Viejo, California</a></li>
+              <li><a href="/">Teeth in a Day in Lake Forest, California</a></li>
+              <li><a href="/">Bone Graft for Dental Implants in Laguna Hills, California</a></li>
+              <li><a href="/">Sleep Sedation Dentist in Laguna Niguel, California</a></li>
+              <li><a href="/">Best Dental Implants in Dana Point, California</a></li>
+              <li><a href="/">Implant Supported Dentures in San Clemente, California</a></li>
+              <li><a href="/">All-on-4 Dental Implants in San Juan Capistrano, California</a></li>
+              <li><a href="/">Snap-On Dentures in Rancho Santa Margarita, California</a></li>
+              <li><a href="/">Tooth Replacement Options in Ladera Ranch, California</a></li>
+              <li><a href="/">Dental Crown and Implant in Coto de Caza, California</a></li>
+              <li><a href="/">Cosmetic Dental Implants in Yorba Linda, California</a></li>
+              <li><a href="/">Dental Implants for Seniors in Placentia, California</a></li>
+              <li><a href="/">Emergency Dental Implant in Brea, California</a></li>
+              <li><a href="/">Immediate Implant Placement in Fullerton, California</a></li>
+              <li><a href="/">Dental Implants with Sedation in Buena Park, California</a></li>
+              <li><a href="/">Implant Retained Dentures in Westminster, California</a></li>
+              <li><a href="/">Permanent Smile Makeover in Cypress, California</a></li>
+              <li><a href="/">Tooth Extraction and Implant in Stanton, California</a></li>
+              <li><a href="/">3D Dental Scan and Implants in Midway City, California</a></li>
+              <li><a href="/">Dental Implants Open Weekends in Sunset Beach, California</a></li>
+              <li><a href="/">Top Rated Implant Dental Center in Rossmoor, California</a></li>
+              <li><a href="/">Implant Dentist Taking New Patients in Surfside, California</a></li>
+              <li><a href="/">Free Smile Consultation in Emerald Bay, California</a></li>
+            </ul>
+          </div>
+          <button class="kw-links__toggle" type="button">Expand<svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+
+        <!-- Row 2: Huntington Beach -->
+        <div class="kw-links__bottom">
+          <div class="kw-links__group">
+            <h3 class="kw-links__heading">People found ARC Dental Implant Center by searching for&hellip;</h3>
+            <div class="kw-links__list-wrap">
+              <ul class="kw-links__list">
+                <li><a href="/">Dental Implants in Huntington Beach, California</a></li>
+                <li><a href="/">Single Tooth Implant in Huntington Beach, California</a></li>
+                <li><a href="/">Full Mouth Implants in Huntington Beach, California</a></li>
+                <li><a href="/">Affordable Dental Implants in Huntington Beach, California</a></li>
+                <li><a href="/">Free Implant Consultation in Huntington Beach, California</a></li>
+                <li><a href="/">Sleep Sedation Dentist in Huntington Beach, California</a></li>
+                <li><a href="/">Best Dental Implants in Huntington Beach, California</a></li>
+                <li><a href="/">Dental Implant Specialist in Huntington Beach, California</a></li>
+                <li><a href="/">Teeth Replacement Near Me in Huntington Beach, California</a></li>
+                <li><a href="/">Implant Supported Dentures in Huntington Beach, California</a></li>
+                <li><a href="/">Bone Graft and Implant in Huntington Beach, California</a></li>
+                <li><a href="/">Same Day Teeth in Huntington Beach, California</a></li>
+                <li><a href="/">Cosmetic Dental Implants in Huntington Beach, California</a></li>
+                <li><a href="/">Dental Implants Cost in Huntington Beach, California</a></li>
+                <li><a href="/">Smile Makeover Dentist in Huntington Beach, California</a></li>
+                <li><a href="/">3D Scan Dental Implant in Huntington Beach, California</a></li>
+              </ul>
+            </div>
+            <button class="kw-links__toggle" type="button">Expand<svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+
+          <div class="kw-links__group">
+            <h3 class="kw-links__heading">Related Searches in Huntington Beach, CA</h3>
+            <div class="kw-links__list-wrap">
+              <ul class="kw-links__list">
+                <li><a href="/">Top Implant Dentist Near Huntington Beach, California</a></li>
+                <li><a href="/">Dental Implant Center Huntington Beach, California</a></li>
+                <li><a href="/">Affordable Implant Dentist Huntington Beach, California</a></li>
+                <li><a href="/">Permanent Teeth Implants Huntington Beach</a></li>
+                <li><a href="/">Full Arch Implants Huntington Beach, California</a></li>
+                <li><a href="/">All-on-4 Implants Near Huntington Beach</a></li>
+                <li><a href="/">Sleep Sedation Dental Huntington Beach</a></li>
+                <li><a href="/">Snap-On Dentures Huntington Beach, California</a></li>
+                <li><a href="/">Free Consultation Dental Implants Huntington Beach</a></li>
+                <li><a href="/">Best Rated Implant Dentist Huntington Beach</a></li>
+                <li><a href="/">Walk In Dental Implant Huntington Beach, California</a></li>
+                <li><a href="/">Emergency Dental Implant Huntington Beach, California</a></li>
+                <li><a href="/">Family Dental Implant Center Huntington Beach</a></li>
+                <li><a href="/">Dental Implants Open Now Huntington Beach</a></li>
+                <li><a href="/">Dental Implants with Financing Huntington Beach</a></li>
+                <li><a href="/">Implant Dentist Taking New Patients Huntington Beach</a></li>
+              </ul>
+            </div>
+            <button class="kw-links__toggle" type="button">Expand<svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+        <!-- Row 3: Tustin -->
+        <div class="kw-links__bottom">
+          <div class="kw-links__group">
+            <h3 class="kw-links__heading">People found ARC Dental Implant Center by searching for&hellip;</h3>
+            <div class="kw-links__list-wrap">
+              <ul class="kw-links__list">
+                <li><a href="/">Dental Implants in Tustin, California</a></li>
+                <li><a href="/">Free Dental Implant Consultation in Tustin, California</a></li>
+                <li><a href="/">Affordable Dental Implants in Tustin, California</a></li>
+                <li><a href="/">Full Mouth Implants in Tustin, California</a></li>
+                <li><a href="/">Single Tooth Implant in Tustin, California</a></li>
+                <li><a href="/">Implant Supported Dentures in Tustin, California</a></li>
+                <li><a href="/">Dental Implant Specialist in Tustin, California</a></li>
+                <li><a href="/">Same Day Dental Implants in Tustin, California</a></li>
+                <li><a href="/">Sleep Sedation Implant Dentist in Tustin, California</a></li>
+                <li><a href="/">Permanent Teeth Replacement in Tustin, California</a></li>
+                <li><a href="/">Bone Graft for Implants in Tustin, California</a></li>
+                <li><a href="/">Dental Implants Cost in Tustin, California</a></li>
+                <li><a href="/">All-on-4 Dental Implants in Tustin, California</a></li>
+                <li><a href="/">Snap-On Dentures in Tustin, California</a></li>
+                <li><a href="/">Cosmetic Dental Implants in Tustin, California</a></li>
+                <li><a href="/">3D Dental Scan and Implant in Tustin, California</a></li>
+              </ul>
+            </div>
+            <button class="kw-links__toggle" type="button">Expand<svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+
+          <div class="kw-links__group">
+            <h3 class="kw-links__heading">Related Searches in Tustin, CA</h3>
+            <div class="kw-links__list-wrap">
+              <ul class="kw-links__list">
+                <li><a href="/">Best Dental Implant Dentist Tustin, California</a></li>
+                <li><a href="/">Top Rated Implant Center Tustin, California</a></li>
+                <li><a href="/">Dental Implant Center Near Tustin</a></li>
+                <li><a href="/">Affordable Implants Tustin, California</a></li>
+                <li><a href="/">Full Arch Implants Tustin, California</a></li>
+                <li><a href="/">All-on-4 Near Tustin, California</a></li>
+                <li><a href="/">Dental Implants Open Now Tustin</a></li>
+                <li><a href="/">Permanent Smile Tustin, California</a></li>
+                <li><a href="/">Snap-On Dentures Tustin, California</a></li>
+                <li><a href="/">Sleep Sedation Dentist Tustin, California</a></li>
+                <li><a href="/">Walk In Dental Implant Tustin, California</a></li>
+                <li><a href="/">Emergency Dental Implant Tustin, California</a></li>
+                <li><a href="/">Dental Implants Financing Tustin, California</a></li>
+                <li><a href="/">3D Scan Implant Tustin, California</a></li>
+                <li><a href="/">Free Consultation Implant Dentist Tustin</a></li>
+                <li><a href="/">Best Rated Dental Implant Center Tustin, California</a></li>
+              </ul>
+            </div>
+            <button class="kw-links__toggle" type="button">Expand<svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <!-- Review dialog (div-based overlay) -->
@@ -3418,6 +3681,25 @@ Free consultation and special promotion: $2,495 per implant.</p>
           });
         });
       })();
+
+      // SEO keyword expand/collapse
+      document.querySelectorAll('.kw-links__toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const wrap = btn.previousElementSibling;
+          const isExpanded = wrap.classList.contains('is-expanded');
+          if (isExpanded) {
+            wrap.classList.remove('is-expanded');
+            wrap.style.maxHeight = '';
+            btn.classList.remove('is-expanded');
+            btn.childNodes[0].textContent = 'Expand';
+          } else {
+            wrap.classList.add('is-expanded');
+            wrap.style.maxHeight = wrap.scrollHeight + 'px';
+            btn.classList.add('is-expanded');
+            btn.childNodes[0].textContent = 'Collapse';
+          }
+        });
+      });
 
     })();
   </script>
