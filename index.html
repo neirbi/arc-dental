@@ -3899,8 +3899,9 @@ Free consultation and special promotion: $2,495 per implant.</p>
         try { localStorage.removeItem(DRAFT_KEY); } catch (_) {}
       }
 
-      // Save on every keystroke
-      consultOverlay.addEventListener('input', saveDraft);
+      // Save on every keystroke and on change (autofill, paste, mobile blur)
+      consultOverlay.addEventListener('input',  saveDraft);
+      consultOverlay.addEventListener('change', saveDraft);
 
       // Restore on page load
       restoreDraft();
