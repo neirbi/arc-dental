@@ -4422,6 +4422,23 @@ Free consultation and special promotion: $2,495 per implant.</p>
         document.addEventListener('dragstart', e => {
           if (e.target.closest('.reviews__row')) e.preventDefault();
         });
+
+        // One-shot scroll hint on the first row when reviews enter view
+        const firstRow = document.querySelector('.reviews__row');
+        if (firstRow) {
+          const hintObs = new IntersectionObserver(([entry], obs) => {
+            if (!entry.isIntersecting) return;
+            obs.disconnect();
+            if (firstRow.scrollLeft > 0) return; // already scrolled, skip
+            setTimeout(() => {
+              firstRow.scrollTo({ left: 180, behavior: 'smooth' });
+              setTimeout(() => {
+                firstRow.scrollTo({ left: 0, behavior: 'smooth' });
+              }, 900);
+            }, 600); // wait for reveal animation to finish first
+          }, { threshold: 0.3 });
+          hintObs.observe(firstRow);
+        }
       }
 
       // ── How it Works — scroll-driven step progress ──────────────────
