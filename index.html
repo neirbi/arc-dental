@@ -3899,6 +3899,49 @@ Free consultation and special promotion: $2,495 per implant.</p>
         try { localStorage.removeItem(DRAFT_KEY); } catch (_) {}
       }
 
+      // ── Auto-formatters ─────────────────────────────────────────────
+      const firstEl = document.getElementById('consult-first');
+      const lastEl  = document.getElementById('consult-last');
+      const phoneEl = document.getElementById('consult-phone');
+      const emailEl = document.getElementById('consult-email');
+
+      const titleCase = s => s.replace(/\b\w/g, c => c.toUpperCase());
+
+      // Name: title-case on blur (less jarring than mid-type)
+      [firstEl, lastEl].forEach(el => {
+        el.addEventListener('blur', () => {
+          if (el.value) { el.value = titleCase(el.value.trim()); saveDraft(); }
+        });
+      });
+
+      // Phone: (xxx) xxx-xxxx — format on every input, preserve cursor
+      const formatPhone = raw => {
+        const d = raw.replace(/\D/g, '').slice(0, 10);
+        if (d.length < 4) return d;
+        if (d.length < 7) return `(${d.slice(0,3)}) ${d.slice(3)}`;
+        return `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
+      };
+
+      phoneEl.addEventListener('input', () => {
+        const cursor = phoneEl.selectionStart;
+        const digitsBeforeCursor = phoneEl.value.slice(0, cursor).replace(/\D/g, '').length;
+        const newVal = formatPhone(phoneEl.value);
+        phoneEl.value = newVal;
+        let digitsSeen = 0, newCursor = newVal.length;
+        for (let i = 0; i < newVal.length; i++) {
+          if (/\d/.test(newVal[i])) digitsSeen++;
+          if (digitsSeen === digitsBeforeCursor) { newCursor = i + 1; break; }
+        }
+        phoneEl.setSelectionRange(newCursor, newCursor);
+      });
+
+      // Email: lowercase + strip spaces on input
+      emailEl.addEventListener('input', () => {
+        const cursor = emailEl.selectionStart;
+        emailEl.value = emailEl.value.toLowerCase().replace(/\s/g, '');
+        emailEl.setSelectionRange(cursor, cursor);
+      });
+
       // Save on every keystroke and on change (autofill, paste, mobile blur)
       consultOverlay.addEventListener('input',  saveDraft);
       consultOverlay.addEventListener('change', saveDraft);
