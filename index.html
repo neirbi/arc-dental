@@ -3845,8 +3845,65 @@ Free consultation and special promotion: $2,495 per implant.</p>
           }
           chip.classList.toggle('is-selected');
           syncChipField(chipsEl);
+          saveDraft();
         });
       });
+
+      // Draft persistence (7-day TTL)
+      const DRAFT_KEY = 'arc_consult_draft';
+      const DRAFT_TTL = 7 * 24 * 60 * 60 * 1000;
+
+      function saveDraft() {
+        try {
+          localStorage.setItem(DRAFT_KEY, JSON.stringify({
+            expires:        Date.now() + DRAFT_TTL,
+            first_name:     document.getElementById('consult-first').value,
+            last_name:      document.getElementById('consult-last').value,
+            phone:          document.getElementById('consult-phone').value,
+            email:          document.getElementById('consult-email').value,
+            dental_concern: document.getElementById('field-dental_concern').value,
+            teeth_count:    document.getElementById('field-teeth_count').value,
+            timeline:       document.getElementById('field-timeline').value,
+            payment_method: document.getElementById('field-payment_method').value,
+          }));
+        } catch (_) {}
+      }
+
+      function restoreDraft() {
+        try {
+          const d = JSON.parse(localStorage.getItem(DRAFT_KEY));
+          if (!d || Date.now() > d.expires) return;
+          const set = (id, val) => { if (val) document.getElementById(id).value = val; };
+          set('consult-first', d.first_name);
+          set('consult-last',  d.last_name);
+          set('consult-phone', d.phone);
+          set('consult-email', d.email);
+          // Restore chips from saved values
+          const restoreChips = (field, savedVal) => {
+            if (!savedVal) return;
+            const vals = savedVal.split(', ');
+            document.querySelectorAll(`.consult-chips[data-field="${field}"] .consult-chip`).forEach(chip => {
+              if (vals.includes(chip.dataset.value)) chip.classList.add('is-selected');
+            });
+            const hiddenInput = document.getElementById('field-' + field);
+            if (hiddenInput) hiddenInput.value = savedVal;
+          };
+          restoreChips('dental_concern', d.dental_concern);
+          restoreChips('teeth_count',    d.teeth_count);
+          restoreChips('timeline',       d.timeline);
+          restoreChips('payment_method', d.payment_method);
+        } catch (_) {}
+      }
+
+      function clearDraft() {
+        try { localStorage.removeItem(DRAFT_KEY); } catch (_) {}
+      }
+
+      // Save on every keystroke
+      consultOverlay.addEventListener('input', saveDraft);
+
+      // Restore on page load
+      restoreDraft();
 
       // Submit — POST named payload to webhook
       document.getElementById('consult-submit').addEventListener('click', () => {
@@ -3871,6 +3928,7 @@ Free consultation and special promotion: $2,495 per implant.</p>
             body: JSON.stringify(payload),
           });
         }
+        clearDraft();
         closeConsult();
       });
 
